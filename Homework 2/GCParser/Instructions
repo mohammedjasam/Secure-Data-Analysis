@@ -1,0 +1,17 @@
+Need to install ANT, JAVACC, JAVA
+
+Create a results folder
+
+create Server input and client input files, create the cir file
+
+
+Place all the i/o at the beginning of the program
+
+./testfiles <cir filename> //tells if cir is correct
+
+./runtestgcparser <cir filename> <serverfilename> <clientfilename>
+
+cat results/siserveroutput
+
+
+

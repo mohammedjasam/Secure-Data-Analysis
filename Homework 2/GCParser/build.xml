@@ -11,7 +11,7 @@
     <javacc
       target="src/GCParser/CircuitParser.jj"
       outputdirectory="src/GCParser/generated_files"
-      javacchome="C:\Program Files\Java\javacc-6.0\bin\lib\"
+      javacchome="/usr/share/java/"
       static="false"
       ignorecase="true"
     />

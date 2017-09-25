@@ -1,5 +1,7 @@
+
 .input a 1 32
 .input b 2 32
+
 
 a1 select a 0 8
 a2 select a 8 16
@@ -10,6 +12,7 @@ b2 select b 8 16
 b3 select b 16 24
 b4 select b 24 32
 
+
 eq1 equ a1 b1
 eq2 equ a2 b2
 eq3 equ a3 b3
@@ -19,5 +22,6 @@ eq4 equ a4 b4
 eq12 or eq1 eq2
 eq34 or eq3 eq4
 samebyte or eq12 eq34
+
 
 .output samebyte

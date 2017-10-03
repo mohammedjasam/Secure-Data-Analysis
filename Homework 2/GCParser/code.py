@@ -17,19 +17,19 @@ with open("./Inputs/InputServer.txt", "w") as text_file:
     a=int(input())
     print("b %d" %a, file=text_file)
 text_file.close()
+print("\n\n")
 #-------------------------------------------------------------------------------
 # Command to check the Circuit file
 checkCirCMD = "./testfiles ./Circuits/" + cirName
 os.system(checkCirCMD)
 
-# os.system("../")
-# os.system("ls")
 # Command to run the Circuit File
 runCirCMD = "./runtestgcparser ./Circuits/" + cirName +" ./Inputs/InputServer.txt ./Inputs/InputClient.txt"
 os.system(runCirCMD)
 #-------------------------------------------------------------------------------
 # Waits for Client and Server exchange
 time.sleep(2)
-
+#-------------------------------------------------------------------------------
 # Displays their results
+print("\n\n")
 os.system("cat ./results/si*")

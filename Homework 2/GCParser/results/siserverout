@@ -1,10 +1,10 @@
-Time (ms) Starting program: 1507051780430 (0.0, 0.0)
+Time (ms) Starting program: 1507053667808 (0.0, 0.0)
 waiting for client to connect
 client has connected
 1
-Elapsed time (ms) on circuit preparation: 1002 (0.009765625, 0.009765625)
-Elapsed time (ms) on OT preparation: 550 (13.1044921875, 8.97265625)
-Elapsed time (ms) on transfer inputs: 169 (0.9609375, 7.203125)
+Elapsed time (ms) on circuit preparation: 1017 (0.009765625, 0.009765625)
+Elapsed time (ms) on OT preparation: 588 (13.1044921875, 8.9716796875)
+Elapsed time (ms) on transfer inputs: 170 (0.9609375, 7.2021484375)
 Elapsed time (ms) on execution of circuit: 34 (0.96875, 0.0)
 output: 
 samebyte = 1

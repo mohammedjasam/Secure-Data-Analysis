@@ -1,4 +1,0 @@
-.input a 1 8
-.input b 2 8
-.output signed
-signed gts a b

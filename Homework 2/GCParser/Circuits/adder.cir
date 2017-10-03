@@ -1,0 +1,4 @@
+.input a 1 2
+.input b 2 2
+.output adder
+adder add a b

@@ -13,15 +13,17 @@ except:
 # Inputs into the Client and Server
 print("\nEnter the value for Client")
 with open("./Inputs/InputClient.txt", "w") as text_file:
-    b=int(input())
-    print("a %d" %b, file=text_file)
-text_file.close()
+    a=int(input())
+    # print(a.bit_length())
+    print("a %d" %a, file=text_file)
+# text_file.close()
 
 print("\nEnter the value for Server")
 with open("./Inputs/InputServer.txt", "w") as text_file:
-    a=int(input())
-    print("b %d" %a, file=text_file)
-text_file.close()
+    b=int(input())
+    # print(b.bit_length())
+    print("b %d" %b, file=text_file)
+# text_file.close()
 print("\n\n")
 #-------------------------------------------------------------------------------
 # Command to check the Circuit file

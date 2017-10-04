@@ -1,0 +1,38 @@
+print("Enter the bits in Client")
+ClientBit = input()
+
+print("Enter the bits in Server")
+ServerBit = input()
+
+with open("Gen.cir","w") as f:
+    print(".input a 1 " + ClientBit, file = f)
+    print(".input b 2 " + ServerBit, file = f)
+    print(".output Gen", file = f)
+
+    for i in range(int(ClientBit)):
+        print("a"+str(i)+" select a "+str(i)+" "+str(i+1), file =f)
+
+    for i in range(int(ServerBit)):
+        print("b"+str(i)+" select b "+str(i)+" "+str(i+1), file =f)
+
+    for j in range(int(ServerBit)):
+        st = "aandb" + str(j) + " concat "
+        for i in range(int(ClientBit)):
+            print("aandb" + str(j) + str(i) + " and a" + str(i) + " b" + str(j), file = f)
+        s="aandb" + str(j) + "temp" + " concat "
+        for k in range(int(ClientBit)-1,-1,-1):
+            s += "aandb" + str(j) + str(k) + " "
+            l = ""
+            r = ""
+            for a in range(int(ClientBit)-j-1,0,-1):
+                l += "0 "
+            for b in range(int(ClientBit)-int(len(l)/2)):
+                if not(b == 0):
+                    r += "0 "
+            fin = st + l + "aandb" + str(j) + "temp " + r
+
+        print(s, file = f)
+        # st = "aandb" + str(j) + " concat "
+
+        # fin = st + l + "aandb" + str(j) + "temp " + r
+        print(fin, file = f)

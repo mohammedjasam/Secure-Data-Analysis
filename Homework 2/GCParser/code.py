@@ -4,7 +4,13 @@ import time
 # Circuit name grabber
 # print("\nEnter Circuit name:")
 # cirName = input()
-cirName = "Gen.cir"
+try:
+    with open("./Circuits/Gen.cir","r") as f:
+        pass
+    cirName = "Gen.cir"
+except:
+    print("\nEnter Circuit name:")
+    cirName = input()
 #-------------------------------------------------------------------------------
 # Inputs into the Client and Server
 print("\nEnter the value for Client")

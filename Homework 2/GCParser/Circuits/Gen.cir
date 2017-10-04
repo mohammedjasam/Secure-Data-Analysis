@@ -1,38 +1,16 @@
-.input a 1 4
-.input b 2 4
+.input a 1 2
+.input b 2 2
 .output Gen
 a0 select a 0 1
 a1 select a 1 2
-a2 select a 2 3
-a3 select a 3 4
 b0 select b 0 1
 b1 select b 1 2
-b2 select b 2 3
-b3 select b 3 4
 aandb00 and a0 b0
 aandb01 and a1 b0
-aandb02 and a2 b0
-aandb03 and a3 b0
-aandb0temp concat aandb03 aandb02 aandb01 aandb00
-aandb0 concat 0 0 0 aandb0temp
+aandb0temp concat aandb01 aandb00 
+aandb0 concat 0 aandb0temp 
 aandb10 and a0 b1
 aandb11 and a1 b1
-aandb12 and a2 b1
-aandb13 and a3 b1
-aandb1temp concat aandb13 aandb12 aandb11 aandb10
-aandb1 concat 0 0 aandb1temp 0
-aandb20 and a0 b2
-aandb21 and a1 b2
-aandb22 and a2 b2
-aandb23 and a3 b2
-aandb2temp concat aandb23 aandb22 aandb21 aandb20
-aandb2 concat 0 aandb2temp 0 0
-aandb30 and a0 b3
-aandb31 and a1 b3
-aandb32 and a2 b3
-aandb33 and a3 b3
-aandb3temp concat aandb33 aandb32 aandb31 aandb30
-aandb3 concat aandb3temp 0 0 0
-sum0 add aandb0 aandb1
-sum1 add sum0 aandb2
-Gen add sum1 aandb3
+aandb1temp concat aandb11 aandb10 
+aandb1 concat aandb1temp 0 
+Gen add aandb0 aandb1

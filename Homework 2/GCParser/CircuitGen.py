@@ -7,7 +7,7 @@ ServerBit = input()
 with open("./Circuits/Gen.cir","w") as f:
     print(".input a 1 " + ClientBit, file = f)
     print(".input b 2 " + ServerBit, file = f)
-    print(".output Gen", file = f)
+    print(".output Product", file = f)
 
     for i in range(int(ClientBit)):
         print("a"+str(i)+" select a "+str(i)+" "+str(i+1), file =f)
@@ -38,9 +38,9 @@ with open("./Circuits/Gen.cir","w") as f:
     for adding in range(int(ClientBit)-1):
         if (adding == int(ClientBit) - 2):
             if adding == 0:
-                print("Gen" + " add " + "aandbs" + str(adding) + " aandbs" + str(adding+1), file = f)
+                print("Product" + " add " + "aandbs" + str(adding) + " aandbs" + str(adding+1), file = f)
             else:
-                print("Gen" + " add " + "sum" + str(adding-1) + " aandbs" + str(adding+1), file = f)
+                print("Product" + " add " + "sum" + str(adding-1) + " aandbs" + str(adding+1), file = f)
         elif adding == 0:
             print("sum"+str(adding) + " add " + "aandbs" + str(adding) + " aandbs" + str(adding+1), file = f)
         else:

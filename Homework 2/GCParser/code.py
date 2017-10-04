@@ -2,8 +2,6 @@ import os
 import time
 #-------------------------------------------------------------------------------
 # Circuit name grabber
-# print("\nEnter Circuit name:")
-# cirName = input()
 try:
     with open("./Circuits/Gen.cir","r") as f:
         pass
@@ -39,4 +37,7 @@ time.sleep(2)
 #-------------------------------------------------------------------------------
 # Displays their results
 print("\n\n")
-os.system("cat ./results/si*")
+print("Client output")
+os.system("cat ./results/siclient* | grep Product")
+print("\nServer output")
+os.system("cat ./results/siserver* | grep Product")

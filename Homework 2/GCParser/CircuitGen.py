@@ -32,7 +32,17 @@ with open("Gen.cir","w") as f:
             fin = st + l + "aandb" + str(j) + "temp " + r
 
         print(s, file = f)
-        # st = "aandb" + str(j) + " concat "
-
-        # fin = st + l + "aandb" + str(j) + "temp " + r
         print(fin, file = f)
+
+
+    for adding in range(int(ClientBit)-1):
+        if (adding == int(ClientBit) - 2):
+            if adding == 0:
+                print("Gen" + " add " + "aandb" + str(adding) + " aandb" + str(adding+1), file = f)
+            else:
+                print("Gen" + " add " + "sum" + str(adding-1) + " aandb" + str(adding+1), file = f)
+        elif adding == 0:
+            print("sum"+str(adding) + " add " + "aandb" + str(adding) + " aandb" + str(adding+1), file = f)
+        else:
+
+            print("sum"+str(adding) + " add " + "sum" + str(adding-1) + " aandb" + str(adding+1), file = f)

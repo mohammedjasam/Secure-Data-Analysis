@@ -13,3 +13,4 @@ aandb10 and a0 b1
 aandb11 and a1 b1
 aandb1temp concat aandb11 aandb10 
 aandb1 concat aandb1temp 0 
+Gen add aandb0 aandb1

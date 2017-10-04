@@ -2,8 +2,9 @@ import os
 import time
 #-------------------------------------------------------------------------------
 # Circuit name grabber
-print("\nEnter Circuit name:")
-cirName = input()
+# print("\nEnter Circuit name:")
+# cirName = input()
+cirName = "Gen.cir"
 #-------------------------------------------------------------------------------
 # Inputs into the Client and Server
 print("\nEnter the value for Client")

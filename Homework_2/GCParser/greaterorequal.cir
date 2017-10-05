@@ -1,4 +1,4 @@
 .input a 1 32
 .input b 2 32
-.output mil
-mil gteu a b
+.output gteq
+gteq gteu a b

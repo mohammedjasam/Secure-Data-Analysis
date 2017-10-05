@@ -1,0 +1,4 @@
+.input a 1 32
+.input b 2 32
+.output gteq
+gteq gteu a b

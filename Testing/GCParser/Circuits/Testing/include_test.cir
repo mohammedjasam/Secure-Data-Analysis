@@ -1,0 +1,9 @@
+.input client 1 32
+.input server 2 32
+.output upisdiff
+.output lowisdiff
+
+.include<uplow.cir> .output(up:ud,low:ld)
+.input(a:client,b:server)
+upisdiff or ud
+lowisdiff or ld

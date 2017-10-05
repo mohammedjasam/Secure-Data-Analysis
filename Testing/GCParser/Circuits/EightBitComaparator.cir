@@ -1,0 +1,86 @@
+.input a 1 4
+.input b 2 4
+.output AeqB
+.output AltB
+.output AgtB
+
+a0 select a 0 1
+a1 select a 1 2
+a2 select a 2 3
+a3 select a 3 4
+
+b0 select b 0 1
+b1 select b 1 2
+b2 select b 2 3
+b3 select b 3 4
+
+
+na0 not a0
+na1 not a1
+na2 not a2
+na3 not a3
+
+
+nb0 not b0
+nb1 not b1
+nb2 not b2
+nb3 not b3
+
+
+i1AND0A0 and na0 b0
+i1AND0B0 and a0 nb0
+
+i1AND1A1 and na1 b1
+i1AND1B1 and a1 nb1
+
+i1AND2A2 and na2 b2
+i1AND2B2 and a2 nb2
+
+i1AND3A3 and na3 b3
+i1AND3B3 and a3 nb3
+
+
+
+i2OR0AND0 or i1AND0A0 i1AND0B0
+i2OR1AND1 or i1AND1A1 i1AND1B1
+i2OR2AND2 or i1AND2A2 i1AND2B2
+i2OR3AND3 or i1AND3A3 i1AND3B3
+
+i2NOR0AND0 not i2OR0AND0
+i2NOR1AND1 not i2OR1AND1
+i2NOR2AND2 not i2OR2AND2
+i2NOR3AND3 not i2OR3AND3
+
+
+i1AeqB and i2NOR0AND0 i2NOR1AND1
+i2AeqB and i2NOR2AND2 i2NOR3AND3
+AeqB and i1AeqB i2AeqB
+
+
+
+
+i3AND0inter and i1AND0B0 i2NOR1AND1
+i3AND0Final and i3AND0inter i2AeqB
+
+i3AND1inter and i1AND0A0 i2NOR1AND1
+i3AND1Final and i3AND1inter i2AeqB
+
+i3AND2Final and i1AND1B1 i2AeqB
+
+i3AND3Final and i1AND1A1 i2AeqB
+
+i3AND4Final and i1AND2B2 i2NOR3AND3
+
+i3AND5Final and i1AND2A2 i2NOR3AND3
+
+
+
+
+i1AltB or i1AND3A3 i3AND5Final
+i2AltB or i3AND1Final i3AND3Final
+AltB or i1AltB i2AltB
+
+
+i1AgtB or i1AND3B3 i3AND4Final
+i2AgtB or i3AND0Final i3AND2Final
+AgtB or i1AgtB i2AgtB

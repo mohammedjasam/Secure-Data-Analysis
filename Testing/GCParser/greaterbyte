@@ -1,4 +1,0 @@
-.input a 1 40
-.input b 2 40
-.output greaterbyte
-greaterbyte gtu a b

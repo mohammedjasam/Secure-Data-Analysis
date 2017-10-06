@@ -1,10 +1,15 @@
-print("Enter the bits in Client")
-ClientBit = input()
+import sys
+import os
+lenOfBits = sys.argv[1]
+ClientBit = lenOfBits
+ServerBit = lenOfBits
 
-print("Enter the bits in Server")
-ServerBit = input()
+try:
+    os.remove("./Circuits/Multiply.cir")
+except:
+    pass
 
-with open("./Circuits/Gen.cir","w") as f:
+with open("./Circuits/Multiply.cir","w") as f:
     print(".input a 1 " + ClientBit, file = f)
     print(".input b 2 " + ServerBit, file = f)
     print(".output Product", file = f)
@@ -46,7 +51,7 @@ with open("./Circuits/Gen.cir","w") as f:
         else:
 
             print("sum"+str(adding) + " add " + "sum" + str(adding-1) + " aandbs" + str(adding+1), file = f)
-import subprocess
-subprocess.call(" python3 code.py 1", shell = True)
+# import subprocess
+# subprocess.call(" python3 code.py 1", shell = True)
 # import os
 # os.system("python3 code.py 1", shell = True)

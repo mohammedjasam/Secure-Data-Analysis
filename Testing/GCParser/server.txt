@@ -1,2 +1,0 @@
-server 4
-server2 1

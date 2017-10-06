@@ -4,17 +4,9 @@
 .input b1 2 32
 .input a2 1 32
 .input b2 2 32
-.input a3 1 32
-.input b3 2 32
-.input a4 1 32
-.input b4 2 32
 .output DotProduct
 .include<Multiply.cir>.output(Product:prod0).input(a:a0,b:b0)
 .include<Multiply.cir>.output(Product:prod1).input(a:a1,b:b1)
 .include<Multiply.cir>.output(Product:prod2).input(a:a2,b:b2)
-.include<Multiply.cir>.output(Product:prod3).input(a:a3,b:b3)
-.include<Multiply.cir>.output(Product:prod4).input(a:a4,b:b4)
 x0 add prod0 prod1
-x1 add x0 prod2
-x2 add x1 prod3
-DotProduct add x2 prod4
+DotProduct add x0 prod2

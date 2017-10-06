@@ -1,45 +1,40 @@
+print("Enter the size of the vector")
+lenOfVector = int(input())
+print("Enter the number of bits")
+lenOfBits = int(input())
+
+import subprocess
+subprocess.call(" python3 MulGen.py " + str(lenOfBits), shell = True)
+
+with open("./Circuits/DotProduct.cir","w") as f:
+    for i in range(lenOfVector):
+        # client =
+        print(".input a" + str(i)+ " 1 " + str(lenOfBits), file = f)
+        print(".input b" + str(i)+ " 2 " + str(lenOfBits), file = f)
+    print(".output DotProduct", file = f)
+    s = "DotProduct add "
+    for i in range(lenOfVector):
+        print(".include<Multiply.cir>.output(Product:prod" + str(i) + ").input(a:a" + str(i) + ",b:b" + str(i) + ")", file = f)
+
+    c = lenOfVector
+    for i in range(lenOfVector-1):
+        c -= 1
+        if (i == 0):
+            if (c == 1):
+                print("DotProduct add prod" + str(i) + " prod" + str(i+1), file = f)
+            else:
+                print("x" + str(i) + " add prod" + str(i) + " prod" + str(i+1), file = f)
+        else:
+            if (c == 1):
+                print("DotProduct add x" + str(i-1) + " prod" + str(i+1), file = f)
+            else:
+                print("x" + str(i) + " add x" + str(i-1) + " prod" + str(i+1), file = f)
+
+import subprocess
 import os
-import time
-#-------------------------------------------------------------------------------
-# Circuit name grabber
 try:
-    with open("./Circuits/Gen.cir","r") as f:
-        pass
-    cirName = "Gen.cir"
+    os.remove("./Inputs/InputClient.txt")
+    os.remove("./Inputs/InputServer.txt")
 except:
-    print("\nEnter Circuit name:")
-    cirName = input()
-#-------------------------------------------------------------------------------
-# Inputs into the Client and Server
-print("\nEnter the value for Client")
-with open("./Inputs/InputClient.txt", "w") as text_file:
-    a=int(input())
-    # print(a.bit_length())
-    print("a %d" %a, file=text_file)
-# text_file.close()
-
-print("\nEnter the value for Server")
-with open("./Inputs/InputServer.txt", "w") as text_file:
-    b=int(input())
-    # print(b.bit_length())
-    print("b %d" %b, file=text_file)
-# text_file.close()
-print("\n\n")
-#-------------------------------------------------------------------------------
-# Command to check the Circuit file
-checkCirCMD = "./testfiles ./Circuits/" + cirName
-os.system(checkCirCMD)
-
-# Command to run the Circuit File
-runCirCMD = "./runtestgcparser ./Circuits/" + cirName +" ./Inputs/InputServer.txt ./Inputs/InputClient.txt"
-os.system(runCirCMD)
-#-------------------------------------------------------------------------------
-# Waits for Client and Server exchange
-time.sleep(2)
-#-------------------------------------------------------------------------------
-# Displays their results
-print("\n\n")
-print("Client output")
-os.system("cat ./results/siclient* | grep Product")
-print("\nServer output")
-os.system("cat ./results/siserver* | grep Product")
+    pass
+subprocess.call(" python3 runhw2.py " + str(lenOfVector), shell = True)

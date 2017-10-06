@@ -1,36 +1,49 @@
-print("Enter the size of the vector")
-lenOfVector = int(input())
-print("Enter the number of bits")
-lenOfBits = int(input())
-with open("./Circuits/Gen.cir","w") as f:
-    for i in range(lenOfVector):
-        # client =
-        print(".input a" + str(i)+ " 1 " + str(lenOfBits), file = f)
-        print(".input b" + str(i)+ " 2 " + str(lenOfBits), file = f)
-    print(".output DotProduct", file = f)
-    s = "DotProduct add "
-    for i in range(lenOfVector):
-        print(".include<Multiply.cir>.output(Product:prod" + str(i) + ").input(a:a" + str(i) + ",b:b" + str(i) + ")", file = f)
-
-    c = lenOfVector
-    for i in range(lenOfVector-1):
-        c -= 1
-        if (i == 0):
-            if (c == 1):
-                print("DotProduct add prod" + str(i) + " prod" + str(i+1), file = f)
-            else:
-                print("x" + str(i) + " add prod" + str(i) + " prod" + str(i+1), file = f)
-        else:
-            if (c == 1):
-                print("DotProduct add x" + str(i-1) + " prod" + str(i+1), file = f)
-            else:
-                print("x" + str(i) + " add x" + str(i-1) + " prod" + str(i+1), file = f)
-
-import subprocess
 import os
+import time
+import sys
+
+
+
+lenOfVector = int(sys.argv[1])
+# print("vex are"+ str(sys.argv[1]))
+#-------------------------------------------------------------------------------
+# Circuit name grabber
 try:
-    os.remove("./Inputs/InputClient.txt")
-    os.remove("./Inputs/InputServer.txt")
+    with open("./Circuits/DotProduct.cir","r") as f:
+        pass
+    cirName = "DotProduct.cir"
 except:
-    pass
-subprocess.call(" python3 hw2commands.py " + str(lenOfVector), shell = True)
+    print("\nEnter Circuit name:")
+    cirName = input()
+#-------------------------------------------------------------------------------
+# Inputs into the Client and Server
+for i in range(lenOfVector):
+    print("\nEnter the value for Client " + str(i))
+    with open("./Inputs/InputClient.txt", "a") as text_file:
+        a=int(input())
+        print("a" + str(i) + " %d" %a, file=text_file)
+
+    print("\nEnter the value for Server "+ str(i))
+    with open("./Inputs/InputServer.txt", "a") as text_file:
+        b=int(input())
+        print("b" + str(i) + " %d" %b, file=text_file)
+
+print("\n\n")
+#-------------------------------------------------------------------------------
+# Command to check the Circuit file
+checkCirCMD = "./testfiles ./Circuits/" + cirName
+os.system(checkCirCMD)
+
+# Command to run the Circuit File
+runCirCMD = "./runtestgcparser ./Circuits/" + cirName +" ./Inputs/InputServer.txt ./Inputs/InputClient.txt"
+os.system(runCirCMD)
+#-------------------------------------------------------------------------------
+# Waits for Client and Server exchange
+time.sleep(2)
+#-------------------------------------------------------------------------------
+# Displays their results
+print("\n\n")
+print("Client output")
+os.system("cat ./results/siclient* | grep Product")
+print("\nServer output")
+os.system("cat ./results/siserver* | grep Product")

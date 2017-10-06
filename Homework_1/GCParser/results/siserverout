@@ -1,10 +1,10 @@
-Time (ms) Starting program: 1507246814295 (0.0, 0.0)
+Time (ms) Starting program: 1507247641776 (0.0, 0.0)
 waiting for client to connect
 client has connected
 1
-Elapsed time (ms) on circuit preparation: 1001 (0.009765625, 0.009765625)
-Elapsed time (ms) on OT preparation: 534 (13.1044921875, 8.97265625)
-Elapsed time (ms) on transfer inputs: 156 (0.9609375, 7.203125)
-Elapsed time (ms) on execution of circuit: 30 (1.0, 0.0)
+Elapsed time (ms) on circuit preparation: 1020 (0.009765625, 0.009765625)
+Elapsed time (ms) on OT preparation: 576 (13.1044921875, 8.9736328125)
+Elapsed time (ms) on transfer inputs: 190 (0.9609375, 7.203125)
+Elapsed time (ms) on execution of circuit: 38 (1.0, 0.0)
 output: 
-mil = 0
+mil = 1

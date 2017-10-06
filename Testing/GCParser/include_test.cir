@@ -1,0 +1,11 @@
+.input client 1 32
+.input server 2 32
+
+.input client2 1 32
+.input server2 2 32
+.output answer
+
+
+.include<uplow.cir>.output(Product:prod).input(a:client,b:server)
+.include<uplow.cir>.output(Product:prod2).input(a:client2,b:server2)
+answer add prod2 prod

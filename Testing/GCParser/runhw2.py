@@ -2,6 +2,13 @@ import os
 import time
 import sys
 
+#-------------------------------------------------------------------------------
+def givePermissions():
+    testFile = "chmod u+x testfiles"
+    runTestGCParser = "chmod u+x runtestgcparser"
+    os.system(testFile)
+    os.system(runTestGCParser)
+
 lenOfVector = int(sys.argv[1])
 #-------------------------------------------------------------------------------
 # Circuit name grabber
@@ -28,11 +35,14 @@ for i in range(len(s1)):
         print("b" + str(i) + " %d" %s2[i], file=text_file)
 
 with open("./Inputs/InputClient.txt", "a") as text_file:
-    a = int(input("Enter the threshold: "))
+    a = int(input("\nEnter the threshold: "))
     print("t " + str(a), file = text_file)
 
 print("\n")
 #-------------------------------------------------------------------------------
+
+# givePermissions()
+
 # Command to check the Circuit file
 checkCirCMD = "./testfiles ./Circuits/" + cirName
 os.system(checkCirCMD)
@@ -42,7 +52,8 @@ runCirCMD = "./runtestgcparser ./Circuits/" + cirName +" ./Inputs/InputServer.tx
 os.system(runCirCMD)
 #-------------------------------------------------------------------------------
 # Waits for Client and Server exchange
-time.sleep(2)
+print("Sleeping for 5 seconds to complete execution")
+time.sleep(5)
 #-------------------------------------------------------------------------------
 # Displays their results
 print("\n")

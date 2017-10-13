@@ -30,8 +30,7 @@ with open("./Circuits/DotProduct.cir","w") as f:
             else:
                 print("x" + str(i) + " add x" + str(i-1) + " prod" + str(i+1), file = f)
 
-    print("DotProduct gtu Dot t", file = f)
-    # print("DotProduct add prod0 0000000000000", file = f)
+    print("DotProduct gteu Dot t", file = f)
 
 
 try:

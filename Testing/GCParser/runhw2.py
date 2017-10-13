@@ -17,20 +17,26 @@ except:
     cirName = input()
 #-------------------------------------------------------------------------------
 # Inputs into the Client and Server
-for i in range(lenOfVector):
-    print("\nEnter the value for Client " + str(i))
+print("\nEnter elements separated by commas")
+s1 = input("Vector 1: ").split(",")
+s2 = input("Vector 2: ").split(",")
+s1 = [int(x) for x in s1[:lenOfVector]]
+s2 = [int(x) for x in s2[:lenOfVector]]
+
+for i in range(len(s1)):
+#     print("\nEnter the value for Client " + str(i))
     with open("./Inputs/InputClient.txt", "a") as text_file:
-        a=int(input())
-        print("a" + str(i) + " %d" %a, file=text_file)
-
-    print("\nEnter the value for Server "+ str(i))
+#         a=int(input())
+        print("a" + str(i) + " %d" %s1[i], file=text_file)
+#
+#     print("\nEnter the value for Server "+ str(i))
     with open("./Inputs/InputServer.txt", "a") as text_file:
-        b=int(input())
-        print("b" + str(i) + " %d" %b, file=text_file)
-
-print("Enter the threshold")
+#         b=int(input())
+        print("b" + str(i) + " %d" %s2[i], file=text_file)
+#
+# print("Enter the threshold")
 with open("./Inputs/InputClient.txt", "a") as text_file:
-    a = int(input())
+    a = int(input("Enter the threshold: "))
     print("t " + str(a), file = text_file)
 
 print("\n\n")

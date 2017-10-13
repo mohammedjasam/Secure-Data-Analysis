@@ -1,52 +1,376 @@
-.input a 1 5
-.input b 2 5
+.input a 1 17
+.input b 2 17
 .output Product
 a0 select a 0 1
 a1 select a 1 2
 a2 select a 2 3
 a3 select a 3 4
 a4 select a 4 5
+a5 select a 5 6
+a6 select a 6 7
+a7 select a 7 8
+a8 select a 8 9
+a9 select a 9 10
+a10 select a 10 11
+a11 select a 11 12
+a12 select a 12 13
+a13 select a 13 14
+a14 select a 14 15
+a15 select a 15 16
+a16 select a 16 17
 b0 select b 0 1
 b1 select b 1 2
 b2 select b 2 3
 b3 select b 3 4
 b4 select b 4 5
+b5 select b 5 6
+b6 select b 6 7
+b7 select b 7 8
+b8 select b 8 9
+b9 select b 9 10
+b10 select b 10 11
+b11 select b 11 12
+b12 select b 12 13
+b13 select b 13 14
+b14 select b 14 15
+b15 select b 15 16
+b16 select b 16 17
 aandb0c0 and a0 b0
 aandb0c1 and a1 b0
 aandb0c2 and a2 b0
 aandb0c3 and a3 b0
 aandb0c4 and a4 b0
-aandb0temp concat aandb0c4 aandb0c3 aandb0c2 aandb0c1 aandb0c0 
-aandbs0 concat 0 0 0 0 aandb0temp 
+aandb0c5 and a5 b0
+aandb0c6 and a6 b0
+aandb0c7 and a7 b0
+aandb0c8 and a8 b0
+aandb0c9 and a9 b0
+aandb0c10 and a10 b0
+aandb0c11 and a11 b0
+aandb0c12 and a12 b0
+aandb0c13 and a13 b0
+aandb0c14 and a14 b0
+aandb0c15 and a15 b0
+aandb0c16 and a16 b0
+aandb0temp concat aandb0c16 aandb0c15 aandb0c14 aandb0c13 aandb0c12 aandb0c11 aandb0c10 aandb0c9 aandb0c8 aandb0c7 aandb0c6 aandb0c5 aandb0c4 aandb0c3 aandb0c2 aandb0c1 aandb0c0 
+aandbs0 concat 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 aandb0temp 
 aandb1c0 and a0 b1
 aandb1c1 and a1 b1
 aandb1c2 and a2 b1
 aandb1c3 and a3 b1
 aandb1c4 and a4 b1
-aandb1temp concat aandb1c4 aandb1c3 aandb1c2 aandb1c1 aandb1c0 
-aandbs1 concat 0 0 0 aandb1temp 0 
+aandb1c5 and a5 b1
+aandb1c6 and a6 b1
+aandb1c7 and a7 b1
+aandb1c8 and a8 b1
+aandb1c9 and a9 b1
+aandb1c10 and a10 b1
+aandb1c11 and a11 b1
+aandb1c12 and a12 b1
+aandb1c13 and a13 b1
+aandb1c14 and a14 b1
+aandb1c15 and a15 b1
+aandb1c16 and a16 b1
+aandb1temp concat aandb1c16 aandb1c15 aandb1c14 aandb1c13 aandb1c12 aandb1c11 aandb1c10 aandb1c9 aandb1c8 aandb1c7 aandb1c6 aandb1c5 aandb1c4 aandb1c3 aandb1c2 aandb1c1 aandb1c0 
+aandbs1 concat 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 aandb1temp 0 
 aandb2c0 and a0 b2
 aandb2c1 and a1 b2
 aandb2c2 and a2 b2
 aandb2c3 and a3 b2
 aandb2c4 and a4 b2
-aandb2temp concat aandb2c4 aandb2c3 aandb2c2 aandb2c1 aandb2c0 
-aandbs2 concat 0 0 aandb2temp 0 0 
+aandb2c5 and a5 b2
+aandb2c6 and a6 b2
+aandb2c7 and a7 b2
+aandb2c8 and a8 b2
+aandb2c9 and a9 b2
+aandb2c10 and a10 b2
+aandb2c11 and a11 b2
+aandb2c12 and a12 b2
+aandb2c13 and a13 b2
+aandb2c14 and a14 b2
+aandb2c15 and a15 b2
+aandb2c16 and a16 b2
+aandb2temp concat aandb2c16 aandb2c15 aandb2c14 aandb2c13 aandb2c12 aandb2c11 aandb2c10 aandb2c9 aandb2c8 aandb2c7 aandb2c6 aandb2c5 aandb2c4 aandb2c3 aandb2c2 aandb2c1 aandb2c0 
+aandbs2 concat 0 0 0 0 0 0 0 0 0 0 0 0 0 0 aandb2temp 0 0 
 aandb3c0 and a0 b3
 aandb3c1 and a1 b3
 aandb3c2 and a2 b3
 aandb3c3 and a3 b3
 aandb3c4 and a4 b3
-aandb3temp concat aandb3c4 aandb3c3 aandb3c2 aandb3c1 aandb3c0 
-aandbs3 concat 0 aandb3temp 0 0 0 
+aandb3c5 and a5 b3
+aandb3c6 and a6 b3
+aandb3c7 and a7 b3
+aandb3c8 and a8 b3
+aandb3c9 and a9 b3
+aandb3c10 and a10 b3
+aandb3c11 and a11 b3
+aandb3c12 and a12 b3
+aandb3c13 and a13 b3
+aandb3c14 and a14 b3
+aandb3c15 and a15 b3
+aandb3c16 and a16 b3
+aandb3temp concat aandb3c16 aandb3c15 aandb3c14 aandb3c13 aandb3c12 aandb3c11 aandb3c10 aandb3c9 aandb3c8 aandb3c7 aandb3c6 aandb3c5 aandb3c4 aandb3c3 aandb3c2 aandb3c1 aandb3c0 
+aandbs3 concat 0 0 0 0 0 0 0 0 0 0 0 0 0 aandb3temp 0 0 0 
 aandb4c0 and a0 b4
 aandb4c1 and a1 b4
 aandb4c2 and a2 b4
 aandb4c3 and a3 b4
 aandb4c4 and a4 b4
-aandb4temp concat aandb4c4 aandb4c3 aandb4c2 aandb4c1 aandb4c0 
-aandbs4 concat aandb4temp 0 0 0 0 
+aandb4c5 and a5 b4
+aandb4c6 and a6 b4
+aandb4c7 and a7 b4
+aandb4c8 and a8 b4
+aandb4c9 and a9 b4
+aandb4c10 and a10 b4
+aandb4c11 and a11 b4
+aandb4c12 and a12 b4
+aandb4c13 and a13 b4
+aandb4c14 and a14 b4
+aandb4c15 and a15 b4
+aandb4c16 and a16 b4
+aandb4temp concat aandb4c16 aandb4c15 aandb4c14 aandb4c13 aandb4c12 aandb4c11 aandb4c10 aandb4c9 aandb4c8 aandb4c7 aandb4c6 aandb4c5 aandb4c4 aandb4c3 aandb4c2 aandb4c1 aandb4c0 
+aandbs4 concat 0 0 0 0 0 0 0 0 0 0 0 0 aandb4temp 0 0 0 0 
+aandb5c0 and a0 b5
+aandb5c1 and a1 b5
+aandb5c2 and a2 b5
+aandb5c3 and a3 b5
+aandb5c4 and a4 b5
+aandb5c5 and a5 b5
+aandb5c6 and a6 b5
+aandb5c7 and a7 b5
+aandb5c8 and a8 b5
+aandb5c9 and a9 b5
+aandb5c10 and a10 b5
+aandb5c11 and a11 b5
+aandb5c12 and a12 b5
+aandb5c13 and a13 b5
+aandb5c14 and a14 b5
+aandb5c15 and a15 b5
+aandb5c16 and a16 b5
+aandb5temp concat aandb5c16 aandb5c15 aandb5c14 aandb5c13 aandb5c12 aandb5c11 aandb5c10 aandb5c9 aandb5c8 aandb5c7 aandb5c6 aandb5c5 aandb5c4 aandb5c3 aandb5c2 aandb5c1 aandb5c0 
+aandbs5 concat 0 0 0 0 0 0 0 0 0 0 0 aandb5temp 0 0 0 0 0 
+aandb6c0 and a0 b6
+aandb6c1 and a1 b6
+aandb6c2 and a2 b6
+aandb6c3 and a3 b6
+aandb6c4 and a4 b6
+aandb6c5 and a5 b6
+aandb6c6 and a6 b6
+aandb6c7 and a7 b6
+aandb6c8 and a8 b6
+aandb6c9 and a9 b6
+aandb6c10 and a10 b6
+aandb6c11 and a11 b6
+aandb6c12 and a12 b6
+aandb6c13 and a13 b6
+aandb6c14 and a14 b6
+aandb6c15 and a15 b6
+aandb6c16 and a16 b6
+aandb6temp concat aandb6c16 aandb6c15 aandb6c14 aandb6c13 aandb6c12 aandb6c11 aandb6c10 aandb6c9 aandb6c8 aandb6c7 aandb6c6 aandb6c5 aandb6c4 aandb6c3 aandb6c2 aandb6c1 aandb6c0 
+aandbs6 concat 0 0 0 0 0 0 0 0 0 0 aandb6temp 0 0 0 0 0 0 
+aandb7c0 and a0 b7
+aandb7c1 and a1 b7
+aandb7c2 and a2 b7
+aandb7c3 and a3 b7
+aandb7c4 and a4 b7
+aandb7c5 and a5 b7
+aandb7c6 and a6 b7
+aandb7c7 and a7 b7
+aandb7c8 and a8 b7
+aandb7c9 and a9 b7
+aandb7c10 and a10 b7
+aandb7c11 and a11 b7
+aandb7c12 and a12 b7
+aandb7c13 and a13 b7
+aandb7c14 and a14 b7
+aandb7c15 and a15 b7
+aandb7c16 and a16 b7
+aandb7temp concat aandb7c16 aandb7c15 aandb7c14 aandb7c13 aandb7c12 aandb7c11 aandb7c10 aandb7c9 aandb7c8 aandb7c7 aandb7c6 aandb7c5 aandb7c4 aandb7c3 aandb7c2 aandb7c1 aandb7c0 
+aandbs7 concat 0 0 0 0 0 0 0 0 0 aandb7temp 0 0 0 0 0 0 0 
+aandb8c0 and a0 b8
+aandb8c1 and a1 b8
+aandb8c2 and a2 b8
+aandb8c3 and a3 b8
+aandb8c4 and a4 b8
+aandb8c5 and a5 b8
+aandb8c6 and a6 b8
+aandb8c7 and a7 b8
+aandb8c8 and a8 b8
+aandb8c9 and a9 b8
+aandb8c10 and a10 b8
+aandb8c11 and a11 b8
+aandb8c12 and a12 b8
+aandb8c13 and a13 b8
+aandb8c14 and a14 b8
+aandb8c15 and a15 b8
+aandb8c16 and a16 b8
+aandb8temp concat aandb8c16 aandb8c15 aandb8c14 aandb8c13 aandb8c12 aandb8c11 aandb8c10 aandb8c9 aandb8c8 aandb8c7 aandb8c6 aandb8c5 aandb8c4 aandb8c3 aandb8c2 aandb8c1 aandb8c0 
+aandbs8 concat 0 0 0 0 0 0 0 0 aandb8temp 0 0 0 0 0 0 0 0 
+aandb9c0 and a0 b9
+aandb9c1 and a1 b9
+aandb9c2 and a2 b9
+aandb9c3 and a3 b9
+aandb9c4 and a4 b9
+aandb9c5 and a5 b9
+aandb9c6 and a6 b9
+aandb9c7 and a7 b9
+aandb9c8 and a8 b9
+aandb9c9 and a9 b9
+aandb9c10 and a10 b9
+aandb9c11 and a11 b9
+aandb9c12 and a12 b9
+aandb9c13 and a13 b9
+aandb9c14 and a14 b9
+aandb9c15 and a15 b9
+aandb9c16 and a16 b9
+aandb9temp concat aandb9c16 aandb9c15 aandb9c14 aandb9c13 aandb9c12 aandb9c11 aandb9c10 aandb9c9 aandb9c8 aandb9c7 aandb9c6 aandb9c5 aandb9c4 aandb9c3 aandb9c2 aandb9c1 aandb9c0 
+aandbs9 concat 0 0 0 0 0 0 0 aandb9temp 0 0 0 0 0 0 0 0 0 
+aandb10c0 and a0 b10
+aandb10c1 and a1 b10
+aandb10c2 and a2 b10
+aandb10c3 and a3 b10
+aandb10c4 and a4 b10
+aandb10c5 and a5 b10
+aandb10c6 and a6 b10
+aandb10c7 and a7 b10
+aandb10c8 and a8 b10
+aandb10c9 and a9 b10
+aandb10c10 and a10 b10
+aandb10c11 and a11 b10
+aandb10c12 and a12 b10
+aandb10c13 and a13 b10
+aandb10c14 and a14 b10
+aandb10c15 and a15 b10
+aandb10c16 and a16 b10
+aandb10temp concat aandb10c16 aandb10c15 aandb10c14 aandb10c13 aandb10c12 aandb10c11 aandb10c10 aandb10c9 aandb10c8 aandb10c7 aandb10c6 aandb10c5 aandb10c4 aandb10c3 aandb10c2 aandb10c1 aandb10c0 
+aandbs10 concat 0 0 0 0 0 0 aandb10temp 0 0 0 0 0 0 0 0 0 0 
+aandb11c0 and a0 b11
+aandb11c1 and a1 b11
+aandb11c2 and a2 b11
+aandb11c3 and a3 b11
+aandb11c4 and a4 b11
+aandb11c5 and a5 b11
+aandb11c6 and a6 b11
+aandb11c7 and a7 b11
+aandb11c8 and a8 b11
+aandb11c9 and a9 b11
+aandb11c10 and a10 b11
+aandb11c11 and a11 b11
+aandb11c12 and a12 b11
+aandb11c13 and a13 b11
+aandb11c14 and a14 b11
+aandb11c15 and a15 b11
+aandb11c16 and a16 b11
+aandb11temp concat aandb11c16 aandb11c15 aandb11c14 aandb11c13 aandb11c12 aandb11c11 aandb11c10 aandb11c9 aandb11c8 aandb11c7 aandb11c6 aandb11c5 aandb11c4 aandb11c3 aandb11c2 aandb11c1 aandb11c0 
+aandbs11 concat 0 0 0 0 0 aandb11temp 0 0 0 0 0 0 0 0 0 0 0 
+aandb12c0 and a0 b12
+aandb12c1 and a1 b12
+aandb12c2 and a2 b12
+aandb12c3 and a3 b12
+aandb12c4 and a4 b12
+aandb12c5 and a5 b12
+aandb12c6 and a6 b12
+aandb12c7 and a7 b12
+aandb12c8 and a8 b12
+aandb12c9 and a9 b12
+aandb12c10 and a10 b12
+aandb12c11 and a11 b12
+aandb12c12 and a12 b12
+aandb12c13 and a13 b12
+aandb12c14 and a14 b12
+aandb12c15 and a15 b12
+aandb12c16 and a16 b12
+aandb12temp concat aandb12c16 aandb12c15 aandb12c14 aandb12c13 aandb12c12 aandb12c11 aandb12c10 aandb12c9 aandb12c8 aandb12c7 aandb12c6 aandb12c5 aandb12c4 aandb12c3 aandb12c2 aandb12c1 aandb12c0 
+aandbs12 concat 0 0 0 0 aandb12temp 0 0 0 0 0 0 0 0 0 0 0 0 
+aandb13c0 and a0 b13
+aandb13c1 and a1 b13
+aandb13c2 and a2 b13
+aandb13c3 and a3 b13
+aandb13c4 and a4 b13
+aandb13c5 and a5 b13
+aandb13c6 and a6 b13
+aandb13c7 and a7 b13
+aandb13c8 and a8 b13
+aandb13c9 and a9 b13
+aandb13c10 and a10 b13
+aandb13c11 and a11 b13
+aandb13c12 and a12 b13
+aandb13c13 and a13 b13
+aandb13c14 and a14 b13
+aandb13c15 and a15 b13
+aandb13c16 and a16 b13
+aandb13temp concat aandb13c16 aandb13c15 aandb13c14 aandb13c13 aandb13c12 aandb13c11 aandb13c10 aandb13c9 aandb13c8 aandb13c7 aandb13c6 aandb13c5 aandb13c4 aandb13c3 aandb13c2 aandb13c1 aandb13c0 
+aandbs13 concat 0 0 0 aandb13temp 0 0 0 0 0 0 0 0 0 0 0 0 0 
+aandb14c0 and a0 b14
+aandb14c1 and a1 b14
+aandb14c2 and a2 b14
+aandb14c3 and a3 b14
+aandb14c4 and a4 b14
+aandb14c5 and a5 b14
+aandb14c6 and a6 b14
+aandb14c7 and a7 b14
+aandb14c8 and a8 b14
+aandb14c9 and a9 b14
+aandb14c10 and a10 b14
+aandb14c11 and a11 b14
+aandb14c12 and a12 b14
+aandb14c13 and a13 b14
+aandb14c14 and a14 b14
+aandb14c15 and a15 b14
+aandb14c16 and a16 b14
+aandb14temp concat aandb14c16 aandb14c15 aandb14c14 aandb14c13 aandb14c12 aandb14c11 aandb14c10 aandb14c9 aandb14c8 aandb14c7 aandb14c6 aandb14c5 aandb14c4 aandb14c3 aandb14c2 aandb14c1 aandb14c0 
+aandbs14 concat 0 0 aandb14temp 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+aandb15c0 and a0 b15
+aandb15c1 and a1 b15
+aandb15c2 and a2 b15
+aandb15c3 and a3 b15
+aandb15c4 and a4 b15
+aandb15c5 and a5 b15
+aandb15c6 and a6 b15
+aandb15c7 and a7 b15
+aandb15c8 and a8 b15
+aandb15c9 and a9 b15
+aandb15c10 and a10 b15
+aandb15c11 and a11 b15
+aandb15c12 and a12 b15
+aandb15c13 and a13 b15
+aandb15c14 and a14 b15
+aandb15c15 and a15 b15
+aandb15c16 and a16 b15
+aandb15temp concat aandb15c16 aandb15c15 aandb15c14 aandb15c13 aandb15c12 aandb15c11 aandb15c10 aandb15c9 aandb15c8 aandb15c7 aandb15c6 aandb15c5 aandb15c4 aandb15c3 aandb15c2 aandb15c1 aandb15c0 
+aandbs15 concat 0 aandb15temp 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+aandb16c0 and a0 b16
+aandb16c1 and a1 b16
+aandb16c2 and a2 b16
+aandb16c3 and a3 b16
+aandb16c4 and a4 b16
+aandb16c5 and a5 b16
+aandb16c6 and a6 b16
+aandb16c7 and a7 b16
+aandb16c8 and a8 b16
+aandb16c9 and a9 b16
+aandb16c10 and a10 b16
+aandb16c11 and a11 b16
+aandb16c12 and a12 b16
+aandb16c13 and a13 b16
+aandb16c14 and a14 b16
+aandb16c15 and a15 b16
+aandb16c16 and a16 b16
+aandb16temp concat aandb16c16 aandb16c15 aandb16c14 aandb16c13 aandb16c12 aandb16c11 aandb16c10 aandb16c9 aandb16c8 aandb16c7 aandb16c6 aandb16c5 aandb16c4 aandb16c3 aandb16c2 aandb16c1 aandb16c0 
+aandbs16 concat aandb16temp 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
 sum0 add aandbs0 aandbs1
 sum1 add sum0 aandbs2
 sum2 add sum1 aandbs3
-Product add sum2 aandbs4
+sum3 add sum2 aandbs4
+sum4 add sum3 aandbs5
+sum5 add sum4 aandbs6
+sum6 add sum5 aandbs7
+sum7 add sum6 aandbs8
+sum8 add sum7 aandbs9
+sum9 add sum8 aandbs10
+sum10 add sum9 aandbs11
+sum11 add sum10 aandbs12
+sum12 add sum11 aandbs13
+sum13 add sum12 aandbs14
+sum14 add sum13 aandbs15
+Product add sum14 aandbs16

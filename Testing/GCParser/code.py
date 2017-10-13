@@ -1,9 +1,7 @@
 import subprocess
 import os
-print("Enter the size of the vector")
-lenOfVector = int(input())
-print("Enter the number of bits")
-lenOfBits = int(input())
+lenOfVector = int(input("Enter the size of the Vectors: "))
+lenOfBits = int(input("Enter the number of bits: "))
 lenOfBits = lenOfBits + 1
 
 subprocess.call(" python3 MulGen.py " + str(lenOfBits), shell = True)

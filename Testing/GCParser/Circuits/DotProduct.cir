@@ -1,12 +1,10 @@
-.input a0 1 32
-.input b0 2 32
-.input a1 1 32
-.input b1 2 32
-.input a2 1 32
-.input b2 2 32
+.input a0 1 5
+.input b0 2 5
+.input a1 1 5
+.input b1 2 5
+.input t 1 9
 .output DotProduct
 .include<Multiply.cir>.output(Product:prod0).input(a:a0,b:b0)
 .include<Multiply.cir>.output(Product:prod1).input(a:a1,b:b1)
-.include<Multiply.cir>.output(Product:prod2).input(a:a2,b:b2)
-x0 add prod0 prod1
-DotProduct add x0 prod2
+Dot add prod0 prod1
+DotProduct gtu Dot t

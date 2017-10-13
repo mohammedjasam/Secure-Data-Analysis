@@ -28,6 +28,11 @@ for i in range(lenOfVector):
         b=int(input())
         print("b" + str(i) + " %d" %b, file=text_file)
 
+print("Enter the threshold")
+with open("./Inputs/InputClient.txt", "a") as text_file:
+    a = int(input())
+    print("t " + str(a), file = text_file)
+
 print("\n\n")
 #-------------------------------------------------------------------------------
 # Command to check the Circuit file

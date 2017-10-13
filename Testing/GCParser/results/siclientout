@@ -1,10 +1,10 @@
-Time (ms) Starting program: 1507257778732 (0.0, 0.0)
+Time (ms) Starting program: 1507913211927 (0.0, 0.0)
 1
-Elapsed time (ms) on circuit preparation: 362 (0.0, 0.0)
-Time (ms) right before NPOT public key generation: 1507257779182 (0.0, 0.0)
-Elapsed time (ms) on NPOT public key generation: 80 (0.0, 0.0)
-Elapsed time (ms) on OT preparation: 361 (0.0, 0.0)
-Elapsed time (ms) on transfer inputs: 151 (0.0, 0.0)
-Elapsed time (ms) on execution of circuit: 320 (0.0, 0.0)
+Elapsed time (ms) on circuit preparation: 199 (0.0, 0.0)
+Time (ms) right before NPOT public key generation: 1507913212217 (0.0, 0.0)
+Elapsed time (ms) on NPOT public key generation: 98 (0.0, 0.0)
+Elapsed time (ms) on OT preparation: 399 (0.0, 0.0)
+Elapsed time (ms) on transfer inputs: 108 (0.0, 0.0)
+Elapsed time (ms) on execution of circuit: 164 (0.0, 0.0)
 output: 
-DotProduct = 78
+DotProduct = 0

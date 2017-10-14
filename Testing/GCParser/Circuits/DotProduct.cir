@@ -1,12 +1,12 @@
-.input a0 1 9
-.input b0 2 9
-.input a1 1 9
-.input b1 2 9
-.input a2 1 9
-.input b2 2 9
-.input a3 1 9
-.input b3 2 9
-.input t 1 17
+.input a0 1 5
+.input b0 2 5
+.input a1 1 5
+.input b1 2 5
+.input a2 1 5
+.input b2 2 5
+.input a3 1 5
+.input b3 2 5
+.input t 1 9
 .output DotProduct
 .include<Multiply.cir>.output(Product:prod0).input(a:a0,b:b0)
 .include<Multiply.cir>.output(Product:prod1).input(a:a1,b:b1)

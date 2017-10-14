@@ -1,128 +1,52 @@
-.input a 1 9
-.input b 2 9
+.input a 1 5
+.input b 2 5
 .output Product
 a0 select a 0 1
 a1 select a 1 2
 a2 select a 2 3
 a3 select a 3 4
 a4 select a 4 5
-a5 select a 5 6
-a6 select a 6 7
-a7 select a 7 8
-a8 select a 8 9
 b0 select b 0 1
 b1 select b 1 2
 b2 select b 2 3
 b3 select b 3 4
 b4 select b 4 5
-b5 select b 5 6
-b6 select b 6 7
-b7 select b 7 8
-b8 select b 8 9
 aandb0c0 and a0 b0
 aandb0c1 and a1 b0
 aandb0c2 and a2 b0
 aandb0c3 and a3 b0
 aandb0c4 and a4 b0
-aandb0c5 and a5 b0
-aandb0c6 and a6 b0
-aandb0c7 and a7 b0
-aandb0c8 and a8 b0
-aandb0temp concat aandb0c8 aandb0c7 aandb0c6 aandb0c5 aandb0c4 aandb0c3 aandb0c2 aandb0c1 aandb0c0 
-aandbs0 concat 0 0 0 0 0 0 0 0 aandb0temp 
+aandb0temp concat aandb0c4 aandb0c3 aandb0c2 aandb0c1 aandb0c0 
+aandbs0 concat 0 0 0 0 aandb0temp 
 aandb1c0 and a0 b1
 aandb1c1 and a1 b1
 aandb1c2 and a2 b1
 aandb1c3 and a3 b1
 aandb1c4 and a4 b1
-aandb1c5 and a5 b1
-aandb1c6 and a6 b1
-aandb1c7 and a7 b1
-aandb1c8 and a8 b1
-aandb1temp concat aandb1c8 aandb1c7 aandb1c6 aandb1c5 aandb1c4 aandb1c3 aandb1c2 aandb1c1 aandb1c0 
-aandbs1 concat 0 0 0 0 0 0 0 aandb1temp 0 
+aandb1temp concat aandb1c4 aandb1c3 aandb1c2 aandb1c1 aandb1c0 
+aandbs1 concat 0 0 0 aandb1temp 0 
 aandb2c0 and a0 b2
 aandb2c1 and a1 b2
 aandb2c2 and a2 b2
 aandb2c3 and a3 b2
 aandb2c4 and a4 b2
-aandb2c5 and a5 b2
-aandb2c6 and a6 b2
-aandb2c7 and a7 b2
-aandb2c8 and a8 b2
-aandb2temp concat aandb2c8 aandb2c7 aandb2c6 aandb2c5 aandb2c4 aandb2c3 aandb2c2 aandb2c1 aandb2c0 
-aandbs2 concat 0 0 0 0 0 0 aandb2temp 0 0 
+aandb2temp concat aandb2c4 aandb2c3 aandb2c2 aandb2c1 aandb2c0 
+aandbs2 concat 0 0 aandb2temp 0 0 
 aandb3c0 and a0 b3
 aandb3c1 and a1 b3
 aandb3c2 and a2 b3
 aandb3c3 and a3 b3
 aandb3c4 and a4 b3
-aandb3c5 and a5 b3
-aandb3c6 and a6 b3
-aandb3c7 and a7 b3
-aandb3c8 and a8 b3
-aandb3temp concat aandb3c8 aandb3c7 aandb3c6 aandb3c5 aandb3c4 aandb3c3 aandb3c2 aandb3c1 aandb3c0 
-aandbs3 concat 0 0 0 0 0 aandb3temp 0 0 0 
+aandb3temp concat aandb3c4 aandb3c3 aandb3c2 aandb3c1 aandb3c0 
+aandbs3 concat 0 aandb3temp 0 0 0 
 aandb4c0 and a0 b4
 aandb4c1 and a1 b4
 aandb4c2 and a2 b4
 aandb4c3 and a3 b4
 aandb4c4 and a4 b4
-aandb4c5 and a5 b4
-aandb4c6 and a6 b4
-aandb4c7 and a7 b4
-aandb4c8 and a8 b4
-aandb4temp concat aandb4c8 aandb4c7 aandb4c6 aandb4c5 aandb4c4 aandb4c3 aandb4c2 aandb4c1 aandb4c0 
-aandbs4 concat 0 0 0 0 aandb4temp 0 0 0 0 
-aandb5c0 and a0 b5
-aandb5c1 and a1 b5
-aandb5c2 and a2 b5
-aandb5c3 and a3 b5
-aandb5c4 and a4 b5
-aandb5c5 and a5 b5
-aandb5c6 and a6 b5
-aandb5c7 and a7 b5
-aandb5c8 and a8 b5
-aandb5temp concat aandb5c8 aandb5c7 aandb5c6 aandb5c5 aandb5c4 aandb5c3 aandb5c2 aandb5c1 aandb5c0 
-aandbs5 concat 0 0 0 aandb5temp 0 0 0 0 0 
-aandb6c0 and a0 b6
-aandb6c1 and a1 b6
-aandb6c2 and a2 b6
-aandb6c3 and a3 b6
-aandb6c4 and a4 b6
-aandb6c5 and a5 b6
-aandb6c6 and a6 b6
-aandb6c7 and a7 b6
-aandb6c8 and a8 b6
-aandb6temp concat aandb6c8 aandb6c7 aandb6c6 aandb6c5 aandb6c4 aandb6c3 aandb6c2 aandb6c1 aandb6c0 
-aandbs6 concat 0 0 aandb6temp 0 0 0 0 0 0 
-aandb7c0 and a0 b7
-aandb7c1 and a1 b7
-aandb7c2 and a2 b7
-aandb7c3 and a3 b7
-aandb7c4 and a4 b7
-aandb7c5 and a5 b7
-aandb7c6 and a6 b7
-aandb7c7 and a7 b7
-aandb7c8 and a8 b7
-aandb7temp concat aandb7c8 aandb7c7 aandb7c6 aandb7c5 aandb7c4 aandb7c3 aandb7c2 aandb7c1 aandb7c0 
-aandbs7 concat 0 aandb7temp 0 0 0 0 0 0 0 
-aandb8c0 and a0 b8
-aandb8c1 and a1 b8
-aandb8c2 and a2 b8
-aandb8c3 and a3 b8
-aandb8c4 and a4 b8
-aandb8c5 and a5 b8
-aandb8c6 and a6 b8
-aandb8c7 and a7 b8
-aandb8c8 and a8 b8
-aandb8temp concat aandb8c8 aandb8c7 aandb8c6 aandb8c5 aandb8c4 aandb8c3 aandb8c2 aandb8c1 aandb8c0 
-aandbs8 concat aandb8temp 0 0 0 0 0 0 0 0 
+aandb4temp concat aandb4c4 aandb4c3 aandb4c2 aandb4c1 aandb4c0 
+aandbs4 concat aandb4temp 0 0 0 0 
 sum0 add aandbs0 aandbs1
 sum1 add sum0 aandbs2
 sum2 add sum1 aandbs3
-sum3 add sum2 aandbs4
-sum4 add sum3 aandbs5
-sum5 add sum4 aandbs6
-sum6 add sum5 aandbs7
-Product add sum6 aandbs8
+Product add sum2 aandbs4

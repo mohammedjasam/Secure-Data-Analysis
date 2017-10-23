@@ -1,37 +1,10 @@
 package Proj3;
-/**
-* This program is free software: you can redistribute it and/or modify it 
-* under the terms of the GNU General Public License as published by the Free 
-* Software Foundation, either version 3 of the License, or (at your option) 
-* any later version. 
-* 
-* This program is distributed in the hope that it will be useful, but WITHOUT 
-* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
-* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for 
-* more details. 
-* 
-* You should have received a copy of the GNU General Public License along with 
-* this program. If not, see <http://www.gnu.org/licenses/>.
-*/
-
 import java.math.*;
 import java.util.*;
 
-/**
-* Paillier Cryptosystem <br><br>
-* References: <br>
-* [1] Pascal Paillier, "Public-Key Cryptosystems Based on Composite Degree Residuosity Classes," EUROCRYPT'99.
-* URL: <a href="http://www.gemplus.com/smart/rd/publications/pdf/Pai99pai.pdf">http://www.gemplus.com/smart/rd/publications/pdf/Pai99pai.pdf</a><br>
-* 
-* [2] Paillier cryptosystem from Wikipedia. 
-* URL: <a href="http://en.wikipedia.org/wiki/Paillier_cryptosystem">http://en.wikipedia.org/wiki/Paillier_cryptosystem</a>
-* @author Kun Liu (kunliu1@cs.umbc.edu)
-* @version 1.0
-*/
 public class Paillier {
-
 /**
-* p and q are two large primes. 
+* p and q are two large primes.
 * lambda = lcm(p-1, q-1) = (p-1)*(q-1)/gcd(p-1, q-1).
 */
 private BigInteger p, q, lambda;
@@ -51,7 +24,6 @@ private BigInteger g;
 * number of bits of modulus
 */
 private int bitLength;
-
 /**
 * Constructs an instance of the Paillier cryptosystem.
 * @param bitLengthVal number of bits of modulus
@@ -148,7 +120,7 @@ System.out.println("Enter all the values of vector A");
 for (int i=0; i<size;i++){
 	A[i]=s.nextBigInteger();
 }
-	
+
 System.out.println("Enter all the values of vector B");
 for (int i=0; i<size;i++){
 	B[i]=s.nextBigInteger();
@@ -166,7 +138,7 @@ for (int i=0; i<size;i++){
 	//BigInteger m1 = new BigInteger(A[i]);
 	BigInteger pow=EA[i].modPow(B[i], paillier.nsquare);
 	prod=prod.multiply(pow).mod(paillier.nsquare);
-	
+
 }
 System.out.println("prod="+paillier.Decryption(prod).toString());
 
@@ -226,4 +198,3 @@ System.out.println("prod="+paillier.Decryption(prod).toString());
 
 }
 }
- 

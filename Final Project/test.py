@@ -74,25 +74,16 @@ def start(l):
 def main(l):
     start(l)
     daffuqList.append(finList[-1])
-    # print(finList)
-    i =0
+    i = 0
     while(len(finList)>0):
         del finList[-1]
         l = finList[:]
-        # print(l)
+        print(l, finList)
         start(l)
         daffuqList.append(finList[-1])
-        # print(finList[-1])
         i +=1
         print(daffuqList)
 
-
-
-
-
-
-
-# print(compare('01***', '0001*'))
 
 
 l = ['0001*', '001**', '0010*', '0011*', '01***', '010**', '0100*', '0101*', '011**', '0110*', '0111*']

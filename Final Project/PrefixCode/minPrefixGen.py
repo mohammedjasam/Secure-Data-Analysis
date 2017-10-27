@@ -48,12 +48,6 @@ def createPrefix(s, preSet):
     preSet += temp
 
 
-
-
-
-
-# print(starList)
-
 def rangeRestrict(starList):
     for s in starList[:]:
         s = list(s)
@@ -63,18 +57,14 @@ def rangeRestrict(starList):
         t1 = [x.replace("*", '1') for x in list(t1)]
         t0 = joinList(t0)
         t1 = joinList(t1)
-        # print(s, t0, t1)
 
 
         if t0 in numList:
             if t1 in numList:
                 pass
             else:
-                # print("Removing "+joinList(s))
-                # print(t1)
                 remFromList(starList, s)
         else:
-            # print("Removing "+joinList(s))
             remFromList(starList, s)
 
     return starList
@@ -92,10 +82,6 @@ def checkMaxStars(temp):
             num = x.count("*")
             res = joinList(x)
             sttt = res
-    # if not (res == ""):
-    #     return res
-    # else:
-    #     return sttt
     return res
 
 
@@ -134,23 +120,21 @@ def replaceElements(listt):
                 if maxStarElement[:] in element[:length]:
                     listt.remove(element)
 
-
-
-
-
-
 def main(finList):
+    global what
     r = list(map(int, input("Enter the range space separated!\n").split()))
-
-    for n in range(r[0], r[-1]+1):
-        createPrefix('{0:010b}'.format(n), preSet)  ## This function call creates the prefix set and stores in preSet list[]
-    unionPreSet = list(set(preSet))
-    j = list(sorted(unionPreSet))
-    minPrefix(unionPreSet)
-    newList = rangeRestrict(starList)
-    newList = starList + numList
-    lenStar = len(starList)
-    # print(starList)
+    string = '{0:0' + str(r[-1].bit_length()) + 'b}'
+    if r[0] == "0" and r[1] == "1":
+        what = ['*']
+    else:
+        for n in range(r[0], r[-1]+1):
+            createPrefix(string.format(n), preSet)  ## This function call creates the prefix set and stores in preSet list[]
+        unionPreSet = list(set(preSet))
+        j = list(sorted(unionPreSet))
+        minPrefix(unionPreSet)
+        newList = rangeRestrict(starList)
+        newList = starList + numList
+        lenStar = len(starList)
 
     for x in range(lenStar):
         replaceElements(newList)

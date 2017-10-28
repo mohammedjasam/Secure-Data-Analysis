@@ -1,0 +1,162 @@
+#
+# A fatal error has been detected by the Java Runtime Environment:
+#
+#  EXCEPTION_ACCESS_VIOLATION (0xc0000005) at pc=0x0000000070132eb3, pid=11464, tid=9156
+#
+# JRE version:  (9.0+181) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (9+181, mixed mode, tiered, compressed oops, g1 gc, windows-amd64)
+# Problematic frame:
+# V  [jvm.dll+0x1b2eb3]
+#
+# No core dump will be written. Minidumps are not enabled by default on client versions of Windows
+#
+# If you would like to submit a bug report, please visit:
+#   http://bugreport.java.com/bugreport/crash.jsp
+#
+
+---------------  S U M M A R Y ------------
+
+Command Line: -Dapplication.home=C:\Program Files\Java\jdk-9 --add-modules=ALL-DEFAULT -Xms8m -Djdk.module.main=jdk.compiler jdk.compiler/com.sun.tools.javac.Main Paillier.java
+
+Host: Intel(R) Core(TM) i7-6500U CPU @ 2.50GHz, 4 cores, 7G,  Windows 10 , 64 bit Build 15063 (10.0.15063.296)
+Time: Sat Oct 28 17:12:55 2017 Central Summer Time elapsed time: 0 seconds (0d 0h 0m 0s)
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0000026b12e1b800):  JavaThread "Unknown thread" [_thread_in_vm, id=9156, stack(0x000000c132100000,0x000000c132200000)]
+
+Stack: [0x000000c132100000,0x000000c132200000],  sp=0x000000c1321ff690,  free space=1021k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+siginfo: EXCEPTION_ACCESS_VIOLATION (0xc0000005), reading address 0x0000000000000000
+
+
+Registers:
+RAX=0x0000000000000001, RBX=0x0000000000000000, RCX=0x0000000000000000, RDX=0x0000026b12e00201
+RSP=0x000000c1321ff690, RBP=0x0000000000000000, RSI=0x000000c1321ffac8, RDI=0x0000026b12e1b800
+R8 =0x0000000000000000, R9 =0x00007ffe89ba4b58, R10=0x0000000000000007, R11=0x000000c1321fef20
+R12=0x00000000704bfb80, R13=0x0000026b12dfa800, R14=0x0000026b12dfa3f8, R15=0x0000000000000000
+RIP=0x0000000070132eb3, EFLAGS=0x0000000000010256
+
+Top of Stack: (sp=0x000000c1321ff690)
+0x000000c1321ff690:   0000026b12e27dc0 000000007052d7c3
+0x000000c1321ff6a0:   0000000000000038 00000000704e1c2d
+0x000000c1321ff6b0:   000000007075e798 00000000706f9f70
+0x000000c1321ff6c0:   0000000000000140 000000c1321ff720
+0x000000c1321ff6d0:   0000026b12e1b800 00000000704e1f85
+0x000000c1321ff6e0:   0000026b12e19610 0000000000000000
+0x000000c1321ff6f0:   0000000000000000 00000000704e1967
+0x000000c1321ff700:   0000000000000000 000000007052d5b9
+0x000000c1321ff710:   000000005d607b7b 000000006ff80000
+0x000000c1321ff720:   0000026b12e27dc0 0000000000000000
+0x000000c1321ff730:   0000000000000004 00006443e5f7f68f
+0x000000c1321ff740:   0000000000000000 0000000070132a65
+0x000000c1321ff750:   0000000000000004 0000000000000000
+0x000000c1321ff760:   0000026b12dfa800 000000c1321ffac8
+0x000000c1321ff770:   000000c1321ff7b0 0000000070130e11
+0x000000c1321ff780:   0000000000000000 000000c1321ff7b0 
+
+Instructions: (pc=0x0000000070132eb3)
+0x0000000070132e93:   48 33 c4 48 89 84 24 a8 00 00 00 0f b6 c2 88 54
+0x0000000070132ea3:   24 31 48 8b e9 49 83 c8 ff 0f 1f 40 00 49 ff c0
+0x0000000070132eb3:   41 80 3c 08 00 75 f6 33 f6 45 33 ed 88 44 24 30
+0x0000000070132ec3:   45 85 c0 0f 8e 78 02 00 00 8b 0d 82 61 7e 00 65 
+
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+[error occurred during error reporting (printing all threads), id 0xc0000005]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+
+[error occurred during error reporting (printing compressed oops mode), id 0xc0000005]
+
+Deoptimization events (0 events):
+No events
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff72de00000 - 0x00007ff72de07000 	C:\Program Files\Java\jdk-9\bin\javac.exe
+0x00007ffea5150000 - 0x00007ffea532b000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffea4560000 - 0x00007ffea460e000 	C:\WINDOWS\System32\KERNEL32.DLL
+0x00007ffea1f20000 - 0x00007ffea2169000 	C:\WINDOWS\System32\KERNELBASE.dll
+0x00007ffe7be70000 - 0x00007ffe7bf5f000 	C:\Program Files\Java\jdk-9\bin\MSVCR120.dll
+0x00007ffe9d980000 - 0x00007ffe9d9b5000 	C:\Program Files\Java\jdk-9\bin\jli.dll
+0x00007ffea2b50000 - 0x00007ffea2bf1000 	C:\WINDOWS\System32\ADVAPI32.dll
+0x00007ffea2e80000 - 0x00007ffea2f1d000 	C:\WINDOWS\System32\msvcrt.dll
+0x00007ffea2f70000 - 0x00007ffea2fc9000 	C:\WINDOWS\System32\sechost.dll
+0x00007ffea26b0000 - 0x00007ffea27d5000 	C:\WINDOWS\System32\RPCRT4.dll
+0x00007ffea2cc0000 - 0x00007ffea2e0a000 	C:\WINDOWS\System32\USER32.dll
+0x00007ffea2170000 - 0x00007ffea218e000 	C:\WINDOWS\System32\win32u.dll
+0x00007ffe934a0000 - 0x00007ffe93707000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.15063.483_none_26002d27e7c744a2\COMCTL32.dll
+0x00007ffea27e0000 - 0x00007ffea2807000 	C:\WINDOWS\System32\GDI32.dll
+0x00007ffea4610000 - 0x00007ffea4909000 	C:\WINDOWS\System32\combase.dll
+0x00007ffea24b0000 - 0x00007ffea2637000 	C:\WINDOWS\System32\gdi32full.dll
+0x00007ffea1720000 - 0x00007ffea1816000 	C:\WINDOWS\System32\ucrtbase.dll
+0x00007ffea2410000 - 0x00007ffea24aa000 	C:\WINDOWS\System32\msvcp_win.dll
+0x00007ffea2640000 - 0x00007ffea26aa000 	C:\WINDOWS\System32\bcryptPrimitives.dll
+0x00007ffe91cc0000 - 0x00007ffe91cca000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffea2810000 - 0x00007ffea283d000 	C:\WINDOWS\System32\IMM32.DLL
+0x00007ffe726b0000 - 0x00007ffe72756000 	C:\Program Files\Java\jdk-9\bin\msvcp120.dll
+0x000000006ff80000 - 0x00000000709aa000 	C:\Program Files\Java\jdk-9\bin\server\jvm.dll
+0x00007ffea2f20000 - 0x00007ffea2f28000 	C:\WINDOWS\System32\PSAPI.DLL
+0x00007ffe9fa50000 - 0x00007ffe9fa73000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffe9d970000 - 0x00007ffe9d979000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffea2e10000 - 0x00007ffea2e7c000 	C:\WINDOWS\System32\WS2_32.dll
+0x00007ffe9fa20000 - 0x00007ffe9fa4b000 	C:\WINDOWS\SYSTEM32\WINMMBASE.dll
+0x00007ffea23c0000 - 0x00007ffea2409000 	C:\WINDOWS\System32\cfgmgr32.dll
+0x00007ffe89bb0000 - 0x00007ffe89bbf000 	C:\Program Files\Java\jdk-9\bin\verify.dll
+0x00007ffe7cf00000 - 0x00007ffe7cf27000 	C:\Program Files\Java\jdk-9\bin\java.dll
+0x00007ffe7cee0000 - 0x00007ffe7cef6000 	C:\Program Files\Java\jdk-9\bin\zip.dll
+0x00007ffe89ba0000 - 0x00007ffe89baa000 	C:\Program Files\Java\jdk-9\bin\jimage.dll
+0x00007ffe8c160000 - 0x00007ffe8c309000 	C:\WINDOWS\SYSTEM32\dbghelp.dll
+
+VM Arguments:
+jvm_args: -Dapplication.home=C:\Program Files\Java\jdk-9 --add-modules=ALL-DEFAULT -Xms8m -Djdk.module.main=jdk.compiler 
+java_command: jdk.compiler/com.sun.tools.javac.Main Paillier.java
+java_class_path (initial): <not set>
+Launcher Type: SUN_STANDARD
+
+Logging:
+Log output configuration:
+#0: stdout all=warning uptime,level,tags
+#1: stderr all=off uptime,level,tags
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk-9\
+PATH=C:\ProgramData\Oracle\Java\javapath;C:\Python3.6\Scripts\;C:\Python3.6\;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Git\cmd;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\cygwin64\bin;C:\Program Files\PuTTY\;C:\MinGW\bin;C:\apache-ant-1.10.1\bin;C:\Program Files\Java\javacc-6.0\bin;C:\Program Files\Java\javacc-6.0\bin\lib\;C:\Python27\;C:\Python27\Scripts\;C:\Program Files\Java\jdk-9\bin\;C:\curl-7.56.0-win64-mingw\bin\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Python35\Scripts\;C:\Python35\;C:\Users\Stark\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Users\Stark\AppData\Local\atom\bin;C:\Program Files\Docker Toolbox
+USERNAME=Stark
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 78 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10 , 64 bit Build 15063 (10.0.15063.296)
+
+CPU:total 4 (initial active 4) 
+
+Memory: 4k page, physical 8244628k(3699544k free), swap 10997140k(6357168k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (9+181) for windows-amd64 JRE (9+181), built on Aug  2 2017 21:30:51 by "javare" with MS VC++ 12.0 (VS2013)
+
+END.

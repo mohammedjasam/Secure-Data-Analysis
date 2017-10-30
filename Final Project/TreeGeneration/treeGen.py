@@ -3,17 +3,21 @@ import math
 preSet = []
 dPreSet = {}
 binRange = []
-
-SNum = [1, 6, 7, 9, 11, 12, 13, 16, 20, 25, 30]
-# SNum = [1, 6, 7, 16, 20]
 bitLen = 5
-S = []
-S1, S2, L = [], [], []
+# dictPrefix = {}
+
+SNum = [1, 6, 7, 9, 11, 12, 13, 16, 20, 25]
+# SNum = [1, 6, 7, 16, 20]
+
+S, S1, S2, L = [], [], [], []
 string = '{0:0' + str(bitLen) + 'b}' # static BitLength
+
+# Converts the numeric to binary values!
 for n in SNum:
     bNum = string.format(n)
     S.append(bNum)
-# print(S)
+
+
 def createPrefix(s, preSet):
     global dPreSet
     savedS = s
@@ -25,33 +29,80 @@ def createPrefix(s, preSet):
         temp.append(''.join(s))
     dPreSet[savedS] = temp
     preSet += temp
+    return preSet
 
-def checkMSB(n, b):
-    if n[b] == "0":
-        return 1
-    elif n[b] == "1":
-        return 2
+for element in S:
+    createPrefix(element, preSet)
 
-SLEN = len(S)
+# for k, v in dPreSet.items():
+#     print(k, v)
+
+
+
+
+
+def checkLCP(S):
+    LCP = ""
+    prefixI = dPreSet[S[0]]
+    prefixJ = dPreSet[S[1]]
+    LCP = set(prefixI).intersection(set(prefixJ))
+
+    for i in range(2, len(S)):
+        prefixI = dPreSet[S[i]]
+
+        LCP = set(prefixI).intersection(set(LCP))
+    # print(LCP)
+
+    LCP0 = list(list(LCP)[0])
+    LCP1 = list(list(LCP)[0])
+    # print(LCP0, LCP1)
+
+    for x in range(len(LCP0)):
+        if LCP0[x] == "*":
+            LCP0[x] = "0"
+            break
+    for x in range(len(LCP1)):
+        if LCP1[x] == "*":
+            LCP1[x] = "1"
+            break
+    LCP0 = "".join(LCP0)
+    LCP1 = "".join(LCP1)
+
+    # print(LCP0, LCP1)
+
+    L0 = []
+    L1 = []
+    for i in range(len(S)):
+        prefixFamily = dPreSet[S[i]]
+        if LCP0 in prefixFamily:
+            L0.append(S[i])
+        elif LCP1 in prefixFamily:
+            L1.append(S[i])
+    return L0, L1
+
+# checkLCP(S)
+
+
+
+n = len(S)
+
 def main():
-    global S, S1, S2, L # L
+    global S, S1, S2, L
 
-    count = 0
-    while (len(S) > math.ceil(SLEN/2)):
-        count += 1
-        for n in S:
-            if checkMSB(n, count) == 1:
-                S1.append(n)
-            else:
-                S2.append(n)
+    # count = 0
+
+    while (len(S) > math.ceil(n/2)):
+        S1, S2 = checkLCP(S)
+        # print(S1, S2)
+
         if len(S1) >= len(S2):
             L.append(S2)
             S = S1
-        elif len(S1) <= len(S2):
+        else:
             L.append(S1)
             S = S2
-    L.append(S)
-    # print(L)
 
+    L.append(S)
+    print(L)
 
 main()

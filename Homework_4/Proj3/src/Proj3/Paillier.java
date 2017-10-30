@@ -48,7 +48,32 @@ public class Paillier
 		KeyGeneration(bitLengthVal, certainty);
 	}
 	
-	
+	public static void WriteToFile(String fileName, String[] array)
+	{
+		File fout = new File(fileName);
+		FileOutputStream fos = null;
+		try {
+			fos = new FileOutputStream(fout);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+     
+    	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+		
+		try 
+		{
+			for (int i = 0; i < array.length; i++)
+			{
+				bw.write(array[i].toString());
+				bw.newLine();
+			}
+			bw.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+	}
 	/**
 	* Constructs an instance of the Paillier cryptosystem with 512 bits of modulus and at least 1-2^(-64) certainty of primes generation.
 	*/
@@ -95,62 +120,29 @@ public class Paillier
 		String textP = "P = "+ p + " ";
 		String textQ = "\nQ = "+ q + " ";
 		String textG = "\nG = "+ g + " ";
-		String finalText = textP + textQ + textG;
     	Scanner f1 = new Scanner(System.in);
     	System.out.println("Enter the filename for P, Q, G");
-    	String fileName = f1.next() + ".txt";
-    	File fout = new File(fileName);
-    	FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream(fout);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-     
-    	BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-		
-		try 
-		{
-			bw.write(textP);
-			bw.newLine();
-			bw.write(textQ);
-			bw.newLine();
-			bw.write(textG);
-			bw.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	Scanner f2 = new Scanner(System.in);
+    	
+    	String fileName = f1.next() + ".txt";    	
+    	
+    	String[] pqg = new String[3];
+    	pqg[0] = textP;
+    	pqg[1] = textQ;
+    	pqg[2] = textG;
+    	
+    	WriteToFile(fileName, pqg); // Writing P, Q, G to the file!
+
+    	
 		String textLambda = "Lambda = " + lambda.toString();
 		String textMu = "Mu = " + u.toString();
 		System.out.println("Enter the filename for Lamda and Mu");
-    	String fileName1 = f2.next() + ".txt";
-    	File fout1 = new File(fileName1);
-    	FileOutputStream fos1 = null;
-		try {
-			fos1 = new FileOutputStream(fout1);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-     
-    	BufferedWriter bw1 = new BufferedWriter(new OutputStreamWriter(fos1));
-		
-		try 
-		{
-			bw1.write(textLambda);
-			bw1.newLine();
-			bw1.write(textMu);
-
-
-			bw1.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+    	String fileName2 = f1.next() + ".txt";
+    	
+    	String[] lambda_mu = new String[2];
+    	lambda_mu[0] = textLambda;
+    	lambda_mu[1] = textMu;
+    	
+    	WriteToFile(fileName2, lambda_mu); // Writing Lambda and Mu to the file!
 				
 	}
 	
@@ -204,131 +196,63 @@ public class Paillier
 		
 		BigInteger A[]= new BigInteger [size];
 		BigInteger EA[]= new BigInteger [size];
+		BigInteger EB[]= new BigInteger [size];
 		BigInteger B[]= new BigInteger [size];
 		
 		
-    	Scanner f22 = new Scanner(System.in);
-    	
-//		String textLambda = x.toString();
-//		String textMu = x.toString();
-//		System.out.println("Enter the filename for Vector A");
-//    	String fileName22 = f22.next() + ".txt";
-
+    	Scanner f1 = new Scanner(System.in);
 		
 		
-		System.out.println("Enter the filename for Vector A");
-    	String fileName22 = f22.next() + ".txt";
+		System.out.println("Enter the filename for Vector U");
+    	String VecA_File = f1.next() + ".txt";
 		//String B[]=new String [size];
-		System.out.println("Enter all the values of vector A");
+		System.out.println("Enter all the values of vector U");
+		String VecA[] = new String[size];
 		for (int i=0; i<size;i++)
 		{
 			A[i]=s.nextBigInteger();
+			VecA[i] = "U[" + Integer.toString(i) + "] = " +  A[i].toString();
 		}
 		
-    	File fout22 = new File(fileName22);
-    	FileOutputStream fos22 = null;
-		try {
-			fos22 = new FileOutputStream(fout22);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-     
-    	BufferedWriter bw22 = new BufferedWriter(new OutputStreamWriter(fos22));
+    	
+		WriteToFile(VecA_File, VecA); // Writing Vector A to the file!
 		
-		try 
-		{
-			for (int i = 0; i < A.length; i++)
-			{
-				bw22.write(A[i].toString());
-				bw22.newLine();
-			}			
-			bw22.close();
-
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-    	Scanner f33 = new Scanner(System.in);
-		System.out.println("Enter the filename for Vector B");
-    	String fileName33 = f33.next() + ".txt";
-		System.out.println("Enter all the values of vector B");
+		System.out.println("Enter the filename for Vector V");
+    	String VecB_File = f1.next() + ".txt";
+		System.out.println("Enter all the values of vector V");
+		String VecB[] = new String[size];
 		for (int i=0; i<size;i++)
 		{
 			B[i]=s.nextBigInteger();
+			VecB[i] = "V[" + Integer.toString(i) + "] = " + B[i].toString();
 		}
+		WriteToFile(VecB_File, VecB); // Writing Vector B to the file!
+    		
 		
-    	File fout33 = new File(fileName33);
-    	FileOutputStream fos33 = null;
-		try {
-			fos33 = new FileOutputStream(fout33);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-     
-    	BufferedWriter bw33 = new BufferedWriter(new OutputStreamWriter(fos33));
-		
-		try 
-		{
-			for (int i = 0; i < B.length; i++)
-			{
-				bw33.write(A[i].toString());
-				bw33.newLine();
-			}			
-			bw33.close();
-
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		
+		System.out.println("Enter the filename for Encrypted U");
+    	String EA_File = f1.next() + ".txt";
+		String EA_Array[] = new String[size];
 		//Multiplication of two vectors
 		for (int i=0; i<size;i++)
 		{
-			//BigInteger m1 = new BigInteger(A[i]);
 			EA[i] = paillier.Encryption(A[i]);
-			System.out.println("EA[i]="+EA[i]);
+			EA_Array[i] = "EU[" + Integer.toString(i) + "] = " + EA[i].toString();
 		}
 		
-    	Scanner f44 = new Scanner(System.in);
-		System.out.println("Enter the filename for Encrypted U");
-    	String fileName44 = f44.next() + ".txt";
+		WriteToFile(EA_File, EA_Array); // Writing Vector EA to the file!
 		
-    	File fout44 = new File(fileName44);
-    	FileOutputStream fos44 = null;
-		try {
-			fos44 = new FileOutputStream(fout44);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-     
-    	BufferedWriter bw44 = new BufferedWriter(new OutputStreamWriter(fos44));
 		
-		try 
+		System.out.println("Enter the filename for Encrypted V");
+    	String EB_File = f1.next() + ".txt";
+		String EB_Array[] = new String[size];
+
+		for (int i=0; i<size;i++)
 		{
-			for (int i = 0; i < EA.length; i++)
-			{
-				bw44.write(EA[i].toString());
-				bw44.newLine();
-			}			
-			bw44.close();
-
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			EB[i] = paillier.Encryption(B[i]);
+			EB_Array[i] = "EV[" + Integer.toString(i) + "] = " + EB[i].toString();
 		}
 		
+		WriteToFile(EB_File, EB_Array); // Writing Vector EB to the file!
 		
 		
 		
@@ -348,37 +272,37 @@ public class Paillier
 		
 		System.out.println("prod="+paillier.Decryption(prod).toString()); // Final Result
 		
-		
-    	Scanner f55 = new Scanner(System.in);
+
 		System.out.println("Enter the filename for Encrypted dotprod of U and V");
-    	String fileName55 = f55.next() + ".txt";
+    	String EAB_File = f1.next() + ".txt";
 		
-    	File fout55 = new File(fileName55);
-    	FileOutputStream fos55 = null;
+    	File foutEAB = new File(EAB_File);
+    	FileOutputStream fosEAB = null;
 		try {
-			fos55 = new FileOutputStream(fout55);
+			fosEAB = new FileOutputStream(foutEAB);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
      
-    	BufferedWriter bw55 = new BufferedWriter(new OutputStreamWriter(fos55));
+    	BufferedWriter bwEAB = new BufferedWriter(new OutputStreamWriter(fosEAB));
 		
 		try 
 		{
 			for (int i = 0; i < PowEA.length; i++)
 			{
-				bw55.write(PowEA[i].toString());
-				bw55.newLine();
+				bwEAB.write("E(U[" + Integer.toString(i) + "]" + ".V[" + Integer.toString(i) + "]) = " + PowEA[i].toString());
+				bwEAB.newLine();
 			}
-			bw55.write("Final Dot Product = " + paillier.Decryption(prod).toString());
-			bw55.close();
+			bwEAB.newLine();
+			bwEAB.write("Final Dot Product = " + paillier.Decryption(prod).toString());
+			bwEAB.close();
 
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
-		
+		System.out.println("All Files are now ready in the Project Folder!");
 	}
 }

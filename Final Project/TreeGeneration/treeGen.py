@@ -3,10 +3,10 @@ from functools import reduce
 preSet = []
 dPreSet = {}
 binRange = []
-bitLen = 7
+bitLen = 10
 # dictPrefix = {}
 
-SNum = [1, 6, 7, 9, 11, 12, 13, 16, 20, 25, 89]#, 128, 256]
+SNum = [1, 6, 7, 9, 11, 12, 13, 16, 20, 25, 89, 128, 256]
 # SNum = [1, 6, 7, 16, 20]
 
 S, S1, S2, L = [], [], [], []

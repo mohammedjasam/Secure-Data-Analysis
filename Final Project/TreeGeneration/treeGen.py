@@ -3,11 +3,11 @@ from functools import reduce
 preSet = []
 dPreSet = {}
 binRange = []
-bitLen = 10
+bitLen = 5
 # dictPrefix = {}
 
-SNum = [1, 6, 7, 9, 11, 12, 13, 16, 20, 25, 89, 128, 256]
-# SNum = [1, 6, 7, 16, 20]
+# SNum = [1, 6, 7, 9, 11, 12, 13, 16, 20, 25]#, 89, 128, 256]
+SNum = [1, 6, 7, 16, 20]
 
 S, S1, S2, L = [], [], [], []
 string = '{0:0' + str(bitLen) + 'b}' # static BitLength
@@ -121,8 +121,50 @@ def main():
                     mergedL.append(Lij)
                 except:
                     pass
-    print(L)
+    # print(L)
     print()
-    print(mergedL)
+    # print(mergedL)
 
-main()
+    if len(mergedL) == 2:
+        print(mergedL)
+    else:
+        # Find S3 via finding the subset who's prefix families share the least number of prefixes!
+        pickS3List = []
+        for subset in mergedL:
+            preFamilies = []
+            for x in subset:
+                preFamilies.append(dPreSet[x])
+            interSection = list(reduce(set.intersection, [set(item) for item in preFamilies]))
+            pickS3List.append((len(interSection), subset))
+        S3 = min(pickS3List)[1]
+        # print(S3)
+        nS3 = len(S3)
+
+        # tempMerged
+        while (len(mergedL) == 3):
+            mergedL.remove(S3)
+
+            while (len(S3) > math.ceil(nS3/2)):
+                S31, S32 = checkLCP(S3)
+
+                if len(S31) >= len(S32):
+                    L.append(S32)
+                    S3 = S31
+                else:
+                    L.append(S31)
+                    S3 = S32
+                    
+            if (len(S1) + len(S31)) <= math.ceil(n/2):
+                S1 += S31
+                if (len(S2) + len(S32)) <= math.ceil(n/2):
+                    S2 += S32
+                else:
+                    S3 = S32[:]
+                    mergedL.append(S3)
+            else:
+                S2 += S31
+                S3 = S32[:]
+                mergedL.append(S3)
+        print(mergedL)
+
+main() # This starts it all!!!!

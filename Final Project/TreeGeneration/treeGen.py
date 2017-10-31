@@ -1,5 +1,5 @@
 import math
-
+from functools import reduce
 preSet = []
 dPreSet = {}
 binRange = []
@@ -40,22 +40,33 @@ for element in S:
 
 
 
-
+pastLCP = []
 def checkLCP(S):
+    global pastLCP
+
     LCP = ""
-    prefixI = dPreSet[S[0]]
-    prefixJ = dPreSet[S[1]]
-    LCP = set(prefixI).intersection(set(prefixJ))
+    prefixF = []
+    for i in range(len(S)):
+        prefixF.append(dPreSet[S[i]])
 
-    for i in range(2, len(S)):
-        prefixI = dPreSet[S[i]]
+    LCP = list(reduce(set.intersection, [set(item) for item in prefixF]))
 
-        LCP = set(prefixI).intersection(set(LCP))
-    # print(LCP)
+    for x in LCP:
+        if x in pastLCP:
+            LCP.remove(x)
 
-    LCP0 = list(list(LCP)[0])
-    LCP1 = list(list(LCP)[0])
-    # print(LCP0, LCP1)
+    pastLCP += LCP
+
+    c = 0
+    countL = []
+    for x in LCP:
+        countL.append((x.count("*"), x))
+
+    LCPrefix = min(countL)[1]
+    print(LCPrefix)
+
+    LCP0 = list(LCPrefix)
+    LCP1 = list(LCPrefix)
 
     for x in range(len(LCP0)):
         if LCP0[x] == "*":
@@ -65,10 +76,9 @@ def checkLCP(S):
         if LCP1[x] == "*":
             LCP1[x] = "1"
             break
+
     LCP0 = "".join(LCP0)
     LCP1 = "".join(LCP1)
-
-    # print(LCP0, LCP1)
 
     L0 = []
     L1 = []
@@ -76,24 +86,18 @@ def checkLCP(S):
         prefixFamily = dPreSet[S[i]]
         if LCP0 in prefixFamily:
             L0.append(S[i])
-        elif LCP1 in prefixFamily:
+        else:
             L1.append(S[i])
     return L0, L1
-
-# checkLCP(S)
-
-
 
 n = len(S)
 
 def main():
-    global S, S1, S2, L
 
-    # count = 0
+    global S, S1, S2, L
 
     while (len(S) > math.ceil(n/2)):
         S1, S2 = checkLCP(S)
-        # print(S1, S2)
 
         if len(S1) >= len(S2):
             L.append(S2)

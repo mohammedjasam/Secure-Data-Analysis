@@ -3,10 +3,10 @@ from functools import reduce
 preSet = []
 dPreSet = {}
 binRange = []
-bitLen = 5
+bitLen = 7
 # dictPrefix = {}
 
-SNum = [1, 6, 7, 9, 11, 12, 13, 16, 20, 25]
+SNum = [1, 6, 7, 9, 11, 12, 13, 16, 20, 25, 89]#, 128, 256]
 # SNum = [1, 6, 7, 16, 20]
 
 S, S1, S2, L = [], [], [], []
@@ -107,6 +107,22 @@ def main():
             S = S2
 
     L.append(S)
+
+    mergedL = L[:] ## Has the merged Values of L
+
+    for i in range(0, (len(L)-1)):
+        for j in range(i + 1, len(L)):
+            if (len(L[i]) + len(L[j])) < math.ceil(n/2):
+                Lij = L[i] + L[j]
+
+                try:
+                    mergedL.remove(L[i])
+                    mergedL.remove(L[j])
+                    mergedL.append(Lij)
+                except:
+                    pass
     print(L)
+    print()
+    print(mergedL)
 
 main()

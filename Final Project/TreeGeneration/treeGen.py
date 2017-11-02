@@ -241,6 +241,7 @@ def superMain(SNum, Bits):
                 try:
                     L.remove(S3)
                 except:
+                    # print(L, L[-1])
                     del L[-1]
                     sub1, sub2 = printTheNumbers(L)
                     # print("Yeah Bitch this is the final result!")
@@ -302,16 +303,20 @@ from binarytree import *
 
 
 # Data
+print("Data")
 SNum = [1,6,7,9,11,12,13,16,20,25]
 Bits = 10
 
-print("The final result")
+print(SNum)
+print()
+print("The Generated Tree for above data set!")
 mytree = tree()
 root = Node(SNum)
 data = SNum
 start = root
-
 parent = root
+
+
 def recBuildTree(x, data, parent):
     if len(x.value) == 1:
         return parent
@@ -322,5 +327,4 @@ def recBuildTree(x, data, parent):
         parent = x
         recBuildTree(x.left, left, parent), recBuildTree(x.right, right, parent)
 recBuildTree(root, data, parent) # Recursively builds the tree!
-
 pprint(start) # Prints the tree

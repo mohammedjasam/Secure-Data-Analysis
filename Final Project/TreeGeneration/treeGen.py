@@ -242,9 +242,13 @@ def superMain(SNum, Bits):
                     L.remove(S3)
                 except:
                     del L[-1]
-                    print("Yeah Bitch this is the final result!")
-                    print(L)
-                    break
+                    sub1, sub2 = printTheNumbers(L)
+                    # print("Yeah Bitch this is the final result!")
+                    # print(L)
+                    # break
+                    # print("HI")
+                    return sub1, sub2
+
 
                 while (len(S3) > math.ceil(nS3/2)):
                     S31, S32 = checkS3LCP(S3, pastS3LCP)
@@ -295,10 +299,10 @@ def superMain(SNum, Bits):
 
 """ PROGRAM EXECUTION BEGINS """
 
-# SNum = [1,6,7,9,11,12,13,16,20,25]
+SNum = [1,6,7,9,11,12,13,16,20,25]
 # SNum = [1, 6, 7, 16, 20]
-SNum = [9, 11, 12, 13, 25]
-Bits = 5
+# SNum = [9, 11, 12, 13, 25]
+Bits = 10
 
 # Splits the SNum to two groups based on the algorithm!
 ## Runs the whole script and produces the result!

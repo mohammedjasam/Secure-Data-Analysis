@@ -215,7 +215,7 @@ def superMain(SNum, Bits):
             # print()
             # print('after appending')
             L.append( Lij)
-            # print(L)
+        # print(L)
 
         if len(L) == 2:
             sub1, sub2 = printTheNumbers(L)
@@ -234,9 +234,17 @@ def superMain(SNum, Bits):
                 pickS3List.append((len(interSection), subset))
             S3 = min(pickS3List)[1]
             nS3 = len(S3)
-
+            # print(pickS3List)
             while (len(L) == 3):
-                L.remove(S3)
+                # print()
+                # print(L, S3)
+                try:
+                    L.remove(S3)
+                except:
+                    del L[-1]
+                    print("Yeah Bitch this is the final result!")
+                    print(L)
+                    break
 
                 while (len(S3) > math.ceil(nS3/2)):
                     S31, S32 = checkS3LCP(S3, pastS3LCP)
@@ -287,8 +295,10 @@ def superMain(SNum, Bits):
 
 """ PROGRAM EXECUTION BEGINS """
 
-SNum = [1,2,3,4,5,20,22,24,80,90,100,150,500]
-Bits = 12
+# SNum = [1,6,7,9,11,12,13,16,20,25]
+# SNum = [1, 6, 7, 16, 20]
+SNum = [9, 11, 12, 13, 25]
+Bits = 5
 
 # Splits the SNum to two groups based on the algorithm!
 ## Runs the whole script and produces the result!
@@ -298,42 +308,15 @@ res2 = []
 res1, res2 = superMain(SNum, Bits)
 print("The final result")
 print(res1, res2)
-# res1, res2 = superMain(res1, Bits)
+while (len(res1) <= 1 and len(res2) <= 1):
+    res1, res2 = superMain(res1, Bits)
 
-l1 = []
-# l2 = []
-# g1 = []
-# g2 = []
-# l1, l2 = superMain(res1, Bits)
-# g1, g2 = superMain(res2, Bits)
-# print(l1, l2, g1, g2)
-
-
-# while (len(res1) <= 1 and len(res2) <= 1):
-#     res1, res2 = superMain(res1, Bits)
-#
-# class Tree(object):
-#     def __init__(self):
-#         self.left = None
-#         self.right = None
-#         self.data = None
-#
-# root = Tree()
-# root.data = "root"
-# root.left = Tree()
-# root.left.data = "left"
-# root.right = Tree()
-# root.right.data = "right"
-#
-# print(root.data)
-
-#
-# from binarytree import *
-# mytree = tree()
-# root = Node(SNum)
-# root.left = Node(2)
-# root.right = Node(3)
-# root.left.left = Node(4)
-# root.left.right = Node(5)
-# pprint(root)
+from binarytree import *
+mytree = tree()
+root = Node(SNum)
+root.left = Node(2)
+root.right = Node(3)
+root.left.left = Node(4)
+root.left.right = Node(5)
+pprint(root)
 # print(inspect(mytree))

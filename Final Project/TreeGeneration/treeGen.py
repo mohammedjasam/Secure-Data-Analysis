@@ -298,28 +298,20 @@ def superMain(SNum, Bits):
 
 
 """ PROGRAM EXECUTION BEGINS """
+from binarytree import *
 
-SNum = [1,2,3,4,5,6,7]
+
+# Data
+SNum = [1,6,7,9,11,12,13,16,20,25]
 Bits = 10
 
-# Splits the SNum to two groups based on the algorithm!
-## Runs the whole script and produces the result!
-
-res1 = []
-res2 = []
 print("The final result")
-# print(res1, res2)
-from binarytree import *
 mytree = tree()
 root = Node(SNum)
-
-# print(root.value)
-# x = root
 data = SNum
 start = root
 
 parent = root
-# print(root.show_ids)
 def recBuildTree(x, data, parent):
     if len(x.value) == 1:
         return parent
@@ -329,5 +321,6 @@ def recBuildTree(x, data, parent):
         x.right = Node(right)
         parent = x
         recBuildTree(x.left, left, parent), recBuildTree(x.right, right, parent)
-recBuildTree(root, data, parent)
+recBuildTree(root, data, parent) # Recursively builds the tree!
+
 pprint(start) # Prints the tree

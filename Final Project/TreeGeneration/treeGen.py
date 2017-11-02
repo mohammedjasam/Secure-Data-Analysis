@@ -299,9 +299,7 @@ def superMain(SNum, Bits):
 
 """ PROGRAM EXECUTION BEGINS """
 
-SNum = [1,6,7,9,11,12,13,16,20,25]
-# SNum = [1, 6, 7, 16, 20]
-# SNum = [9, 11, 12, 13, 25]
+SNum = [1,2,3,4,5,6,7]
 Bits = 10
 
 # Splits the SNum to two groups based on the algorithm!
@@ -315,25 +313,21 @@ from binarytree import *
 mytree = tree()
 root = Node(SNum)
 
-print(root.value)
-x = root
+# print(root.value)
+# x = root
 data = SNum
 start = root
-while (len(x.value)>1):
-    left, right = superMain(data, Bits)
-    root.left = Node(left)
-    root.right = Node(right)
-    x = root.left
-    data = left
-    # pprint(root)
-    root = root.left
 
-pprint(start)
-
-
-
-root.left = Node(2)
-root.right = Node(3)
-root.left.left = Node(4)
-root.left.right = Node(5)
-# print(inspect(mytree))
+parent = root
+# print(root.show_ids)
+def recBuildTree(x, data, parent):
+    if len(x.value) == 1:
+        return parent
+    else:
+        left, right = superMain(data, Bits)
+        x.left = Node(left)
+        x.right = Node(right)
+        parent = x
+        recBuildTree(x.left, left, parent), recBuildTree(x.right, right, parent)
+recBuildTree(root, data, parent)
+pprint(start) # Prints the tree

@@ -309,18 +309,31 @@ Bits = 10
 
 res1 = []
 res2 = []
-res1, res2 = superMain(SNum, Bits)
 print("The final result")
-print(res1, res2)
-while (len(res1) <= 1 and len(res2) <= 1):
-    res1, res2 = superMain(res1, Bits)
-
+# print(res1, res2)
 from binarytree import *
 mytree = tree()
 root = Node(SNum)
+
+print(root.value)
+x = root
+data = SNum
+start = root
+while (len(x.value)>1):
+    left, right = superMain(data, Bits)
+    root.left = Node(left)
+    root.right = Node(right)
+    x = root.left
+    data = left
+    # pprint(root)
+    root = root.left
+
+pprint(start)
+
+
+
 root.left = Node(2)
 root.right = Node(3)
 root.left.left = Node(4)
 root.left.right = Node(5)
-pprint(root)
 # print(inspect(mytree))

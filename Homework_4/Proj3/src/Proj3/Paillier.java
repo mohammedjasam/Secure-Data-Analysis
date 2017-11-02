@@ -1,5 +1,7 @@
 package Proj3;
 import java.math.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 
 public class Paillier 
@@ -32,7 +35,7 @@ public class Paillier
 //	number of bits of modulus
 	private int bitLength;
 	
-	
+	public static int fileCount;
 
 //	Constructs an instance of the Paillier cryptosystem.
 //	bitLengthVal number of bits of modulus
@@ -41,6 +44,29 @@ public class Paillier
 	{
 		KeyGeneration(bitLengthVal, certainty);
 	}
+	
+	@SuppressWarnings("null")
+	public static String[] ReadFromFile(String fileName) throws IOException
+	{
+		File f = new File("./" + fileName);
+		@SuppressWarnings("resource")
+		Scanner scan = new Scanner(f);		
+		long arrCount = 0;
+		arrCount = Files.lines(Paths.get(fileName)).count(); // len of the file content
+		
+		
+		String str[] = new String[(int) arrCount];
+		fileCount = (int) arrCount;
+		for (int i = 0; scan.hasNext(); i++)
+		{
+			String s = scan.nextLine();
+			str[i] = s;
+		}
+		
+		
+		return str;
+	}
+	
 	
 //	This function Writes Data to the Files
 	public static void WriteToFile(String fileName, String[] array)
@@ -84,16 +110,31 @@ public class Paillier
 	public void KeyGeneration(int bitLengthVal, int certainty) 
 	{
 		bitLength = bitLengthVal;
+		
+		System.out.print("Enter the filename contains p, q and g:");
+		Scanner pqgFile = new Scanner(System.in);
+		String input[] = new String[fileCount];
+		try {
+			input = ReadFromFile(pqgFile.next() + ".txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		for (int i = 0; i < input.length; i++ )
+		{
+			System.out.println(input[i]);
+		}
+		
 //		Constructs two randomly generated positive BigIntegers that are probably prime, with the specified bitLength and certainty.*/
 		p = new BigInteger(bitLength / 2, certainty, new Random());
 		q = new BigInteger(bitLength / 2, certainty, new Random());
 		
 		n = p.multiply(q);
 		nsquare = n.multiply(n);
-		Random r = new Random(); // Random Number Generator for the G Value!
+		
+		Random r = new Random(nsquare.intValue() -1); // Random Number Generator for the G Value!
 		
 		g = new BigInteger(Integer.toString(r.nextInt()));
-		
 		
 		lambda = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)).divide(
 		p.subtract(BigInteger.ONE).gcd(q.subtract(BigInteger.ONE)));
@@ -105,26 +146,26 @@ public class Paillier
 			System.out.println("g is not good. Choose g again.");
 			System.exit(1);
 		}
-			
+		System.out.println("G = " + Integer.toString(g.intValue()));	
 		BigInteger u = g.modPow(lambda, nsquare).subtract(BigInteger.ONE).divide(n).modInverse(n);
 		
-//		Creating data to write to file
-		String textP = "P = "+ p + " ";
-		String textQ = "\nQ = "+ q + " ";
-		String textG = "\nG = "+ g + " ";
-		
-//		Scanner object to read data from console
+////		Creating data to write to file
+//		String textP = "P = "+ p + " ";
+//		String textQ = "\nQ = "+ q + " ";
+//		String textG = "\nG = "+ g + " ";
+//		
+////		Scanner object to read data from console
     	Scanner f1 = new Scanner(System.in);
-    	System.out.println("Enter the filename for P, Q, G");
-    	
-    	String fileName = f1.next() + ".txt";    	
-    	
-    	String[] pqg = new String[3];
-    	pqg[0] = textP;
-    	pqg[1] = textQ;
-    	pqg[2] = textG;
-    	
-    	WriteToFile(fileName, pqg); // Writing P, Q, G to the file!
+//    	System.out.println("Enter the filename for P, Q, G");
+//    	
+//    	String fileName = f1.next() + ".txt";    	
+//    	
+//    	String[] pqg = new String[3];
+//    	pqg[0] = textP;
+//    	pqg[1] = textQ;
+//    	pqg[2] = textG;
+//    	
+//    	WriteToFile(fileName, pqg); // Writing P, Q, G to the file!
 
     	
 		String textLambda = "Lambda = " + lambda.toString();
@@ -170,8 +211,16 @@ public class Paillier
 	}
 	
 	
-	public static void main(String[] str) 
+	public static void main(String[] str) throws IOException 
 	{
+//		String input[] = new String[fileCount];
+//		input = ReadFromFile("eu.txt");
+////		String input[] = ReadFromFile("eu.txt");
+////		
+//		for (int i = 0; i < input.length; i++ )
+//		{
+//			System.out.println(input[i]);
+//		}
 //		instantiating an object of Paillier cryptosystem
 		Paillier paillier = new Paillier();		
 		int size; // Gets the size of the vectors from the console

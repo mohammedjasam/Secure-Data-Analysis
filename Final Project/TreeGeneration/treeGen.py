@@ -1,254 +1,339 @@
 import math
 from functools import reduce
-preSet = []
-dPreSet = {}
-binRange = []
-bitLen = 10
-# dictPrefix = {}
 
-SNum = [1, 6, 7, 9, 11, 12, 13, 16, 20, 25, 30, 89, 90, 128, 256]
-# SNum = [1, 6, 7, 16, 20]
+def superMain(SNum, Bits):
+    sub1, sub2  = [], []
+    preSet = []
+    dPreSet = {}
+    binRange = []
+    bitLen = Bits
+    dNumToBin = {}
+    dBinToNum = {}
+    S, S1, S2, L = [], [], [], []
+    string = '{0:0' + str(bitLen) + 'b}' # static BitLength
 
-S, S1, S2, L = [], [], [], []
-string = '{0:0' + str(bitLen) + 'b}' # static BitLength
+    # Converts the numeric to binary values!
+    for n in SNum:
+        bNum = string.format(n)
+        S.append(bNum)
+        dNumToBin[n] = bNum
 
-# Converts the numeric to binary values!
-for n in SNum:
-    bNum = string.format(n)
-    S.append(bNum)
+    for x in SNum:
+        dBinToNum[dNumToBin[x]] = x
+
+    def createPrefix(s, preSet):
+        # global dPreSet
+        savedS = s
+        temp = []  # temp list to generate the Prefix Set of a binary value
+        temp.append(s)
+        s = list(s)
+        for x in range(1, len(s) + 1):
+            s[-x] = '*'
+            temp.append(''.join(s))
+        dPreSet[savedS] = temp
+        preSet += temp
+        return preSet
+
+    for element in S:
+        createPrefix(element, preSet)
+
+    # for k, v in dPreSet.items():
+    #     print(k, v)
+
+    pastLCP = []
+    def checkLCP(S, pastLCP):
+        LCP = ""
+        prefixF = []
+
+        for i in range(len(S)):
+            prefixF.append(dPreSet[S[i]])
+
+        LCP = list(reduce(set.intersection, [set(item) for item in prefixF]))
+
+        for x in LCP:
+            if x in pastLCP:
+                LCP.remove(x)
+
+        pastLCP += LCP
+
+        c = 0
+        countL = []
+
+        for x in LCP:
+            countL.append((x.count("*"), x))
 
 
-def createPrefix(s, preSet):
-    global dPreSet
-    savedS = s
-    temp = []  # temp list to generate the Prefix Set of a binary value
-    temp.append(s)
-    s = list(s)
-    for x in range(1, len(s) + 1):
-        s[-x] = '*'
-        temp.append(''.join(s))
-    dPreSet[savedS] = temp
-    preSet += temp
-    return preSet
+        # Replaces the first star with 0 or 1
+        LCPrefix = min(countL)[1]
 
-for element in S:
-    createPrefix(element, preSet)
+        LCP0 = list(LCPrefix)
+        LCP1 = list(LCPrefix)
 
-# for k, v in dPreSet.items():
-#     print(k, v)
+        for x in range(len(LCP0)):
+            if LCP0[x] == "*":
+                LCP0[x] = "0"
+                break
 
+        for x in range(len(LCP1)):
+            if LCP1[x] == "*":
+                LCP1[x] = "1"
+                break
 
+        LCP0 = "".join(LCP0)
+        LCP1 = "".join(LCP1)
 
+        L0 = []
+        L1 = []
 
-pastLCP = []
-def checkLCP(S):
-    global pastLCP
+        for i in range(len(S)):
+            prefixFamily = dPreSet[S[i]]
 
-    LCP = ""
-    prefixF = []
-    for i in range(len(S)):
-        prefixF.append(dPreSet[S[i]])
+            if LCP0 in prefixFamily:
+                L0.append(S[i])
+            else:
+                L1.append(S[i])
 
-    LCP = list(reduce(set.intersection, [set(item) for item in prefixF]))
+        return L0, L1
 
-    for x in LCP:
-        if x in pastLCP:
-            LCP.remove(x)
+    pastS3LCP = []
+    def checkS3LCP(S, pastS3LCP):
+        LCP = ""
+        prefixF = []
 
-    pastLCP += LCP
+        for i in range(len(S)):
+            prefixF.append(dPreSet[S[i]])
 
-    c = 0
-    countL = []
-    for x in LCP:
-        countL.append((x.count("*"), x))
+        LCP = list(reduce(set.intersection, [set(item) for item in prefixF]))
 
-    LCPrefix = min(countL)[1]
-    print(LCPrefix)
+        for x in LCP:
+            if x in pastS3LCP:
+                LCP.remove(x)
 
-    LCP0 = list(LCPrefix)
-    LCP1 = list(LCPrefix)
+        pastS3LCP += LCP
 
-    for x in range(len(LCP0)):
-        if LCP0[x] == "*":
-            LCP0[x] = "0"
-            break
-    for x in range(len(LCP1)):
-        if LCP1[x] == "*":
-            LCP1[x] = "1"
-            break
+        c = 0
+        countL = []
 
-    LCP0 = "".join(LCP0)
-    LCP1 = "".join(LCP1)
+        for x in LCP:
+            countL.append((x.count("*"), x))
 
-    L0 = []
-    L1 = []
-    for i in range(len(S)):
-        prefixFamily = dPreSet[S[i]]
-        if LCP0 in prefixFamily:
-            L0.append(S[i])
+        LCPrefix = min(countL)[1]
+
+        # Replaces the first star with 0 and 1
+        LCP0 = list(LCPrefix)
+        LCP1 = list(LCPrefix)
+
+        for x in range(len(LCP0)):
+            if LCP0[x] == "*":
+                LCP0[x] = "0"
+                break
+
+        for x in range(len(LCP1)):
+            if LCP1[x] == "*":
+                LCP1[x] = "1"
+                break
+
+        LCP0 = "".join(LCP0)
+        LCP1 = "".join(LCP1)
+
+        L0 = []
+        L1 = []
+        for i in range(len(S)):
+            prefixFamily = dPreSet[S[i]]
+            if LCP0 in prefixFamily:
+                L0.append(S[i])
+            else:
+                L1.append(S[i])
+        return L0, L1
+
+    def printTheNumbers(L):
+        temp1 = L[0]
+        temp2 = L[1]
+        temp1 = [dBinToNum[x] for x in temp1]
+        temp2 = [dBinToNum[x] for x in temp2]
+
+        if len(temp1) >= len(temp2):
+            pass
         else:
-            L1.append(S[i])
-    return L0, L1
+            temp = temp1[:]
+            temp1 = temp2[:]
+            temp2 = temp[:]
 
+        # print(temp1, temp2)
+        return temp1, temp2
 
+    n = len(S)
+    def checkCombo(L):
+        # print("In the combo")
+        # print(L)
+        i = -1
+        j = -1
 
+        for x in range(len(L)-1):
+            for y in range(x + 1, len(L)):
+                if (len(L[x]) + len(L[y])) <= math.ceil(n/2):
+                    i = x
+                    j = y
+        return i, j
 
-pastS3LCP = []
-def checkS3LCP(S):
-    global pastS3LCP
+    def main(S, pastLCP, pastS3LCP):
+        global sub1, sub2
+        while (len(S) > math.ceil(n/2)):
+            S1, S2 = checkLCP(S, pastLCP)
 
-    LCP = ""
-    prefixF = []
-    for i in range(len(S)):
-        prefixF.append(dPreSet[S[i]])
+            if len(S1) >= len(S2):
+                L.append(S2)
+                S = S1
+            else:
+                L.append(S1)
+                S = S2
 
-    LCP = list(reduce(set.intersection, [set(item) for item in prefixF]))
+        L.append(S)
 
-    for x in LCP:
-        if x in pastS3LCP:
-            LCP.remove(x)
+        # mergedL = L[:] ## Has the merged Values of L
 
-    pastS3LCP += LCP
+        while (checkCombo(L)):
 
-    c = 0
-    countL = []
-    for x in LCP:
-        countL.append((x.count("*"), x))
+            i, j = checkCombo(L)
+            if i == -1 or j == -1:
+                break
+            a = L[i]
+            b = L[j]
 
-    LCPrefix = min(countL)[1]
-    # print(LCPrefix)
+            Lij = L[i] + L[j]
+            tempD = {}
+            # print('deleting')
+            # print(i, j)
+            # print("Deleting i")
+            del L[i]
+            # print(L)
+            # print("Deleting j")
 
-    LCP0 = list(LCPrefix)
-    LCP1 = list(LCPrefix)
+            del L[j-1]
+            # print(L)
 
-    for x in range(len(LCP0)):
-        if LCP0[x] == "*":
-            LCP0[x] = "0"
-            break
-    for x in range(len(LCP1)):
-        if LCP1[x] == "*":
-            LCP1[x] = "1"
-            break
+            # print()
+            # print('after appending')
+            L.append( Lij)
+            # print(L)
 
-    LCP0 = "".join(LCP0)
-    LCP1 = "".join(LCP1)
+        if len(L) == 2:
+            sub1, sub2 = printTheNumbers(L)
+            return sub1, sub2
 
-    L0 = []
-    L1 = []
-    for i in range(len(S)):
-        prefixFamily = dPreSet[S[i]]
-        if LCP0 in prefixFamily:
-            L0.append(S[i])
+            # return mergedL
         else:
-            L1.append(S[i])
-    return L0, L1
+            # Find S3 via finding the subset who's prefix families share the least number of prefixes!
+            pickS3List = []
 
+            for subset in L:
+                preFamilies = []
+                for x in subset:
+                    preFamilies.append(dPreSet[x])
+                interSection = list(reduce(set.intersection, [set(item) for item in preFamilies]))
+                pickS3List.append((len(interSection), subset))
+            S3 = min(pickS3List)[1]
+            nS3 = len(S3)
 
+            while (len(L) == 3):
+                L.remove(S3)
 
+                while (len(S3) > math.ceil(nS3/2)):
+                    S31, S32 = checkS3LCP(S3, pastS3LCP)
 
+                    if len(S31) >= len(S32):
+                        L.append(S32)
+                        S3 = S31
+                    else:
+                        L.append(S31)
+                        S3 = S32
 
+                ## Assigns bigger list to S1 and vice versa!
+                if (len(L[0]) >= len(L[1])):
+                    S1 = L[0]
+                    S2 = L[1]
+                else:
+                    S1 = L[1]
+                    S2 = L[0]
 
-n = len(S)
-
-def main():
-
-    global S, S1, S2, L
-
-    while (len(S) > math.ceil(n/2)):
-        S1, S2 = checkLCP(S)
-        # print("S1, S2")
-        # print(S1, S2)
-
-        if len(S1) >= len(S2):
-            L.append(S2)
-            S = S1
-        else:
-            L.append(S1)
-            S = S2
-
-    L.append(S)
-
-    mergedL = L[:] ## Has the merged Values of L
-
-    for i in range(0, (len(L)-1)):
-        for j in range(i + 1, len(L)):
-            if (len(L[i]) + len(L[j])) < math.ceil(n/2):
-                Lij = L[i] + L[j]
-
-                try:
-                    mergedL.remove(L[i])
-                    mergedL.remove(L[j])
-                    mergedL.append(Lij)
-                except:
+                ## Assigns smaller list to S31 and vice versa!
+                if (len(S31) <= len(S32)):
                     pass
-    # print(L)
-    # print()
-    # print(mergedL)
-
-    if len(mergedL) == 2:
-        print(mergedL)
-    else:
-        # Find S3 via finding the subset who's prefix families share the least number of prefixes!
-        pickS3List = []
-        for subset in mergedL:
-            preFamilies = []
-            for x in subset:
-                preFamilies.append(dPreSet[x])
-            interSection = list(reduce(set.intersection, [set(item) for item in preFamilies]))
-            pickS3List.append((len(interSection), subset))
-        S3 = min(pickS3List)[1]
-        nS3 = len(S3)
-
-        # tempMerged
-        while (len(mergedL) == 3):
-            mergedL.remove(S3)
-
-
-            # print("outer daffuq")
-            # print(mergedL)
-            while (len(S3) > math.ceil(nS3/2)):
-                # print("inner daffuq")
-                S31, S32 = checkS3LCP(S3)
-
-                # print("S31, S32")
-                # print(S31, S32)
-
-                if len(S31) >= len(S32):
-                    L.append(S32)
-                    S3 = S31
                 else:
-                    L.append(S31)
-                    S3 = S32
+                    temp = S31[:]
+                    S31 = S32[:]
+                    S32 = temp[:]
 
-
-            ## Assigns bigger list to S1 and vice versa!
-            if (len(mergedL[0]) >= len(mergedL[1])):
-                S1 = mergedL[0]
-                S2 = mergedL[1]
-            else:
-                S1 = mergedL[1]
-                S2 = mergedL[0]
-
-            ## Assigns smaller list to S31 and vice versa!
-            if (len(S31) <= len(S32)):
-                pass
-            else:
-                temp = S31[:]
-                S31 = S32[:]
-                S32 = temp[:]
-
-
-            if (len(S1) + len(S31)) <= math.ceil(n/2):
-                S1 += S31
-                if (len(S2) + len(S32)) <= math.ceil(n/2):
-                    S2 += S32
+                if (len(S1) + len(S31)) <= math.ceil(n/2):
+                    S1 += S31
+                    if (len(S2) + len(S32)) <= math.ceil(n/2):
+                        S2 += S32
+                    else:
+                        S3 = S32[:]
+                        L.append(S3)
                 else:
+                    S2 += S31
                     S3 = S32[:]
-                    mergedL.append(S3)
-            else:
-                S2 += S31
-                S3 = S32[:]
-                mergedL.append(S3)
-        print(mergedL)
+                    L.append(S3)
 
-main() # This starts it all!!!!
+            sub1, sub2 = printTheNumbers(L)
+            return (sub1, sub2)
+
+    res1, res2 = main(S, pastLCP, pastS3LCP)
+    return res1, res2
+
+
+
+
+""" PROGRAM EXECUTION BEGINS """
+
+SNum = [1,2,3,4,5,20,22,24,80,90,100,150,500]
+Bits = 12
+
+# Splits the SNum to two groups based on the algorithm!
+## Runs the whole script and produces the result!
+
+res1 = []
+res2 = []
+res1, res2 = superMain(SNum, Bits)
+print("The final result")
+print(res1, res2)
+# res1, res2 = superMain(res1, Bits)
+
+l1 = []
+# l2 = []
+# g1 = []
+# g2 = []
+# l1, l2 = superMain(res1, Bits)
+# g1, g2 = superMain(res2, Bits)
+# print(l1, l2, g1, g2)
+
+
+# while (len(res1) <= 1 and len(res2) <= 1):
+#     res1, res2 = superMain(res1, Bits)
+#
+# class Tree(object):
+#     def __init__(self):
+#         self.left = None
+#         self.right = None
+#         self.data = None
+#
+# root = Tree()
+# root.data = "root"
+# root.left = Tree()
+# root.left.data = "left"
+# root.right = Tree()
+# root.right.data = "right"
+#
+# print(root.data)
+
+#
+# from binarytree import *
+# mytree = tree()
+# root = Node(SNum)
+# root.left = Node(2)
+# root.right = Node(3)
+# root.left.left = Node(4)
+# root.left.right = Node(5)
+# pprint(root)
+# print(inspect(mytree))

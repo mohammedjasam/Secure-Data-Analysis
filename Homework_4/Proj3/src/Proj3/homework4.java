@@ -12,39 +12,31 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 
-public class Paillier 
+public class homework4 
 {
-
 //	p and q are two large primes.
 //	lambda = lcm(p-1, q-1) = (p-1)*(q-1)/gcd(p-1, q-1).
-	private BigInteger p, q, lambda;
-	
+//	Generator in Z*_{n^2}; here, gcd (L(g^lambda mod n^2), n) = 1.
+	private BigInteger p, q, lambda, pTemp, qTemp, lambdaTemp, g, gTemp;	
 
-//	n = p*q, where p and q are two large primes.
-	public BigInteger n;
-	
-
-//	nsquare = n*n
-	public BigInteger nsquare;
-	
-
-//	a random integer in Z*_{n^2} where gcd (L(g^lambda mod n^2), n) = 1.
-	private BigInteger g;
-	
+//	n = p*q and nsq = n*n
+	public BigInteger n, nTemp, nsq, nsqTemp;	
 
 //	number of bits of modulus
 	private int bitLength;
 	
+//	Global var which stores the size of contents in the file!
 	public static int fileCount;
 
 //	Constructs an instance of the Paillier cryptosystem.
-//	bitLengthVal number of bits of modulus
+//	numBits number of bits of modulus
 //	certainty The probability that the new BigInteger represents a prime number will exceed (1 - 2^(-certainty)). The execution time of this constructor is proportional to the value of this parameter.
-	public Paillier(int bitLengthVal, int certainty) 
+	public homework4(int numBits, int certainty) 
 	{
-		KeyGeneration(bitLengthVal, certainty);
+		KeyGen(numBits, certainty);
 	}
 	
+//	This function reads data from the file
 	@SuppressWarnings("null")
 	public static String[] ReadFromFile(String fileName) throws IOException
 	{
@@ -68,7 +60,7 @@ public class Paillier
 	}
 	
 	
-//	This function Writes Data to the Files
+//	This function writes data to the Files
 	public static void WriteToFile(String fileName, String[] array)
 	{
 		File fout = new File(fileName); // File Object
@@ -97,80 +89,97 @@ public class Paillier
 			e.printStackTrace();
 		}		
 	}
-
-//	Constructs an instance of the Paillier cryptosystem with 512 bits of modulus and at least 1-2^(-64) certainty of primes generation.
-	public Paillier() 
+	
+//	Constructs the key using the specified key size
+	public homework4() 
 	{
 		Scanner s1 = new Scanner(System.in);
-		System.out.print("Enter key size:");
+		System.out.print("Enter key size: ");
 		int keySize = s1.nextInt();
-		KeyGeneration(keySize, 64);
+		KeyGen(keySize, 0);
 	}
 	
-	public void KeyGeneration(int bitLengthVal, int certainty) 
+	public void KeyGen(int numBits, int certainty) 
 	{
-		bitLength = bitLengthVal;
-		
-		System.out.print("Enter the filename contains p, q and g:");
+		bitLength = numBits;
 		Scanner pqgFile = new Scanner(System.in);
+		
+//		The below block of code inputs the values of pqg from the user
+		System.out.print("Enter the filename contains p, q and g: ");		
 		String input[] = new String[fileCount];
+		
 		try {
 			input = ReadFromFile(pqgFile.next() + ".txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		for (int i = 0; i < input.length; i++ )
-		{
-			System.out.println(input[i]);
-		}
 		
-//		Constructs two randomly generated positive BigIntegers that are probably prime, with the specified bitLength and certainty.*/
-		p = new BigInteger(bitLength / 2, certainty, new Random());
-		q = new BigInteger(bitLength / 2, certainty, new Random());
+		p = new BigInteger(input[0]);
+		q = new BigInteger(input[1]);
+		g = new BigInteger(input[2]);
+		
+//		Generates P and Q
+		pTemp = new BigInteger(bitLength / 2, certainty, new Random());
+		qTemp = new BigInteger(bitLength / 2, certainty, new Random());
+		
+		nTemp = pTemp.multiply(qTemp);
+		nsqTemp = nTemp.multiply(nTemp);
 		
 		n = p.multiply(q);
-		nsquare = n.multiply(n);
+		nsq = n.multiply(n);
 		
-		Random r = new Random(nsquare.intValue() -1); // Random Number Generator for the G Value!
+//		Randomly generating G
+		Random rnd = new Random(nsqTemp.intValue() - 1);
+		BigInteger gTemp;
+		do {
+		    gTemp = new BigInteger(n.bitLength(), rnd);
+		} while (gTemp.compareTo(n) >= 0);
 		
-		g = new BigInteger(Integer.toString(r.nextInt()));
+		
+		lambdaTemp = pTemp.subtract(BigInteger.ONE).multiply(qTemp.subtract(BigInteger.ONE)).divide(
+		pTemp.subtract(BigInteger.ONE).gcd(qTemp.subtract(BigInteger.ONE)));
 		
 		lambda = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)).divide(
 		p.subtract(BigInteger.ONE).gcd(q.subtract(BigInteger.ONE)));
 		
 		
-//		check whether g is good.
-		if (g.modPow(lambda, nsquare).subtract(BigInteger.ONE).divide(n).gcd(n).intValue() != 1) 
+		
+//		Verification of G.
+		if (gTemp.modPow(lambdaTemp, nsqTemp).subtract(BigInteger.ONE).divide(nTemp).gcd(nTemp).intValue() != 1) 
 		{
-			System.out.println("g is not good. Choose g again.");
+			System.out.println("Wrong G, choose a new randome value!");
 			System.exit(1);
 		}
-		System.out.println("G = " + Integer.toString(g.intValue()));	
-		BigInteger u = g.modPow(lambda, nsquare).subtract(BigInteger.ONE).divide(n).modInverse(n);
 		
-////		Creating data to write to file
-//		String textP = "P = "+ p + " ";
-//		String textQ = "\nQ = "+ q + " ";
-//		String textG = "\nG = "+ g + " ";
-//		
-////		Scanner object to read data from console
+		
+		BigInteger MuTemp = gTemp.modPow(lambdaTemp, nsqTemp).subtract(BigInteger.ONE).divide(nTemp).modInverse(nTemp);	
+		
+		BigInteger Mu = g.modPow(lambda, nsq).subtract(BigInteger.ONE).divide(n).modInverse(n);
+		
+		
+		
+//		Creating data to write to file
+		String textP = "P = "+ pTemp + " ";
+		String textQ = "\nQ = "+ qTemp + " ";
+		String textG = "\nG = "+ gTemp + " ";
+		
+//		Scanner object to read data from console
     	Scanner f1 = new Scanner(System.in);
 //    	System.out.println("Enter the filename for P, Q, G");
-//    	
-//    	String fileName = f1.next() + ".txt";    	
-//    	
-//    	String[] pqg = new String[3];
-//    	pqg[0] = textP;
-//    	pqg[1] = textQ;
-//    	pqg[2] = textG;
-//    	
-//    	WriteToFile(fileName, pqg); // Writing P, Q, G to the file!
+    	String fileName = "GeneratedPQG.txt";    	
+    	
+    	String[] pqg = new String[3];
+    	pqg[0] = textP;
+    	pqg[1] = textQ;
+    	pqg[2] = textG;
+    	
+    	WriteToFile(fileName, pqg); // Writing P, Q, G to the file!
 
     	
 		String textLambda = "Lambda = " + lambda.toString();
-		String textMu = "Mu = " + u.toString();
-		System.out.println("Enter the filename for Lamda and Mu");
+		String textMu = "Mu = " + Mu.toString();
+		System.out.print("Enter the filename to store Lamda and Mu: ");
     	String fileName2 = f1.next() + ".txt";
     	
     	String[] lambda_mu = new String[2];
@@ -188,7 +197,7 @@ public class Paillier
 //	returns the ciphertext as a BigInteger
 	public BigInteger Encryption(BigInteger m, BigInteger r) 
 	{
-		return g.modPow(m, nsquare).multiply(r.modPow(n, nsquare)).mod(nsquare);	
+		return g.modPow(m, nsq).multiply(r.modPow(n, nsq)).mod(nsq);	
 	}
 	
 
@@ -198,7 +207,7 @@ public class Paillier
 	public BigInteger Encryption(BigInteger m) 
 	{
 		BigInteger r = new BigInteger(bitLength, new Random());
-		return g.modPow(m, nsquare).multiply(r.modPow(n, nsquare)).mod(nsquare);	
+		return g.modPow(m, nsq).multiply(r.modPow(n, nsq)).mod(nsq);	
 	}
 	
 //	Decrypts ciphertext c. plaintext m = L(c^lambda mod n^2) * u mod n, where u = (L(g^lambda mod n^2))^(-1) mod n.
@@ -206,29 +215,35 @@ public class Paillier
 //	returns plaintext as a BigInteger
 	public BigInteger Decryption(BigInteger c) 
 	{
-		BigInteger u = g.modPow(lambda, nsquare).subtract(BigInteger.ONE).divide(n).modInverse(n);
-		return c.modPow(lambda, nsquare).subtract(BigInteger.ONE).divide(n).multiply(u).mod(n);
+		BigInteger u = g.modPow(lambda, nsq).subtract(BigInteger.ONE).divide(n).modInverse(n);
+		return c.modPow(lambda, nsq).subtract(BigInteger.ONE).divide(n).multiply(u).mod(n);
 	}
 	
 	
 	public static void main(String[] str) throws IOException 
 	{
-//		String input[] = new String[fileCount];
-//		input = ReadFromFile("eu.txt");
-////		String input[] = ReadFromFile("eu.txt");
-////		
-//		for (int i = 0; i < input.length; i++ )
-//		{
-//			System.out.println(input[i]);
-//		}
-//		instantiating an object of Paillier cryptosystem
-		Paillier paillier = new Paillier();		
-		int size; // Gets the size of the vectors from the console
-//		Scanner obj to read from console!
-		Scanner f1 = new Scanner(System.in);
 		
-		System.out.println("Enter the vector size");
-		size = f1.nextInt();	
+//		Object creating to the class
+		homework4 paillier = new homework4();		
+		
+		int size; // Gets the size of the vectors from the console
+		Scanner f1 = new Scanner(System.in);
+		System.out.print("Enter the filename that contains Vector U: ");
+		
+		@SuppressWarnings("resource")
+		Scanner VecUFile = new Scanner(System.in);
+		String inputU[] = new String[fileCount];
+		try {
+
+			inputU = ReadFromFile(VecUFile.next() + ".txt");
+
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		size = fileCount;
 		
 //		Creating different BigInteger arrays to store the values and encrypted values of U and V respectively
 		BigInteger A[]= new BigInteger [size];
@@ -240,35 +255,38 @@ public class Paillier
 		BigInteger PowEA[]= new BigInteger [size];		
 		BigInteger prod = new BigInteger("1");
 		
+
+		for (int i=0; i<size;i++)
+		{
+			BigInteger x = new BigInteger(inputU[i]);
+			A[i] = x;
+		}
+
 		
+		System.out.print("Enter the filename that contains Vector V: ");
+		@SuppressWarnings("resource")
+		Scanner VecVFile = new Scanner(System.in);
+		String inputV[] = new String[fileCount];
+		try 
+		{
+			inputV = ReadFromFile(VecVFile.next() + ".txt");
+		}
+		catch (IOException e) 
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		System.out.println("Enter the filename for Vector U");
-    	String VecA_File = f1.next() + ".txt";
-		System.out.println("Enter all the values of Vector U");
+		size = fileCount;
 		
 //		Loop that reads the bigInteger and creates a string copy of that bigInteger!
 		for (int i=0; i<size;i++)
 		{
-			A[i]=f1.nextBigInteger();
-			VecA[i] = "U[" + Integer.toString(i) + "] = " +  A[i].toString();
-		}
-		    	
-		WriteToFile(VecA_File, VecA); // Writing Vector A to the file!
-		
-		System.out.println("Enter the filename for Vector V");
-    	String VecB_File = f1.next() + ".txt";
-		System.out.println("Enter all the values of Vector V");
-		
-//		Loop that reads the bigInteger and creates a string copy of that bigInteger!
-		for (int i=0; i<size;i++)
-		{
-			B[i]=f1.nextBigInteger();
-			VecB[i] = "V[" + Integer.toString(i) + "] = " + B[i].toString();
+			BigInteger x = new BigInteger(inputV[i]);
+			B[i]=x;
 		}
 		
-		WriteToFile(VecB_File, VecB); // Writing Vector B to the file!    		
-		
-		System.out.println("Enter the filename for Encrypted U");
+		System.out.print("Enter the filename to store Encrypted U: ");
     	String EA_File = f1.next() + ".txt";
 		String EA_Array[] = new String[size];
 		
@@ -281,7 +299,7 @@ public class Paillier
 		
 		WriteToFile(EA_File, EA_Array); // Writing Vector EA to the file!		
 		
-		System.out.println("Enter the filename for Encrypted V");
+		System.out.print("Enter the filename for Encrypted V: ");
     	String EB_File = f1.next() + ".txt";
 		String EB_Array[] = new String[size];
 
@@ -295,9 +313,9 @@ public class Paillier
 
 		for (int i=0; i<size;i++)
 		{
-			BigInteger pow=EA[i].modPow(B[i], paillier.nsquare);
+			BigInteger pow=EA[i].modPow(B[i], paillier.nsq);
 			PowEA[i] = pow;
-			prod=prod.multiply(pow).mod(paillier.nsquare);		
+			prod=prod.multiply(pow).mod(paillier.nsq);		
 		}
 		
 		System.out.println("Enter the filename for Encrypted DotProduct of U and V");
@@ -331,7 +349,6 @@ public class Paillier
 			e.printStackTrace();
 		}	
 		
-		System.out.println("\n\n");
 		System.out.println("Product = " + paillier.Decryption(prod).toString()); // Final Result
 		
 		System.out.println("All Files are now ready in the Project Folder!");

@@ -246,8 +246,6 @@ def superMain(SNum, Bits):
                     sub1, sub2 = printTheNumbers(L)
                     # print("Yeah Bitch this is the final result!")
                     # print(L)
-                    # break
-                    # print("HI")
                     return sub1, sub2
 
 

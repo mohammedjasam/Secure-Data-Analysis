@@ -1,37 +1,40 @@
 import math
 from functools import reduce
 
+# This is the main function which takes the list and breaks it into two sublists based on algorithm!
 def superMain(SNum, Bits):
-    sub1, sub2  = [], []
-    preSet = []
-    dPreSet = {}
+    sub1, sub2  = [], [] # Final two sublists!
+    preSet = [] # This will contain the prefix families of individual binary element
+    dPreSet = {} # This stores all (key, value) pairs of (binary, prefix family)
     binRange = []
     bitLen = Bits
-    dNumToBin = {}
-    dBinToNum = {}
-    S, S1, S2, L = [], [], [], []
+    dNumToBin = {} # Helper dict to convert Number to Binary
+    dBinToNum = {} # Helper dict to convert Binary to Number
+    S, S1, S2, L = [], [], [], [] # Important Variables of the algorithm!
     string = '{0:0' + str(bitLen) + 'b}' # static BitLength
 
     # Converts the numeric to binary values!
     for n in SNum:
         bNum = string.format(n)
         S.append(bNum)
-        dNumToBin[n] = bNum
+        dNumToBin[n] = bNum # Adds Binary value to Number key
 
     for x in SNum:
-        dBinToNum[dNumToBin[x]] = x
+        dBinToNum[dNumToBin[x]] = x # Adds Number value to Binary key
 
     def createPrefix(s, preSet):
-        # global dPreSet
-        savedS = s
+        savedS = s # Copy of the S
         temp = []  # temp list to generate the Prefix Set of a binary value
+
         temp.append(s)
+
         s = list(s)
         for x in range(1, len(s) + 1):
             s[-x] = '*'
             temp.append(''.join(s))
-        dPreSet[savedS] = temp
+        dPreSet[savedS] = temp # Saves the prefix family to the binary key!
         preSet += temp
+
         return preSet
 
     for element in S:
@@ -40,7 +43,7 @@ def superMain(SNum, Bits):
     # for k, v in dPreSet.items():
     #     print(k, v)
 
-    pastLCP = []
+    pastLCP = [] # This list keeps track of the past Longest common prefix.
     def checkLCP(S, pastLCP):
         LCP = ""
         prefixF = []
@@ -48,27 +51,29 @@ def superMain(SNum, Bits):
         for i in range(len(S)):
             prefixF.append(dPreSet[S[i]])
 
+        # Finds the intersection between prefix families of the subset
         LCP = list(reduce(set.intersection, [set(item) for item in prefixF]))
 
+        # Checking if the current LCP is unique by removing the redundant LCP by comparing it to PastLCP
         for x in LCP:
             if x in pastLCP:
                 LCP.remove(x)
 
-        pastLCP += LCP
+        pastLCP += LCP # Adding the unique LCP to the pastLCP list for futher comparision
 
+        ## The below block finds the Longest Common Prefix by checking for least number of * in it.
         c = 0
         countL = []
 
         for x in LCP:
             countL.append((x.count("*"), x))
 
-
-        # Replaces the first star with 0 or 1
         LCPrefix = min(countL)[1]
 
         LCP0 = list(LCPrefix)
         LCP1 = list(LCPrefix)
 
+        # Replaces the first star with 0 or 1 to divide the elements of S to S1 and S2
         for x in range(len(LCP0)):
             if LCP0[x] == "*":
                 LCP0[x] = "0"
@@ -82,20 +87,22 @@ def superMain(SNum, Bits):
         LCP0 = "".join(LCP0)
         LCP1 = "".join(LCP1)
 
-        L0 = []
-        L1 = []
+        L0 = [] # Empty lists which will be filled by elements which have 0 in the location of the first *
+        L1 = [] # Empty lists which will be filled by elements which have 1 in the location of the first *
 
         for i in range(len(S)):
-            prefixFamily = dPreSet[S[i]]
+            prefixFamily = dPreSet[S[i]] # Pulling the prefix family of individual element
 
+            # Checking if that prefix family has LCP0 or LCP1, if present then we add to corresponding L0/L1
             if LCP0 in prefixFamily:
                 L0.append(S[i])
             else:
                 L1.append(S[i])
 
-        return L0, L1
+        return L0, L1 # returns the two subsets for further computation
 
-    pastS3LCP = []
+
+    pastS3LCP = [] # This list keeps track of the past Longest common prefix.
     def checkS3LCP(S, pastS3LCP):
         LCP = ""
         prefixF = []
@@ -103,14 +110,17 @@ def superMain(SNum, Bits):
         for i in range(len(S)):
             prefixF.append(dPreSet[S[i]])
 
+        # Finds the intersection between prefix families of the subset
         LCP = list(reduce(set.intersection, [set(item) for item in prefixF]))
 
+        # Checking if the current LCP is unique by removing the redundant LCP by comparing it to PastLCP
         for x in LCP:
             if x in pastS3LCP:
                 LCP.remove(x)
 
-        pastS3LCP += LCP
+        pastS3LCP += LCP # Adding the unique LCP to the pastLCP list for futher comparision
 
+        ## The below block finds the Longest Common Prefix by checking for least number of * in it.
         c = 0
         countL = []
 
@@ -123,6 +133,7 @@ def superMain(SNum, Bits):
         LCP0 = list(LCPrefix)
         LCP1 = list(LCPrefix)
 
+        # Replaces the first star with 0 or 1 to divide the elements of S to S1 and S2
         for x in range(len(LCP0)):
             if LCP0[x] == "*":
                 LCP0[x] = "0"
@@ -136,38 +147,44 @@ def superMain(SNum, Bits):
         LCP0 = "".join(LCP0)
         LCP1 = "".join(LCP1)
 
-        L0 = []
-        L1 = []
+        L0 = [] # Empty lists which will be filled by elements which have 0 in the location of the first *
+        L1 = [] # Empty lists which will be filled by elements which have 1 in the location of the first *
+
+        # Checking if that prefix family has LCP0 or LCP1, if present then we add to corresponding L0/L1
         for i in range(len(S)):
             prefixFamily = dPreSet[S[i]]
             if LCP0 in prefixFamily:
                 L0.append(S[i])
             else:
                 L1.append(S[i])
-        return L0, L1
 
+        return L0, L1 # returns the two subsets for further computation
+
+    # A type of overloaded function which prints the values as required by the algorithm
     def printTheNumbers(L):
         temp1 = L[0]
         temp2 = L[1]
         temp1 = [dBinToNum[x] for x in temp1]
         temp2 = [dBinToNum[x] for x in temp2]
 
+        # Checks which list is bigger, keeps the bigger list in temp1 and smaller in temp2
         if len(temp1) >= len(temp2):
             pass
         else:
+            # Swaps if temp1 is smaller than temp2
             temp = temp1[:]
             temp1 = temp2[:]
             temp2 = temp[:]
 
-        # print(temp1, temp2)
-        return temp1, temp2
+        return temp1, temp2 # Returns the results
 
-    n = len(S)
+    n = len(S) # Length of the main S
+
+    # This function goes over List L and checks if there is a possibility of combining two lists
+    # and still satisfy the condition of being less than or equal to the half of the initial List!
     def checkCombo(L):
-        # print("In the combo")
-        # print(L)
-        i = -1
-        j = -1
+        i = -1 # default value
+        j = -1 # default value
 
         for x in range(len(L)-1):
             for y in range(x + 1, len(L)):
@@ -176,8 +193,12 @@ def superMain(SNum, Bits):
                     j = y
         return i, j
 
+    # A sub main function which runs the algorithm
     def main(S, pastLCP, pastS3LCP):
-        global sub1, sub2
+
+        global sub1, sub2 # Stores the result.
+
+        # This while splits the S ==> (S1, S2)
         while (len(S) > math.ceil(n/2)):
             S1, S2 = checkLCP(S, pastLCP)
 
@@ -190,65 +211,61 @@ def superMain(SNum, Bits):
 
         L.append(S)
 
-        # mergedL = L[:] ## Has the merged Values of L
-
+        # Checks if there are any sublists which can be combined, if they can then they will be combined
         while (checkCombo(L)):
 
-            i, j = checkCombo(L)
+            i, j = checkCombo(L) # Gets the index of the sublists which can be combined
+
+            # Checking for default value, if so then we stop the combination process as there
+            # are no sublists that can be combined!
             if i == -1 or j == -1:
                 break
+
+            # Copies the sublists to a and b
             a = L[i]
             b = L[j]
 
-            Lij = L[i] + L[j]
+            Lij = L[i] + L[j] # Combining the two lists in temporary Lij
             tempD = {}
-            # print('deleting')
-            # print(i, j)
-            # print("Deleting i")
-            del L[i]
-            # print(L)
-            # print("Deleting j")
 
+            del L[i] # Deleting the first sublist at index i
+
+            # Deleting the second sublist at index j-1 as i has been deleted in the previous statement
+            # so the index of j decreases by 1
             del L[j-1]
-            # print(L)
 
-            # print()
-            # print('after appending')
-            L.append( Lij)
-        # print(L)
+            L.append(Lij) # Adding the temporary combined L[i] and L[j]
 
+        # If there are only 2 sublists after the previous step then we return the result
         if len(L) == 2:
             sub1, sub2 = printTheNumbers(L)
-            return sub1, sub2
-
-            # return mergedL
+            return sub1, sub2 # two sublists which are the final result are returned
         else:
-            # Find S3 via finding the subset who's prefix families share the least number of prefixes!
-            pickS3List = []
 
+            pickS3List = [] # Stores the intersection and sublists as a tuple from which S3 is picked
+
+            # Find S3 via finding the subset who's prefix families share the least number of prefixes!
             for subset in L:
                 preFamilies = []
                 for x in subset:
                     preFamilies.append(dPreSet[x])
                 interSection = list(reduce(set.intersection, [set(item) for item in preFamilies]))
                 pickS3List.append((len(interSection), subset))
-            S3 = min(pickS3List)[1]
-            nS3 = len(S3)
-            # print(pickS3List)
+
+            S3 = min(pickS3List)[1] # Picking the S3 which has the least interSection
+            nS3 = len(S3) # stores len of S3
+
+
             while (len(L) == 3):
-                # print()
-                # print(L, S3)
                 try:
-                    L.remove(S3)
+                    L.remove(S3) # Removes S3 and then runs the algorithm!
                 except:
-                    # print(L, L[-1])
+                    """ SPECIAL CASE - BRUTE FORCED THE SOLUTION """
                     del L[-1]
                     sub1, sub2 = printTheNumbers(L)
-                    # print("Yeah Bitch this is the final result!")
-                    # print(L)
                     return sub1, sub2
 
-
+                # Splits the S3 ==> (S31, S32)
                 while (len(S3) > math.ceil(nS3/2)):
                     S31, S32 = checkS3LCP(S3, pastS3LCP)
 
@@ -268,6 +285,7 @@ def superMain(SNum, Bits):
                     S2 = L[0]
 
                 ## Assigns smaller list to S31 and vice versa!
+                # Combines S31 with S1/S2 and S32 with S2/S1 based on the algorithm!
                 if (len(S31) <= len(S32)):
                     pass
                 else:
@@ -288,17 +306,16 @@ def superMain(SNum, Bits):
                     L.append(S3)
 
             sub1, sub2 = printTheNumbers(L)
-            return (sub1, sub2)
+            return (sub1, sub2) # returns result to SuperMain
 
     res1, res2 = main(S, pastLCP, pastS3LCP)
-    return res1, res2
+    return res1, res2 # Returns results to the function call superMain(S, Number_of_Bits)
 
 
 
 
 """ PROGRAM EXECUTION BEGINS """
 from binarytree import *
-
 
 # Data
 print("Data")

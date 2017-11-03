@@ -319,7 +319,7 @@ from binarytree import *
 
 # Data
 print("Data")
-SNum = [1,6,7,9,11,12,13,16,20,25]
+SNum = [1,6,7,9,25,11,12,13,16,20]
 Bits = 10
 
 print(SNum)

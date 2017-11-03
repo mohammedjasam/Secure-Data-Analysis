@@ -100,7 +100,7 @@ what = []
 def replaceElements(listt):
     temp = listt[:]
     global what
-    
+
     ele = checkMaxStars(temp) # returns element with max stars in the list
     maxStarElement = list(ele)
     if ele == "":
@@ -108,7 +108,7 @@ def replaceElements(listt):
 
     else:
         finList.append(joinList(maxStarElement))
-        print(finList)
+        # print(finList)
         maxStarElement = removeStars(maxStarElement)
         length = len(list(maxStarElement))
 

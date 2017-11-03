@@ -14,26 +14,28 @@ import java.io.OutputStreamWriter;
 
 public class homework4 
 {
-//	p and q are two large primes.
-//	lambda = lcm(p-1, q-1) = (p-1)*(q-1)/gcd(p-1, q-1).
-//	Generator in Z*_{n^2}; here, gcd (L(g^lambda mod n^2), n) = 1.
-	private BigInteger p, q, lambda, pTemp, qTemp, lambdaTemp, g, gTemp;	
+	
+/* All temp values are generated to write to file as per the instructions in the assignment */	
+	
+//	p and q are large primes
+	private BigInteger p, q, pTemp, qTemp;	
 
-//	n = p*q and nsq = n*n
-	public BigInteger n, nTemp, nsq, nsqTemp;	
+//	Lambda and Mu are the private keys
+	private BigInteger lambda, lambdaTemp, Mu, MuTemp;
+	
+//	n is the product of p and q also nsq = n*n and g is the generator. n and g together act as public keys
+	public BigInteger n, nTemp, nsq, nsqTemp, g, gTemp;	
 
-//	number of bits of modulus
+//	# of bits used in mod
 	private int bitLength;
 	
 //	Global var which stores the size of contents in the file!
 	public static int fileCount;
 
-//	Constructs an instance of the Paillier cryptosystem.
-//	numBits number of bits of modulus
-//	certainty The probability that the new BigInteger represents a prime number will exceed (1 - 2^(-certainty)). The execution time of this constructor is proportional to the value of this parameter.
-	public homework4(int numBits, int certainty) 
+//	parameterized constructor to call the keygen function
+	public homework4(int numBits, int probability) 
 	{
-		KeyGen(numBits, certainty);
+		KeyGen(numBits, probability);
 	}
 	
 //	This function reads data from the file
@@ -44,21 +46,18 @@ public class homework4
 		@SuppressWarnings("resource")
 		Scanner scan = new Scanner(f);		
 		long arrCount = 0;
-		arrCount = Files.lines(Paths.get(fileName)).count(); // len of the file content
-		
-		
+		arrCount = Files.lines(Paths.get(fileName)).count(); // len of the file content		
 		String str[] = new String[(int) arrCount];
 		fileCount = (int) arrCount;
+		
 		for (int i = 0; scan.hasNext(); i++)
 		{
 			String s = scan.nextLine();
 			str[i] = s;
-		}
-		
+		}		
 		
 		return str;
-	}
-	
+	}	
 	
 //	This function writes data to the Files
 	public static void WriteToFile(String fileName, String[] array)
@@ -84,7 +83,9 @@ public class homework4
 				bw.newLine();
 			}
 			bw.close(); // Closing file to avoid file corruptions
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
@@ -96,10 +97,10 @@ public class homework4
 		Scanner s1 = new Scanner(System.in);
 		System.out.print("Enter key size: ");
 		int keySize = s1.nextInt();
-		KeyGen(keySize, 0);
+		KeyGen(keySize, 64);
 	}
-	
-	public void KeyGen(int numBits, int certainty) 
+// 	This function reads pqg and generates the mu and lambda
+	public void KeyGen(int numBits, int probability) 
 	{
 		bitLength = numBits;
 		Scanner pqgFile = new Scanner(System.in);
@@ -120,8 +121,8 @@ public class homework4
 		g = new BigInteger(input[2]);
 		
 //		Generates P and Q
-		pTemp = new BigInteger(bitLength / 2, certainty, new Random());
-		qTemp = new BigInteger(bitLength / 2, certainty, new Random());
+		pTemp = new BigInteger(bitLength / 2, probability, new Random());
+		qTemp = new BigInteger(bitLength / 2, probability, new Random());
 		
 		nTemp = pTemp.multiply(qTemp);
 		nsqTemp = nTemp.multiply(nTemp);
@@ -143,8 +144,6 @@ public class homework4
 		lambda = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)).divide(
 		p.subtract(BigInteger.ONE).gcd(q.subtract(BigInteger.ONE)));
 		
-		
-		
 //		Verification of G.
 		if (gTemp.modPow(lambdaTemp, nsqTemp).subtract(BigInteger.ONE).divide(nTemp).gcd(nTemp).intValue() != 1) 
 		{
@@ -152,12 +151,10 @@ public class homework4
 			System.exit(1);
 		}
 		
+		MuTemp = gTemp.modPow(lambdaTemp, nsqTemp).subtract(BigInteger.ONE).divide(nTemp).modInverse(nTemp);	
 		
-		BigInteger MuTemp = gTemp.modPow(lambdaTemp, nsqTemp).subtract(BigInteger.ONE).divide(nTemp).modInverse(nTemp);	
-		
-		BigInteger Mu = g.modPow(lambda, nsq).subtract(BigInteger.ONE).divide(n).modInverse(n);
-		
-		
+//		Created here as per the instructions!
+		Mu = g.modPow(lambda, nsq).subtract(BigInteger.ONE).divide(n).modInverse(n);
 		
 //		Creating data to write to file
 		String textP = "P = "+ pTemp + " ";
@@ -166,7 +163,6 @@ public class homework4
 		
 //		Scanner object to read data from console
     	Scanner f1 = new Scanner(System.in);
-//    	System.out.println("Enter the filename for P, Q, G");
     	String fileName = "GeneratedPQG.txt";    	
     	
     	String[] pqg = new String[3];
@@ -176,7 +172,6 @@ public class homework4
     	
     	WriteToFile(fileName, pqg); // Writing P, Q, G to the file!
 
-    	
 		String textLambda = "Lambda = " + lambda.toString();
 		String textMu = "Mu = " + Mu.toString();
 		System.out.print("Enter the filename to store Lamda and Mu: ");
@@ -186,45 +181,28 @@ public class homework4
     	lambda_mu[0] = textLambda;
     	lambda_mu[1] = textMu;
     	
-    	WriteToFile(fileName2, lambda_mu); // Writing Lambda and Mu to the file!
-				
+    	WriteToFile(fileName2, lambda_mu); // Writing Lambda and Mu to the file!		
 	}
 	
-
-//	Encrypts plaintext m. ciphertext c = g^m * r^n mod n^2. This function explicitly requires random input r to help with encryption.
-//	m plaintext as a BigInteger
-//	r random plaintext to help with encryption
-//	returns the ciphertext as a BigInteger
-	public BigInteger Encryption(BigInteger m, BigInteger r) 
-	{
-		return g.modPow(m, nsq).multiply(r.modPow(n, nsq)).mod(nsq);	
-	}
-	
-
-//	Encrypts plaintext m. ciphertext c = g^m * r^n mod n^2. This function automatically generates random input r (to help with encryption).
-//	m plaintext as a BigInteger
-//	returns the ciphertext as a BigInteger
+//	Encrypts the plaintext using the public keys g and n then returns the Ciphertext
 	public BigInteger Encryption(BigInteger m) 
 	{
 		BigInteger r = new BigInteger(bitLength, new Random());
 		return g.modPow(m, nsq).multiply(r.modPow(n, nsq)).mod(nsq);	
 	}
 	
-//	Decrypts ciphertext c. plaintext m = L(c^lambda mod n^2) * u mod n, where u = (L(g^lambda mod n^2))^(-1) mod n.
-//	c ciphertext as a BigInteger
-//	returns plaintext as a BigInteger
+//	Creates the Decryption key lambda and Mu, then decrypts the Cipher text and returns the Plaintext
 	public BigInteger Decryption(BigInteger c) 
 	{
-		BigInteger u = g.modPow(lambda, nsq).subtract(BigInteger.ONE).divide(n).modInverse(n);
-		return c.modPow(lambda, nsq).subtract(BigInteger.ONE).divide(n).multiply(u).mod(n);
-	}
+		lambda = p.subtract(BigInteger.ONE).multiply(q.subtract(BigInteger.ONE)).divide(
+		p.subtract(BigInteger.ONE).gcd(q.subtract(BigInteger.ONE)));
+		Mu = g.modPow(lambda, nsq).subtract(BigInteger.ONE).divide(n).modInverse(n);
+		return c.modPow(lambda, nsq).subtract(BigInteger.ONE).divide(n).multiply(Mu).mod(n);
+	}	
 	
-	
-	public static void main(String[] str) throws IOException 
-	{
-		
-//		Object creating to the class
-		homework4 paillier = new homework4();		
+	public static void main(String[] args) throws IOException 
+	{		
+		homework4 obj = new homework4();		
 		
 		int size; // Gets the size of the vectors from the console
 		Scanner f1 = new Scanner(System.in);
@@ -233,12 +211,15 @@ public class homework4
 		@SuppressWarnings("resource")
 		Scanner VecUFile = new Scanner(System.in);
 		String inputU[] = new String[fileCount];
-		try {
+		try 
+		{
 
 			inputU = ReadFromFile(VecUFile.next() + ".txt");
 
 
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -255,14 +236,12 @@ public class homework4
 		BigInteger PowEA[]= new BigInteger [size];		
 		BigInteger prod = new BigInteger("1");
 		
-
 		for (int i=0; i<size;i++)
 		{
 			BigInteger x = new BigInteger(inputU[i]);
 			A[i] = x;
 		}
 
-		
 		System.out.print("Enter the filename that contains Vector V: ");
 		@SuppressWarnings("resource")
 		Scanner VecVFile = new Scanner(System.in);
@@ -293,7 +272,7 @@ public class homework4
 		//Multiplication of two vectors
 		for (int i=0; i<size;i++)
 		{
-			EA[i] = paillier.Encryption(A[i]);
+			EA[i] = obj.Encryption(A[i]);
 			EA_Array[i] = "EU[" + Integer.toString(i) + "] = " + EA[i].toString();
 		}
 		
@@ -305,7 +284,7 @@ public class homework4
 
 		for (int i=0; i<size;i++)
 		{
-			EB[i] = paillier.Encryption(B[i]);
+			EB[i] = obj.Encryption(B[i]);
 			EB_Array[i] = "EV[" + Integer.toString(i) + "] = " + EB[i].toString();
 		}
 		
@@ -313,9 +292,9 @@ public class homework4
 
 		for (int i=0; i<size;i++)
 		{
-			BigInteger pow=EA[i].modPow(B[i], paillier.nsq);
+			BigInteger pow=EA[i].modPow(B[i], obj.nsq);
 			PowEA[i] = pow;
-			prod=prod.multiply(pow).mod(paillier.nsq);		
+			prod=prod.multiply(pow).mod(obj.nsq);		
 		}
 		
 		System.out.println("Enter the filename for Encrypted DotProduct of U and V");
@@ -340,17 +319,18 @@ public class homework4
 				bwEAB.newLine();
 			}
 			bwEAB.newLine();
-			bwEAB.write("Final Dot Product = " + paillier.Decryption(prod).toString());
+			bwEAB.write("Final Dot Product = " + obj.Decryption(prod).toString());
 			bwEAB.close();
 
 
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		
-		System.out.println("Product = " + paillier.Decryption(prod).toString()); // Final Result
-		
+		System.out.println("Product = " + obj.Decryption(prod).toString()); // Final Result		
 		System.out.println("All Files are now ready in the Project Folder!");
 	}
 }

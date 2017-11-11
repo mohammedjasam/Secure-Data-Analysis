@@ -1,6 +1,7 @@
 import math
 from functools import reduce
-
+def printTheFuck():
+    print("LOL")
 # This is the main function which takes the list and breaks it into two sublists based on algorithm!
 def superMain(SNum, Bits):
     sub1, sub2  = [], [] # Final two sublists!
@@ -318,18 +319,9 @@ def superMain(SNum, Bits):
 from binarytree import *
 
 # Data
-print("Data")
-SNum = [1,6,7,9,25,11,12,13,16,20]
-Bits = 10
 
-print(SNum)
-print()
-print("The Generated Tree for above data set!")
-mytree = tree()
-root = Node(SNum)
-data = SNum
-start = root
-parent = root
+
+
 
 
 def recBuildTree(x, data, parent):
@@ -341,5 +333,21 @@ def recBuildTree(x, data, parent):
         x.right = Node(right)
         parent = x
         recBuildTree(x.left, left, parent), recBuildTree(x.right, right, parent)
-recBuildTree(root, data, parent) # Recursively builds the tree!
-pprint(start) # Prints the tree
+
+
+
+print("Data")
+SNum = [1,6,7,9,25,11,12,13,16,20]
+Bits = 10
+print(SNum)
+print()
+print("The Generated Tree for above data set!")
+mytree = tree()
+root = Node(SNum)
+data = SNum
+start = root
+parent = root
+
+def getTree():
+    recBuildTree(root, data, parent) # Recursively builds the tree!
+    pprint(start) # Prints the tree

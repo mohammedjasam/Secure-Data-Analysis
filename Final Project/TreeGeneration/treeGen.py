@@ -317,16 +317,20 @@ def superMain(SNum, Bits):
 """ PROGRAM EXECUTION BEGINS """
 # Importing the bloomFilter file!
 import sys
+import random as rand
 sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/BloomFilter/')
 import bloomfilter as bf # file that will generate the bloom filter!
 from binarytree import * # this will import the binary tree file
 
+randK = []
+for i in range(7):
+    randK.append(str(rand.randint(1, 1000)))
 
 # Data
 print("Data")
 # SNum = [1,6,7,9,25,11,12,13,16,20]
-SNum = [1,6]
-Bits = 3
+SNum = [1,6,7]
+Bits = 5
 print(SNum)
 print()
 print("The Generated Tree for above data set!")
@@ -352,7 +356,7 @@ def recBuildTree(x, data, parent):
 # Preorder Traversal through the tree to create the bloomFilters for each node!
 def preorder(tree):
     if tree:
-        tree.value = bf.getBloomFilter(tree.value, Bits) # Retrieves the bloom filter for the node data
+        tree.value = bf.getBloomFilter(tree.value, Bits, randK) # Retrieves the bloom filter for the node data
         preorder(tree.left)
         preorder(tree.right)
 

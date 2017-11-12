@@ -3,14 +3,17 @@ import hashlib
 
 SNum = [6, 7]
 
-def getBloomFilter(SNum, Bits):
+def getBloomFilter(SNum, Bits, randK):
     unionSet = []
     S = []
     bitLen = Bits
     preset = []
     appendFirst = []
     hashedAppendFirst = []
-    randK = []
+    print(randK)
+    # Each node has a random value
+    vr = random.randint(1, 1000)
+    print(vr)
 
     # SHA-1 Hash function!
     def hashIt(s):
@@ -32,10 +35,6 @@ def getBloomFilter(SNum, Bits):
 
         return preSet
 
-    # generate random values!
-    for i in range(7):
-        randK.append(str(random.randint(1, 1000)))
-
     # Convert to fixed length binary!
     string = '{0:0' + str(bitLen) + 'b}' # static BitLength
 
@@ -50,8 +49,7 @@ def getBloomFilter(SNum, Bits):
     # Taking union of prefix set!
     unionSet = list(set(preset))
 
-    # Each node has a random value
-    vr = random.randint(1, 1000)
+
     # print()
     # print("UnionSet is: ")
     # print(unionSet)

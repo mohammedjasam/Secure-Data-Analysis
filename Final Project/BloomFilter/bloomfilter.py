@@ -10,10 +10,11 @@ def getBloomFilter(SNum, Bits, randK):
     preset = []
     appendFirst = []
     hashedAppendFirst = []
-    print(randK)
+    # print(randK)
+
     # Each node has a random value
     vr = random.randint(1, 1000)
-    print(vr)
+    # print(vr)
 
     # SHA-1 Hash function!
     def hashIt(s):
@@ -49,15 +50,6 @@ def getBloomFilter(SNum, Bits, randK):
     # Taking union of prefix set!
     unionSet = list(set(preset))
 
-
-    # print()
-    # print("UnionSet is: ")
-    # print(unionSet)
-    # print()
-    # print("VR is:")
-    # print(vr)
-    # print()
-
     # For every element in unionSet create the hashed values of the elements for some N iterations!
     for prefix in unionSet:
         l = []
@@ -73,18 +65,16 @@ def getBloomFilter(SNum, Bits, randK):
         appendFirst.append(l)
         hashedAppendFirst.append(hl)
 
-    # print("The random K are:")
-    # print(randK)
-    # print()
-
     # m value to create the bloomfilter
     m = 10 * len(unionSet)
 
     bloomFilter = []
+    # Creating an array with default value as 0
     for i in range(m):
         bloomFilter.append(0)
     # print(bloomFilter)
 
+    # Setting 1 to every index pointed by the mod operation!
     for sett in hashedAppendFirst:
         for x in sett:
             a = int(x, 16)

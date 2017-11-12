@@ -326,14 +326,14 @@ randK = []
 for i in range(7):
     randK.append(str(rand.randint(1, 1000)))
 
+def getPrivateKeys():
+    return randK
 # Data
-print("Data")
+
 # SNum = [1,6,7,9,25,11,12,13,16,20]
 SNum = [1,6,7]
 Bits = 5
-print(SNum)
-print()
-print("The Generated Tree for above data set!")
+
 mytree = tree()
 root = Node(SNum)
 data = SNum
@@ -362,11 +362,15 @@ def preorder(tree):
 
 # Generating the tree
 def getTree():
+    print("Data")
+    print(SNum)
+    print()
+    print("The Generated Tree for above data set!")
     recBuildTree(root, data, parent) # Recursively builds the tree!
     pprint(start) # Prints the tree
     preorder(start)
-    pprint(start)
+    # pprint(start)
 
 # This function call will create the tree normally and then traverse through it in Preorder
 # fashion and replace the nodes with the bloom filters!
-getTree()
+# getTree() # <========= Starts the exectution

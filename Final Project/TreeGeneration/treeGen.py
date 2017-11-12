@@ -2,6 +2,21 @@ import math
 from functools import reduce
 def printTheFuck():
     print("LOL")
+
+def genPrefix(s, preSet):
+    savedS = s # Copy of the S
+    temp = []  # temp list to generate the Prefix Set of a binary value
+
+    temp.append(s)
+
+    s = list(s)
+    for x in range(1, len(s) + 1):
+        s[-x] = '*'
+        temp.append(''.join(s))
+    preSet += temp
+
+    return preSet
+
 # This is the main function which takes the list and breaks it into two sublists based on algorithm!
 def superMain(SNum, Bits):
     sub1, sub2  = [], [] # Final two sublists!
@@ -319,10 +334,6 @@ def superMain(SNum, Bits):
 from binarytree import *
 
 # Data
-
-
-
-
 
 def recBuildTree(x, data, parent):
     if len(x.value) == 1:

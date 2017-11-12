@@ -1,21 +1,5 @@
 import math
 from functools import reduce
-def printTheFuck():
-    print("LOL")
-
-def genPrefix(s, preSet):
-    savedS = s # Copy of the S
-    temp = []  # temp list to generate the Prefix Set of a binary value
-
-    temp.append(s)
-
-    s = list(s)
-    for x in range(1, len(s) + 1):
-        s[-x] = '*'
-        temp.append(''.join(s))
-    preSet += temp
-
-    return preSet
 
 # This is the main function which takes the list and breaks it into two sublists based on algorithm!
 def superMain(SNum, Bits):
@@ -368,16 +352,16 @@ def recBuildTree(x, data, parent):
 # Preorder Traversal through the tree to create the bloomFilters for each node!
 def preorder(tree):
     if tree:
-        tree.value = bf.genBloomFilter(tree.value, Bits)
+        tree.value = bf.getBloomFilter(tree.value, Bits) # Retrieves the bloom filter for the node data
         preorder(tree.left)
         preorder(tree.right)
-
 
 # Generating the tree
 def getTree():
     recBuildTree(root, data, parent) # Recursively builds the tree!
     pprint(start) # Prints the tree
     preorder(start)
+    pprint(start)
 
 # This function call will create the tree normally and then traverse through it in Preorder
 # fashion and replace the nodes with the bloom filters!

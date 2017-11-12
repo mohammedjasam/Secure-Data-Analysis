@@ -120,7 +120,8 @@ def replaceElements(listt):
                 if maxStarElement[:] in element[:length]:
                     listt.remove(element)
 
-def main(r):
+def main(data):
+    r = data
     global what
     global finList
     # r = list(map(int, input("Enter the range space separated!\n").split()))

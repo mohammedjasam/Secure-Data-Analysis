@@ -1,13 +1,9 @@
-import sys
-sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/TreeGeneration/')
-import treeGen as tree
 import random
 import hashlib
 
-# SNum = [6, 7]
+SNum = [6, 7]
 
-
-def genBloomFilter(SNum, Bits):
+def getBloomFilter(SNum, Bits):
     unionSet = []
     S = []
     bitLen = Bits
@@ -15,10 +11,26 @@ def genBloomFilter(SNum, Bits):
     appendFirst = []
     hashedAppendFirst = []
     randK = []
+
     # SHA-1 Hash function!
     def hashIt(s):
         s = str.encode(s)
         return hashlib.sha1(s).hexdigest()
+
+    # Creates the prefixes
+    def genPrefix(s, preSet):
+        savedS = s # Copy of the S
+        temp = []  # temp list to generate the Prefix Set of a binary value
+
+        temp.append(s)
+
+        s = list(s)
+        for x in range(1, len(s) + 1):
+            s[-x] = '*'
+            temp.append(''.join(s))
+        preSet += temp
+
+        return preSet
 
     # generate random values!
     for i in range(7):
@@ -33,7 +45,7 @@ def genBloomFilter(SNum, Bits):
 
     # Creating the prefix set!
     for element in S:
-        tree.genPrefix(element, preset)
+        genPrefix(element, preset)
 
     # Taking union of prefix set!
     unionSet = list(set(preset))
@@ -81,7 +93,5 @@ def genBloomFilter(SNum, Bits):
             i = a % m
             # print(i)
             bloomFilter[i - 1] = 1
-    # print(bloomFilter)
 
     return bloomFilter
-    # tree.getTree()

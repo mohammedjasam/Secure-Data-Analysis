@@ -3,5 +3,7 @@ sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-An
 import minPrefixGen as mp # file that will generate the bloom filter!
 
 
-minPrefixSet = mp.getMinPrefixSet([1, 8])
+theRange = [1, 8]
+
+minPrefixSet = mp.main(theRange)
 print(minPrefixSet)

@@ -120,9 +120,10 @@ def replaceElements(listt):
                 if maxStarElement[:] in element[:length]:
                     listt.remove(element)
 
-def main(finList):
+def main(r):
     global what
-    r = list(map(int, input("Enter the range space separated!\n").split()))
+    global finList
+    # r = list(map(int, input("Enter the range space separated!\n").split()))
     string = '{0:0' + str(r[-1].bit_length()) + 'b}'
     if r[0] == "0" and r[1] == "1":
         what = ['*']
@@ -138,6 +139,8 @@ def main(finList):
 
     for x in range(lenStar):
         replaceElements(newList)
+    return what
 
-main(finList)
-print(what)
+""" CAN BE USED TO TEST THIS CODE!"""
+# r = [1, 8]
+# print(main(r))

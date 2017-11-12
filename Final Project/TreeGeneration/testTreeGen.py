@@ -348,8 +348,9 @@ def recBuildTree(x, data, parent):
 
 
 print("Data")
-SNum = [1,6,7,9,25,11,12,13,16,20]
-Bits = 10
+# SNum = [1,6,7,9,25,11,12,13,16,20]
+SNum = [1,6]
+Bits = 3
 print(SNum)
 print()
 print("The Generated Tree for above data set!")
@@ -359,6 +360,26 @@ data = SNum
 start = root
 parent = root
 
+
+# Importing the bloomFilter file!
+import sys
+sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/BloomFilter/')
+import bloomfilter as bf
+
+# Preorder Traversal through the tree to create the bloomFilters for each node!
+def preorder(tree):
+    if tree:
+        tree.value = bf.genBloomFilter(tree.value, Bits)
+        preorder(tree.left)
+        preorder(tree.right)
+
+
+# Generating the tree
 def getTree():
     recBuildTree(root, data, parent) # Recursively builds the tree!
     pprint(start) # Prints the tree
+    preorder(start)
+
+# This function call will create the tree normally and then traverse through it in Preorder
+# fashion and replace the nodes with the bloom filters!
+getTree()

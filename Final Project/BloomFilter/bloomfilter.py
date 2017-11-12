@@ -4,13 +4,13 @@ import treeGen as tree
 import random
 import hashlib
 
-SNum = [6, 7]
+# SNum = [6, 7]
 
 
-def genBloomFilter(l):
+def genBloomFilter(SNum, Bits):
     unionSet = []
     S = []
-    bitLen = 4
+    bitLen = Bits
     preset = []
     appendFirst = []
     hashedAppendFirst = []
@@ -40,13 +40,13 @@ def genBloomFilter(l):
 
     # Each node has a random value
     vr = random.randint(1, 1000)
-    print()
-    print("UnionSet is: ")
-    print(unionSet)
-    print()
-    print("VR is:")
-    print(vr)
-    print()
+    # print()
+    # print("UnionSet is: ")
+    # print(unionSet)
+    # print()
+    # print("VR is:")
+    # print(vr)
+    # print()
 
     # For every element in unionSet create the hashed values of the elements for some N iterations!
     for prefix in unionSet:
@@ -63,9 +63,9 @@ def genBloomFilter(l):
         appendFirst.append(l)
         hashedAppendFirst.append(hl)
 
-    print("The random K are:")
-    print(randK)
-    print()
+    # print("The random K are:")
+    # print(randK)
+    # print()
 
     # m value to create the bloomfilter
     m = 10 * len(unionSet)
@@ -73,7 +73,7 @@ def genBloomFilter(l):
     bloomFilter = []
     for i in range(m):
         bloomFilter.append(0)
-    print(bloomFilter)
+    # print(bloomFilter)
 
     for sett in hashedAppendFirst:
         for x in sett:
@@ -81,7 +81,7 @@ def genBloomFilter(l):
             i = a % m
             # print(i)
             bloomFilter[i - 1] = 1
-    print(bloomFilter)
+    # print(bloomFilter)
 
     return bloomFilter
     # tree.getTree()

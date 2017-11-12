@@ -7,6 +7,7 @@ import treeGen as tree # file used to extract the private keys!
 sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/BloomFilter/')
 import bloomfilter as bf # file that will generate the bloom filter!
 
+
 # SHA-1 Hash function!
 def hashIt(s):
     s = str.encode(s)
@@ -14,24 +15,23 @@ def hashIt(s):
 
 # Extract the keys from the treeGen function
 randK = tree.getPrivateKeys()
-print(randK)
 
 theRange = [1, 8]
 minPrefixSet = mp.main(theRange)
-
-print(minPrefixSet)
 
 trap = []
 tempTrap = []
 for prefix in minPrefixSet:
     l = []
     ll = []
+    
     for k in randK:
         element = k + prefix
         l.append(hashIt(element))
         ll.append(element)
-    trap.append(l)
-    tempTrap.append(ll)
+    trap.append(l) # Contains the hashed values!
+    tempTrap.append(ll) # Appends the normal element an primarily used to display
 
+# Prints the hashed values
 for x in trap:
     print(x)

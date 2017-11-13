@@ -24,7 +24,7 @@ tempTrap = []
 for prefix in minPrefixSet:
     l = []
     ll = []
-    
+
     for k in randK:
         element = k + prefix
         l.append(hashIt(element))

@@ -2,11 +2,8 @@ import sys
 import hashlib
 sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/MinPrefixCode/')
 import minPrefixGen as mp # file that generates the minPrefix
-sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/TreeGeneration/')
-import treeGen as tree # file used to extract the private keys!
-sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/BloomFilter/')
-import bloomfilter as bf # file that will generate the bloom filter!
-
+# sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/BloomFilter/')
+# import bloomfilter as bf # file that will generate the bloom filter!
 
 # SHA-1 Hash function!
 def hashIt(s):
@@ -32,6 +29,10 @@ for prefix in minPrefixSet:
     trap.append(l) # Contains the hashed values!
     tempTrap.append(ll) # Appends the normal element an primarily used to display
 
+def getTrapDoor():
+    return trap
+
+
 # Prints the hashed values
-for x in trap:
-    print(x)
+# for x in trap:
+#     print(x)

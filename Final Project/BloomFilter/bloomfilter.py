@@ -15,7 +15,8 @@ def getBloomFilter(SNum, Bits, randK):
     # Each node has a random value
     vr = random.randint(1, 1000)
     # print(vr)
-
+    def getVR():
+        return vr
     # SHA-1 Hash function!
     def hashIt(s):
         s = str.encode(s)
@@ -81,5 +82,6 @@ def getBloomFilter(SNum, Bits, randK):
             i = a % m
             # print(i)
             bloomFilter[i - 1] = 1
-
-    return bloomFilter
+    # print("Bloom and VR in bf file")
+    # print(bloomFilter, vr)
+    return bloomFilter, vr

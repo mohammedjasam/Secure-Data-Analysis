@@ -312,15 +312,59 @@ def superMain(SNum, Bits):
     return res1, res2 # Returns results to the function call superMain(S, Number_of_Bits)
 
 
+import sys
+import hashlib
+sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/MinPrefixCode/')
+import minPrefixGen as mp # file that generates the minPrefix
+
+def getTrapDoor():
+    # sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/BloomFilter/')
+    # import bloomfilter as bf # file that will generate the bloom filter!
+
+    # SHA-1 Hash function!
+    def hashIt(s):
+        s = str.encode(s)
+        return hashlib.sha1(s).hexdigest()
+
+    # Extract the keys from the treeGen function
+    randK = getPrivateKeys()
+
+    theRange = [1, 8]
+    minPrefixSet = mp.main(theRange)
+
+    trap = []
+    tempTrap = []
+    for prefix in minPrefixSet:
+        l = []
+        ll = []
+
+        for k in randK:
+            element = k + prefix
+            l.append(hashIt(element))
+            ll.append(element)
+        trap.append(l) # Contains the hashed values!
+        tempTrap.append(ll) # Appends the normal element an primarily used to display
+
+    return trap
 
 
 """ PROGRAM EXECUTION BEGINS """
 # Importing the bloomFilter file!
 import sys
 import random as rand
+from binarytree import * # this will import the binary tree file
+
 sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/BloomFilter/')
 import bloomfilter as bf # file that will generate the bloom filter!
-from binarytree import * # this will import the binary tree file
+
+sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/SearchTree/')
+import searchElement as search
+
+
+
+
+
+
 
 randK = []
 for i in range(7):
@@ -328,6 +372,9 @@ for i in range(7):
 
 def getPrivateKeys():
     return randK
+
+
+
 # Data
 
 # SNum = [1,6,7,9,25,11,12,13,16,20]
@@ -351,14 +398,25 @@ def recBuildTree(x, data, parent):
         parent = x
         recBuildTree(x.left, left, parent), recBuildTree(x.right, right, parent)
 
-
-
 # Preorder Traversal through the tree to create the bloomFilters for each node!
 def preorder(tree):
     if tree:
-        tree.value = (bf.getBloomFilter(tree.value, Bits, randK), bf.getVR()) # Retrieves the bloom filter for the node data
+        bloom, vr = bf.getBloomFilter(tree.value, Bits, randK) # Retrieves the bloom filter for the node data
+        tree.value = (bloom, vr)
         preorder(tree.left)
         preorder(tree.right)
+
+trap = getTrapDoor()
+
+
+def searchIT(tree):
+    if tree:
+        # print(tree.value)
+        bloomAndVR = tree.value # Gets the bloom filter and VR from the tree
+        # print(bloomAndVR)
+        search.searchForME(bloomAndVR[0], bloomAndVR[1], trap)
+        searchIT(tree.left)
+        searchIT(tree.right)
 
 # Generating the tree
 def getTree():
@@ -369,8 +427,11 @@ def getTree():
     recBuildTree(root, data, parent) # Recursively builds the tree!
     pprint(start) # Prints the tree
     preorder(start)
+    searchIT(start)
+
     # pprint(start)
+# print("Printing Trapdoor in main")
 
 # This function call will create the tree normally and then traverse through it in Preorder
 # fashion and replace the nodes with the bloom filters!
-# getTree() # <========= Starts the exectution
+getTree() # <========= Starts the exectution

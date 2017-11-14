@@ -329,7 +329,7 @@ def getTrapDoor():
     # Extract the keys from the treeGen function
     randK = getPrivateKeys()
 
-    theRange = [1, 8]
+    theRange = [1,7]
     minPrefixSet = mp.main(theRange)
 
     trap = []
@@ -377,8 +377,8 @@ def getPrivateKeys():
 
 # Data
 
-# SNum = [1,6,7,9,25,11,12,13,16,20]
-SNum = [1,6,7]
+SNum = [1,6,7,9,25,11,12,13,16,20]
+# SNum = [1,6,7]
 Bits = 5
 
 mytree = tree()
@@ -414,7 +414,9 @@ def searchIT(tree):
         # print(tree.value)
         bloomAndVR = tree.value # Gets the bloom filter and VR from the tree
         # print(bloomAndVR)
-        search.searchForME(bloomAndVR[0], bloomAndVR[1], trap)
+        x = search.searchForME(bloomAndVR[0], bloomAndVR[1], trap)
+        if x == "FAIL":
+            return
         searchIT(tree.left)
         searchIT(tree.right)
 

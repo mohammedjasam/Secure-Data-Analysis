@@ -356,7 +356,7 @@ def recBuildTree(x, data, parent):
 # Preorder Traversal through the tree to create the bloomFilters for each node!
 def preorder(tree):
     if tree:
-        tree.value = bf.getBloomFilter(tree.value, Bits, randK) # Retrieves the bloom filter for the node data
+        tree.value = (bf.getBloomFilter(tree.value, Bits, randK), bf.getVR()) # Retrieves the bloom filter for the node data
         preorder(tree.left)
         preorder(tree.right)
 

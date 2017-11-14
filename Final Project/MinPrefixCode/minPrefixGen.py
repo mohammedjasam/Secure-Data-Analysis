@@ -143,5 +143,5 @@ def main(data):
     return what
 
 """ CAN BE USED TO TEST THIS CODE!"""
-# r = [1, 8]
-# print(main(r))
+r = [1, 7]
+print(main(r))

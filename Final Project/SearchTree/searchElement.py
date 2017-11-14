@@ -6,7 +6,10 @@ def hashIt(s):
     return hashlib.sha1(s).hexdigest()
 
 def searchForME(bloom, vr, trap):
-    print(bloom)
+    print("trap is")
+    print(trap)
+    trapCopy = trap[:]
+    # print(bloom)
     print()
     m = len(trap)
     total = bloom.count(1)
@@ -16,12 +19,15 @@ def searchForME(bloom, vr, trap):
             index = hashIt(col + str(vr))
             index = int(index, 16) % m
             if bloom[index] == 1:
-                print('index is' + str(index))
+                # print('index is' + str(index))
                 counter += 1
                 pass
             elif bloom[index] == 0:
-                print("LOL its not in range!")
-                return "FAIL"
-        print("=====================> ", str(counter))
+                a=1
+                # print("LOL its not in range!")
+                # return "FAIL"
+        # print("=====================> ", str(counter))
     if counter == total:
         print("yaaaaaaa*******************************************************************aaaaaaay")
+        print("result is ")
+        print(trap)

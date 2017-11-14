@@ -34,7 +34,8 @@ def getBloomFilter(SNum, Bits, randK):
             s[-x] = '*'
             temp.append(''.join(s))
         preSet += temp
-
+        # print('preset is')
+        # print(preSet)
         return preSet
 
     # Convert to fixed length binary!
@@ -50,20 +51,27 @@ def getBloomFilter(SNum, Bits, randK):
 
     # Taking union of prefix set!
     unionSet = list(set(preset))
-
+    lol = []
+    mainLol = []
+    print(len(unionSet))
+    print(unionSet)
     # For every element in unionSet create the hashed values of the elements for some N iterations!
     for prefix in unionSet:
         l = []
         hl = []
+        lol = []
         for index, num in enumerate(randK):
             K = randK[index] + prefix
             l.append(K)
-            # hk = hashIt(K)
+            # hal = hashIt(K)
             # hl.append(hk)
-            hK = hashIt(K) + str(vr)
+            hK = hashIt(K)
+            lol.append(hK)
+            hK += str(vr)
             hhKvr = hashIt(hK)
             hl.append(hhKvr)
         appendFirst.append(l)
+        mainLol.append(lol)
         hashedAppendFirst.append(hl)
 
     # m value to create the bloomfilter
@@ -74,7 +82,9 @@ def getBloomFilter(SNum, Bits, randK):
     for i in range(m):
         bloomFilter.append(0)
     # print(bloomFilter)
+    print("initial is")
 
+    print(mainLol)
     # Setting 1 to every index pointed by the mod operation!
     for sett in hashedAppendFirst:
         for x in sett:

@@ -331,7 +331,9 @@ def getTrapDoor():
 
     theRange = [1,7]
     minPrefixSet = mp.main(theRange)
-
+    print("min prefix of 1 - 7 is:")
+    minPrefixSet = list(set(minPrefixSet))
+    print(minPrefixSet)
     trap = []
     tempTrap = []
     for prefix in minPrefixSet:
@@ -377,9 +379,9 @@ def getPrivateKeys():
 
 # Data
 
-SNum = [1,6,7,9,25,11,12,13,16,20]
-# SNum = [1,6,7]
-Bits = 5
+# SNum = [1,6,7,9,25,11,12,13,16,20]
+SNum = [1,2,3,4,5,6,7]
+Bits = 3
 
 mytree = tree()
 root = Node(SNum)

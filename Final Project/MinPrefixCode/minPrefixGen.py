@@ -120,12 +120,12 @@ def replaceElements(listt):
                 if maxStarElement[:] in element[:length]:
                     listt.remove(element)
 
-def main(data):
+def main(data, Bits):
     r = data
     global what
     global finList
     # r = list(map(int, input("Enter the range space separated!\n").split()))
-    string = '{0:0' + str(r[-1].bit_length()+1) + 'b}'
+    string = '{0:0' + str(Bits) + 'b}'
     if r[0] == "0" and r[1] == "1":
         what = ['*']
     else:

@@ -334,10 +334,10 @@ def getTrapDoor():
 
 
     theRange = [4,7]
-    minPrefixSet = mp.main(theRange)
+    minPrefixSet = mp.main(theRange, Bits)
     # print("min prefix of 1 - 7 is:")
     minPrefixSet = list(set(minPrefixSet))
-    # print(minPrefixSet)
+    print(minPrefixSet)
     trap = []
     tempTrap = []
     for prefix in minPrefixSet:
@@ -383,9 +383,9 @@ def getPrivateKeys():
 
 # Data
 
-# SNum = [1,6,7,9,25,11,12,13,16,20]
-SNum = [1,2,3,4,6,8,9,10]
-Bits = 4
+SNum = [1,4,5,7,9,14,12,25,16,20]
+# SNum = [1,2,4,6,7,9,10]
+Bits = 5
 
 mytree = tree()
 root = Node(SNum)
@@ -421,28 +421,25 @@ def searchIT(tree):
         # print(tree.value)
         data = tree.value # Gets the bloom filter and VR from the tree
         # print(bloomAndVR)
-        x = search.searchForME(data[0], data[1], data[4], trap)
+        x = search.searchForME(data[0], data[1], data[4], trap, data[2])
         # print("X is: ", x)
-        if x == "PASS":
-        #     # return
-            if not(tree.left or tree.right):
-                # print(data[2])
-                if len(queryResult) == 0:
-                    queryResult = data[2]
-                else:
-                    queryResult += data[2]
-        #         pass
-        #     else:
-        #         print(data[2])
-        # elif x == "FAIL":
-        #     # return
-        #     pass
+        # if x == "PASS":
+        #     print(data[2])
+        #     if not(tree.left or tree.right):
+        #         # print(data[2])
+        #         if len(queryResult) == 0:
+        #             queryResult = data[2]
+        #         else:
+        #             queryResult += data[2]
 
-        searchIT(tree.left)
-        searchIT(tree.right)
+        searchIT(tree.left), searchIT(tree.right)
+        # print("Searched left")
+
+        # print("Searched Right")
 
 # Generating the tree
 def getTree():
+    global queryResult
     # print("Data")
     print(SNum)
     print()
@@ -451,7 +448,7 @@ def getTree():
     pprint(start) # Prints the tree
     preorder(start)
     searchIT(start)
-    print(sorted(queryResult))
+    # print(sorted(queryResult))
 
     # pprint(start)
 # print("Printing Trapdoor in main")

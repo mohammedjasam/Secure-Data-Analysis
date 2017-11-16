@@ -78,7 +78,7 @@ def getBloomFilter(SNum, Bits, randK):
     # print(hashedAppendFirst)# contains double hashed values
     # print("________________________________________________")
     # m value to create the bloomfilter
-    m = 10 * len(unionSet[1])
+    m = 100 * len(unionSet[1])
 
     bloomFilter = []
     # Creating an array with default value as 0

@@ -5,7 +5,7 @@ import hashlib
 
 def getBloomFilter(SNum, Bits, randK):
     storedSNUM = SNum[:]
-    randK = randK[:1]
+    # randK = randK[:1]
     unionSet = []
     S = []
     bitLen = Bits
@@ -96,6 +96,4 @@ def getBloomFilter(SNum, Bits, randK):
             # print(m)
             # print(i)
             bloomFilter[i] = 1
-    # print("Bloom and VR in bf file")
-    # print(bloomFilter, vr)
     return bloomFilter, vr, unionSet, hashedAppendFirst

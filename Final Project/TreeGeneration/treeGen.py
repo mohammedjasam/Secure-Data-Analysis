@@ -330,18 +330,18 @@ def getTrapDoor():
     randK = getPrivateKeys()
 
 
-    randK = randK[:1]
+    # randK = randK[:1]
 
     # This is the search range
-    theRange = [1,20]
-    print("The range is: ")
-    print(theRange)
+    theRange = [1,5]
+    print("The range is:        " + str(theRange))
+    # print(theRange)
     print()
     minPrefixSet = mp.main(theRange, Bits)
     # print("min prefix of 1 - 7 is:")
     minPrefixSet = list(set(minPrefixSet))
-    print("The minprefixset is:")
-    print(minPrefixSet)
+    print("The minprefixset is: " + str(minPrefixSet))
+    # print(minPrefixSet)
     print()
     trap = []
     tempTrap = []
@@ -371,12 +371,6 @@ import bloomfilter as bf # file that will generate the bloom filter!
 sys.path.insert(0, 'C:/Users/Stark/Desktop/Programming/Coursework/Secure-Data-Analysis/Final Project/SearchTree/')
 import searchElement as search
 
-
-
-
-
-
-
 randK = []
 for i in range(7):
     randK.append(str(rand.randint(1, 1000)))
@@ -385,12 +379,10 @@ def getPrivateKeys():
     return randK
 
 
-
 # Data
-
-SNum = [1,4,5,7,25,16,20]
-# SNum = [1,2,4,6,7,9,10]
-Bits = 5
+# SNum = [1,7,25,127, 251, 517, 1021]
+SNum = [1,2,3,4,5,6,7,8,9,10]
+Bits = 4
 
 mytree = tree()
 root = Node(SNum)
@@ -442,21 +434,16 @@ def searchIT(tree):
 # Generating the tree
 def getTree():
     global queryResult
-    print("Data")
-    print(SNum)
+    print("Data is:             " + str(SNum))
     print()
     # print("The Generated Tree for above data set!")
     recBuildTree(root, data, parent) # Recursively builds the tree!
     pprint(start) # Prints the tree
     preorder(start)
-    # pprint(start) # Prints the tree
-
     searchIT(start)
-    print("__________________________________")
-    print("FINAL SEARCH RESULT:")
-    print("--------------------")
-    print(sorted(queryResult))
-    print("__________________________________")
+    print()
+    print("_______________________________________________________________________________________________________________________")
+    print("FINAL SEARCH RESULT: "  + str(sorted(queryResult)))
 
 # This function call will create the tree normally and then traverse through it in Preorder
 # fashion and replace the nodes with the bloom filters!

@@ -145,7 +145,7 @@ def main(data, Bits):
     # print(newList)
     # print("\n+++++++++++++++++++++++++")
     # print(finList + what+ newList)
-    return finList + what+ newList
+    return finList + what + newList
 
 """ CAN BE USED TO TEST THIS CODE!"""
 # r = [8,10]

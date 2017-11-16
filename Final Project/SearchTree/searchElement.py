@@ -18,6 +18,7 @@ def searchForME(bloom, vr, secondhashed, trap, SNUM):
             # print(twoTimeHash) # Prints the hash with vr
             xa = int(twoTimeHash, 16)
             index = xa % m
+            # print(trap)
             if bloom[index] == 1:
                 return "PASS"
             else:

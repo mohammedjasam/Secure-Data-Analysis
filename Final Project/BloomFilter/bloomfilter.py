@@ -1,8 +1,6 @@
 import random
 import hashlib
 
-# SNum = [6, 7]
-
 def getBloomFilter(SNum, Bits, randK):
     storedSNUM = SNum[:]
     # randK = randK[:1]
@@ -12,13 +10,13 @@ def getBloomFilter(SNum, Bits, randK):
     preset = []
     appendFirst = []
     hashedAppendFirst = []
-    # print(randK)
 
     # Each node has a random value
     vr = random.randint(1, 1000)
     # print(vr)
     def getVR():
         return vr
+
     # SHA-1 Hash function!
     def hashIt(s):
         s = str.encode(s)
@@ -36,8 +34,7 @@ def getBloomFilter(SNum, Bits, randK):
             s[-x] = '*'
             temp.append(''.join(s))
         preSet += temp
-        # print('preset is')
-        # print(preSet)
+
         return preSet
 
     # Convert to fixed length binary!
@@ -65,8 +62,6 @@ def getBloomFilter(SNum, Bits, randK):
         for index, num in enumerate(randK):
             K = randK[index] + prefix
             l.append(K)
-            # hal = hashIt(K)
-            # hl.append(hk)
             hK = hashIt(K)
             lol.append(hK)
             hK += str(vr)

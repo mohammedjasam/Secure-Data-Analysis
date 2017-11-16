@@ -125,7 +125,7 @@ def main(data):
     global what
     global finList
     # r = list(map(int, input("Enter the range space separated!\n").split()))
-    string = '{0:0' + str(r[-1].bit_length()) + 'b}'
+    string = '{0:0' + str(r[-1].bit_length()+1) + 'b}'
     if r[0] == "0" and r[1] == "1":
         what = ['*']
     else:
@@ -143,5 +143,5 @@ def main(data):
     return what
 
 """ CAN BE USED TO TEST THIS CODE!"""
-r = [1, 7]
-print(main(r))
+# r = [0,8]
+# print(main(r))

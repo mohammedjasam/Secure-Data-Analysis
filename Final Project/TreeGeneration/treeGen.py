@@ -329,9 +329,13 @@ def getTrapDoor():
     # Extract the keys from the treeGen function
     randK = getPrivateKeys()
 
-    theRange = [1,7]
+
+    randK = randK[:1]
+
+
+    theRange = [4,7]
     minPrefixSet = mp.main(theRange)
-    print("min prefix of 1 - 7 is:")
+    # print("min prefix of 1 - 7 is:")
     minPrefixSet = list(set(minPrefixSet))
     print(minPrefixSet)
     trap = []
@@ -380,8 +384,8 @@ def getPrivateKeys():
 # Data
 
 # SNum = [1,6,7,9,25,11,12,13,16,20]
-SNum = [1,2,3,4,5,6,7]
-Bits = 3
+SNum = [4,8]
+Bits = 4
 
 mytree = tree()
 root = Node(SNum)
@@ -424,10 +428,10 @@ def searchIT(tree):
 
 # Generating the tree
 def getTree():
-    print("Data")
+    # print("Data")
     print(SNum)
     print()
-    print("The Generated Tree for above data set!")
+    # print("The Generated Tree for above data set!")
     recBuildTree(root, data, parent) # Recursively builds the tree!
     pprint(start) # Prints the tree
     preorder(start)

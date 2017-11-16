@@ -4,6 +4,7 @@ import hashlib
 SNum = [6, 7]
 
 def getBloomFilter(SNum, Bits, randK):
+    randK = randK[:1]
     unionSet = []
     S = []
     bitLen = Bits
@@ -72,8 +73,9 @@ def getBloomFilter(SNum, Bits, randK):
             hl.append(hhKvr)
         appendFirst.append(l)
         mainLol.append(lol)
-        hashedAppendFirst.append(hl)
-
+        hashedAppendFirst.append(hl) # contains double hashed values
+    print(hashedAppendFirst)# contains double hashed values
+    print("________________________________________________")
     # m value to create the bloomfilter
     m = 10 * len(unionSet)
 
@@ -82,9 +84,9 @@ def getBloomFilter(SNum, Bits, randK):
     for i in range(m):
         bloomFilter.append(0)
     # print(bloomFilter)
-    print("initial is")
+    # print("initial is")
 
-    print(mainLol)
+    # print(mainLol) # 1st hash
     # Setting 1 to every index pointed by the mod operation!
     for sett in hashedAppendFirst:
         for x in sett:

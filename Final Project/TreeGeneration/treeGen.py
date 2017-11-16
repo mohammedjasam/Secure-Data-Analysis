@@ -333,7 +333,7 @@ def getTrapDoor():
     randK = randK[:1]
 
     # This is the search range
-    theRange = [1,1]
+    theRange = [1,20]
     print("The range is: ")
     print(theRange)
     print()
@@ -438,9 +438,6 @@ def searchIT(tree):
                     queryResult += data[2]
 
         searchIT(tree.left), searchIT(tree.right)
-        # print("Searched left")
-
-        # print("Searched Right")
 
 # Generating the tree
 def getTree():
@@ -452,15 +449,14 @@ def getTree():
     recBuildTree(root, data, parent) # Recursively builds the tree!
     pprint(start) # Prints the tree
     preorder(start)
+    # pprint(start) # Prints the tree
+
     searchIT(start)
     print("__________________________________")
     print("FINAL SEARCH RESULT:")
     print("--------------------")
     print(sorted(queryResult))
     print("__________________________________")
-
-    # pprint(start)
-# print("Printing Trapdoor in main")
 
 # This function call will create the tree normally and then traverse through it in Preorder
 # fashion and replace the nodes with the bloom filters!

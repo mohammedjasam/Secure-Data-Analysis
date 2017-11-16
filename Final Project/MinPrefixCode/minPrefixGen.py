@@ -15,8 +15,6 @@ def remFromList(starList, tempArray):
 
 # This function creates two separate lists 1. with "*" and 2. without "*"
 def separateLists(unionPreSet):
-    # starList = []
-    # numList = []
     for x in unionPreSet:
         if '*' in list(x):
             starList.append(x)
@@ -108,7 +106,6 @@ def replaceElements(listt):
 
     else:
         finList.append(joinList(maxStarElement))
-        # print(finList)
         maxStarElement = removeStars(maxStarElement)
         length = len(list(maxStarElement))
 
@@ -119,6 +116,7 @@ def replaceElements(listt):
             else:
                 if maxStarElement[:] in element[:length]:
                     listt.remove(element)
+                    # print(listt)
 
 def main(data, Bits):
     r = data
@@ -133,15 +131,22 @@ def main(data, Bits):
             createPrefix(string.format(n), preSet)  ## This function call creates the prefix set and stores in preSet list[]
         unionPreSet = list(set(preSet))
         j = list(sorted(unionPreSet))
-        minPrefix(unionPreSet)
+        # print(unionPreSet)
+        # print(j)
+        minPrefix(j)
         newList = rangeRestrict(starList)
+        # print(newList)
         newList = starList + numList
+        # print(newList)
         lenStar = len(starList)
 
     for x in range(lenStar):
         replaceElements(newList)
-    return what
+    # print(newList)
+    # print("\n+++++++++++++++++++++++++")
+    # print(finList + what+ newList)
+    return finList + what+ newList
 
 """ CAN BE USED TO TEST THIS CODE!"""
-# r = [0,8]
-# print(main(r))
+# r = [8,10]
+# print(main(r, 3))

@@ -333,12 +333,16 @@ def getTrapDoor():
     randK = randK[:1]
 
     # This is the search range
-    theRange = [9,15]
-
+    theRange = [1,1]
+    print("The range is: ")
+    print(theRange)
+    print()
     minPrefixSet = mp.main(theRange, Bits)
     # print("min prefix of 1 - 7 is:")
     minPrefixSet = list(set(minPrefixSet))
+    print("The minprefixset is:")
     print(minPrefixSet)
+    print()
     trap = []
     tempTrap = []
     for prefix in minPrefixSet:
@@ -441,7 +445,7 @@ def searchIT(tree):
 # Generating the tree
 def getTree():
     global queryResult
-    # print("Data")
+    print("Data")
     print(SNum)
     print()
     # print("The Generated Tree for above data set!")

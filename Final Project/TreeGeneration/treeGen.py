@@ -337,7 +337,7 @@ def getTrapDoor():
     minPrefixSet = mp.main(theRange)
     # print("min prefix of 1 - 7 is:")
     minPrefixSet = list(set(minPrefixSet))
-    print(minPrefixSet)
+    # print(minPrefixSet)
     trap = []
     tempTrap = []
     for prefix in minPrefixSet:
@@ -384,7 +384,7 @@ def getPrivateKeys():
 # Data
 
 # SNum = [1,6,7,9,25,11,12,13,16,20]
-SNum = [4,8]
+SNum = [1,2,3,4,6,8,9,10]
 Bits = 4
 
 mytree = tree()
@@ -407,22 +407,37 @@ def recBuildTree(x, data, parent):
 # Preorder Traversal through the tree to create the bloomFilters for each node!
 def preorder(tree):
     if tree:
-        bloom, vr = bf.getBloomFilter(tree.value, Bits, randK) # Retrieves the bloom filter for the node data
-        tree.value = (bloom, vr)
+        bloom, vr, unionSET, secondhashed = bf.getBloomFilter(tree.value, Bits, randK) # Retrieves the bloom filter for the node data
+        tree.value = (bloom, vr, unionSET[0], unionSET[1], secondhashed)
         preorder(tree.left)
         preorder(tree.right)
 
 trap = getTrapDoor()
 
-
+queryResult = []
 def searchIT(tree):
+    global queryResult
     if tree:
         # print(tree.value)
-        bloomAndVR = tree.value # Gets the bloom filter and VR from the tree
+        data = tree.value # Gets the bloom filter and VR from the tree
         # print(bloomAndVR)
-        x = search.searchForME(bloomAndVR[0], bloomAndVR[1], trap)
-        if x == "FAIL":
-            return
+        x = search.searchForME(data[0], data[1], data[4], trap)
+        # print("X is: ", x)
+        if x == "PASS":
+        #     # return
+            if not(tree.left or tree.right):
+                # print(data[2])
+                if len(queryResult) == 0:
+                    queryResult = data[2]
+                else:
+                    queryResult += data[2]
+        #         pass
+        #     else:
+        #         print(data[2])
+        # elif x == "FAIL":
+        #     # return
+        #     pass
+
         searchIT(tree.left)
         searchIT(tree.right)
 
@@ -436,6 +451,7 @@ def getTree():
     pprint(start) # Prints the tree
     preorder(start)
     searchIT(start)
+    print(sorted(queryResult))
 
     # pprint(start)
 # print("Printing Trapdoor in main")

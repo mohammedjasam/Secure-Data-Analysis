@@ -1,9 +1,10 @@
 import random
 import hashlib
 
-SNum = [6, 7]
+# SNum = [6, 7]
 
 def getBloomFilter(SNum, Bits, randK):
+    storedSNUM = SNum[:]
     randK = randK[:1]
     unionSet = []
     S = []
@@ -51,13 +52,13 @@ def getBloomFilter(SNum, Bits, randK):
         genPrefix(element, preset)
 
     # Taking union of prefix set!
-    unionSet = list(set(preset))
+    unionSet = [storedSNUM, list(set(preset))]
     lol = []
     mainLol = []
-    print(len(unionSet))
-    print(unionSet)
+    # print(len(unionSet[1]))
+    # print(unionSet)
     # For every element in unionSet create the hashed values of the elements for some N iterations!
-    for prefix in unionSet:
+    for prefix in unionSet[1]:
         l = []
         hl = []
         lol = []
@@ -74,10 +75,10 @@ def getBloomFilter(SNum, Bits, randK):
         appendFirst.append(l)
         mainLol.append(lol)
         hashedAppendFirst.append(hl) # contains double hashed values
-    print(hashedAppendFirst)# contains double hashed values
-    print("________________________________________________")
+    # print(hashedAppendFirst)# contains double hashed values
+    # print("________________________________________________")
     # m value to create the bloomfilter
-    m = 10 * len(unionSet)
+    m = 10 * len(unionSet[1])
 
     bloomFilter = []
     # Creating an array with default value as 0
@@ -92,8 +93,9 @@ def getBloomFilter(SNum, Bits, randK):
         for x in sett:
             a = int(x, 16)
             i = a % m
+            # print(m)
             # print(i)
-            bloomFilter[i - 1] = 1
+            bloomFilter[i] = 1
     # print("Bloom and VR in bf file")
     # print(bloomFilter, vr)
-    return bloomFilter, vr
+    return bloomFilter, vr, unionSet, hashedAppendFirst

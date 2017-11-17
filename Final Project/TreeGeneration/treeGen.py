@@ -463,8 +463,8 @@ def main(SNum, Bits, theRange):
 
 
 # Data and Search Query
-theRange = [23, 128] # Search Query
+theRange = [1,1] # Search Query
 SNum = [1, 6, 7, 9, 10, 11, 12, 16, 20, 25] # Data items
-Bits = max(theRange).bit_length() # Selects the number of bits to the max value in Range!
+Bits = max(max(theRange), max(SNum)).bit_length() # Selects the number of bits to the max value in Range!
 
 main(SNum, Bits, theRange) # This is the main function call to Run the whole program!

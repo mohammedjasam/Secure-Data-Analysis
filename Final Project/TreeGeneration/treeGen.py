@@ -317,6 +317,9 @@ import sys
 import random as rand
 from binarytree import * # this will import the binary tree file
 queryResult = []
+
+
+
 def main(SNum, Bits, theRange):
     import sys
     import hashlib
@@ -340,13 +343,13 @@ def main(SNum, Bits, theRange):
 
         # This is the search range
         # theRange = [1,5]
-        print("The range is:        " + str(theRange))
+        print("The Range is:        " + str(theRange))
         # print(theRange)
         print()
         minPrefixSet = mp.main(theRange, Bits)
         # print("min prefix of 1 - 7 is:")
         minPrefixSet = list(set(minPrefixSet))
-        print("The minprefixset is: " + str(minPrefixSet))
+        print("The MinPrefixSet is: " + str(minPrefixSet))
         # print(minPrefixSet)
         print()
         trap = []
@@ -365,7 +368,7 @@ def main(SNum, Bits, theRange):
         return trap
 
 
-    """ PROGRAM EXECUTION BEGINS """
+    # ______________________________________________________________________________________________#
     # Importing the bloomFilter file!
     # import sys
     # import random as rand
@@ -428,7 +431,7 @@ def main(SNum, Bits, theRange):
             # print("X is: ", x)
             if x == "PASS":
                 # print(data[2])
-                if not(tree.left or tree.right):
+                if not(tree.left or tree.right): # Verifies for leaf nodes
                     # print(data[2])
                     if len(queryResult) == 0:
                         queryResult = data[2]
@@ -448,8 +451,10 @@ def main(SNum, Bits, theRange):
         preorder(start)
         searchIT(start)
         print()
-        print("_______________________________________________________________________________________________________________________")
-        print("FINAL SEARCH RESULT: "  + str(sorted(queryResult)))
+        print("__________________________________________________________________________________________________________________________________________________________________________________________________")
+        print()
+        print("Search Result(s): "  + str(sorted(queryResult)))
+        print("__________________________________________________________________________________________________________________________________________________________________________________________________")
 
     # This function call will create the tree normally and then traverse through it in Preorder
     # fashion and replace the nodes with the bloom filters!
@@ -457,9 +462,9 @@ def main(SNum, Bits, theRange):
 
 
 
+# Data and Search Query
+theRange = [23, 128] # Search Query
+SNum = [1, 6, 7, 9, 10, 11, 12, 16, 20, 25] # Data items
+Bits = max(theRange).bit_length() # Selects the number of bits to the max value in Range!
 
-theRange = [1,5]
-SNum = [1,2,3,4,5,6,7,8,9,10]
-Bits = 4
-
-main(SNum, Bits, theRange)
+main(SNum, Bits, theRange) # This is the main function call to Run the whole program!

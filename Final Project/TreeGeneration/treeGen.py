@@ -465,7 +465,7 @@ def main(SNum, Bits, theRange):
     getTree() # <========= Starts the exectution
 
 # Data and Search Query
-theRange = [990000,1000000] # Search Query
+theRange = [990000, 1000000] # Search Query
 SNum = [1, 6, 7, 9, 10, 11, 12, 16, 1000000] # Data items
 Bits = max(max(theRange), max(SNum)).bit_length() # Selects the number of bits to the max value in Range!
 

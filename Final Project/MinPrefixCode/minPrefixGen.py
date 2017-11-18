@@ -1,14 +1,17 @@
 preSet = [] # list which stores the prefix Set
 unionPreSet = [] # Takes only the commons and removes redundancies from preSet[]
-starList, numList = [], []
-finList = []
+starList, numList = [], [] # These are the lists that store elements with/without Stars respectively
+finList = [] # Stores the intermediate result
 
+# This fucntion joins the elements in the list
 def joinList(l):
     return ''.join(l)
 
+# This function prints the starlist
 def retList(starList):
     print(starList)
 
+# This fucntion removes the element(s) from the starlist
 def remFromList(starList, tempArray):
     if joinList(tempArray) in starList:
         starList.remove(joinList(tempArray))
@@ -22,8 +25,6 @@ def separateLists(unionPreSet):
             numList.append(x)
     return starList, numList
 
-
-
 # This is the function which generates the minimum Prefix set
 # used in the tree building process!
 def minPrefix(unionPreSet):
@@ -31,8 +32,6 @@ def minPrefix(unionPreSet):
     unionPreSet = sorted(unionPreSet)
     starList, numList = separateLists(unionPreSet)
     # print(starList, numList)
-
-
 
 # This function takes the binary values of numbers in the range
 # and then converts it to prefix set and appends all the values to preSet List!
@@ -45,7 +44,8 @@ def createPrefix(s, preSet):
         temp.append(''.join(s))
     preSet += temp
 
-
+# This function will replace the first occuring star with 1 and 0 and will
+# restrict the elements in the starlist
 def rangeRestrict(starList):
     for s in starList[:]:
         s = list(s)
@@ -55,7 +55,6 @@ def rangeRestrict(starList):
         t1 = [x.replace("*", '1') for x in list(t1)]
         t0 = joinList(t0)
         t1 = joinList(t1)
-
 
         if t0 in numList:
             if t1 in numList:
@@ -67,7 +66,9 @@ def rangeRestrict(starList):
 
     return starList
 
+
 sttt = ""
+# This function checks the element which has more number of stars in it.
 def checkMaxStars(temp):
     res = ""
     global sttt
@@ -82,19 +83,15 @@ def checkMaxStars(temp):
             sttt = res
     return res
 
-
-
-
-
+# This is used to extract the prefix of the maxStarElement
 def removeStars(maxStarElement):
     return joinList(list(filter(("*").__ne__, maxStarElement)))
 
 what = []
 
-
-
-
-
+# This will over lap the modified maxStarElement with other replaceElements
+# if there is an overlap then it removes that element from the list as the
+# maxStarElement can represent it when permuted with '0' or '1'
 def replaceElements(listt):
     temp = listt[:]
     global what
@@ -116,37 +113,32 @@ def replaceElements(listt):
             else:
                 if maxStarElement[:] in element[:length]:
                     listt.remove(element)
-                    # print(listt)
 
+# Main point of execution which takes the range of data and the number of bits
+# and returns the minPrefixSet of the range of data
 def main(data, Bits):
     r = data
     global what
     global finList
-    # r = list(map(int, input("Enter the range space separated!\n").split()))
+
     string = '{0:0' + str(Bits) + 'b}'
     if r[0] == "0" and r[1] == "1":
         what = ['*']
     else:
         for n in range(r[0], r[-1]+1):
-            createPrefix(string.format(n), preSet)  ## This function call creates the prefix set and stores in preSet list[]
+            ## This function call creates the prefix set and stores in preSet list[]
+            createPrefix(string.format(n), preSet)
         unionPreSet = list(set(preSet))
         j = list(sorted(unionPreSet))
-        # print(unionPreSet)
-        # print(j)
         minPrefix(j)
         newList = rangeRestrict(starList)
-        # print(newList)
         newList = starList + numList
-        # print(newList)
         lenStar = len(starList)
 
     for x in range(lenStar):
         replaceElements(newList)
-    # print(newList)
-    # print("\n+++++++++++++++++++++++++")
-    # print(finList + what+ newList)
-    return finList + what + newList
+    return finList + what + newList # this combination has the minPrefixSet
 
 """ CAN BE USED TO TEST THIS CODE!"""
-# r = [8,10]
-# print(main(r, 3))
+# r = [1,10]
+# print(main(r, 4))

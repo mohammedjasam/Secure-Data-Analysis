@@ -126,6 +126,7 @@ def main(data, Bits):
         what = ['*']
     else:
         for n in range(r[0], r[-1]+1):
+            # print(n)
             ## This function call creates the prefix set and stores in preSet list[]
             createPrefix(string.format(n), preSet)
         unionPreSet = list(set(preSet))
@@ -141,4 +142,6 @@ def main(data, Bits):
 
 """ CAN BE USED TO TEST THIS CODE!"""
 # r = [1,10]
-# print(main(r, 4))
+# print("The range query is : " + str(r))
+# print("The min prefix set : " + str(list(set(main(r, 4)))))
+# print(list(set(main(r, 4))))

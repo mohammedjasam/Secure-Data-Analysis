@@ -334,8 +334,8 @@ def main(SNum, Bits, theRange):
         randK = getPrivateKeys()
 
         # prints theRange of the query
-        print("The Range is:        " + str(theRange))
-        print()
+        # print("The Range is:        " + str(theRange))
+        # print()
 
         # Extracts the minPrefixSet from the minPrefixGen module
         minPrefixSet = mp.main(theRange, Bits)
@@ -394,7 +394,7 @@ def main(SNum, Bits, theRange):
             x.left = Node(left) # The left child
             x.right = Node(right) # The right child
             parent = x # Its the parent now for next iterations
-
+            # pprint(start)
             # this is a recursive algorithm which will divide the data into a tree
             recBuildTree(x.left, left, parent), recBuildTree(x.right, right, parent)
 
@@ -443,8 +443,8 @@ def main(SNum, Bits, theRange):
     # Generating the tree, and running the whole build and search process
     def getTree():
         global queryResult
-        print("Data is:             " + str(SNum))
-        print()
+        # print("Data is:             " + str(SNum))
+        # print()
 
         recBuildTree(root, data, parent) # Recursively builds the tree!
         pprint(start) # Prints the tree
@@ -464,9 +464,17 @@ def main(SNum, Bits, theRange):
     # fashion and replace the nodes with the bloom filters!
     getTree() # <========= Starts the exectution
 
-# Data and Search Query
-theRange = [7, 15] # Search Query
-SNum = [1, 6, 7, 9, 10, 11, 12, 16, 20, 25] # Data items
+# Inputting the data
+SNum = list(map(int, input("Enter the Data separated by commas: ").split(",")))
+
+# Inputting the Query Range
+theRange = list(map(int, input("Enter the Range separated by commas: ").split(",")))
+
+"""THIS CAN BE USED FOR TESTING PURPOSES"""
+# theRange = [6,16] # Search Query
+# SNum = [1, 6, 7, 9, 10, 11, 12, 16, 20, 25] # Data items
+# SNum = [1,6,7,16,20]
+
 Bits = max(max(theRange), max(SNum)).bit_length() # Selects the number of bits to the max value in Range!
 
 main(SNum, Bits, theRange) # This is the main function call to Run the whole program!

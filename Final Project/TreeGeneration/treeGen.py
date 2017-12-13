@@ -454,6 +454,7 @@ def main(SNum, Bits, theRange):
 
         # Recursively searches for the elements in the tree and generates the queryResult
         searchIT(start)
+        # pprint(start) # UGLIEST LINE OF CODE OF THE PROJECT!<-----------------------------------------------------
         print()
         print("__________________________________________________________________________________________________________________________________________________________________________________________________")
         print()
@@ -464,11 +465,20 @@ def main(SNum, Bits, theRange):
     # fashion and replace the nodes with the bloom filters!
     getTree() # <========= Starts the exectution
 
-# Inputting the data
-SNum = list(map(int, input("Enter the Data separated by commas: ").split(",")))
+# # Inputting the data
+# SNum = list(map(int, input("Enter the Data separated by commas: ").split(",")))
+#
+# # Inputting the Query Range
+# theRange = list(map(int, input("Enter the Range separated by commas: ").split(",")))
 
-# Inputting the Query Range
-theRange = list(map(int, input("Enter the Range separated by commas: ").split(",")))
+with open("data.txt") as data:
+    for x in data:
+        SNum = list(map(int, x.split(",")))
+
+with open("query.txt") as query:
+    for x in query:
+        theRange = list(map(int, x.split(",")))
+
 
 """THIS CAN BE USED FOR TESTING PURPOSES"""
 # theRange = [6,16] # Search Query

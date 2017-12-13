@@ -456,11 +456,13 @@ def main(SNum, Bits, theRange):
         searchIT(start)
         # pprint(start) # UGLIEST LINE OF CODE OF THE PROJECT!<-----------------------------------------------------
         print()
-        print("__________________________________________________________________________________________________________________________________________________________________________________________________")
+        print("_______________________________________________________________________________________________")
         print()
         print("Search Result(s): "  + str(sorted(queryResult))) # Prints the final Result of the query
-        print("__________________________________________________________________________________________________________________________________________________________________________________________________")
+        print("_______________________________________________________________________________________________")
 
+        if (int(input("Enter 1 to see the UGLY TREE, else enter 0 to exit!    "))):
+            pprint(start)
     # This function call will create the tree normally and then traverse through it in Preorder
     # fashion and replace the nodes with the bloom filters!
     getTree() # <========= Starts the exectution
@@ -471,6 +473,8 @@ def main(SNum, Bits, theRange):
 # # Inputting the Query Range
 # theRange = list(map(int, input("Enter the Range separated by commas: ").split(",")))
 
+
+## File operations!
 with open("data.txt") as data:
     for x in data:
         SNum = list(map(int, x.split(",")))
@@ -485,6 +489,8 @@ with open("query.txt") as query:
 # SNum = [1, 6, 7, 9, 10, 11, 12, 16, 20, 25] # Data items
 # SNum = [1,6,7,16,20]
 
+
+""" FIRST POINT OF EXECUTION """
 Bits = max(max(theRange), max(SNum)).bit_length() # Selects the number of bits to the max value in Range!
 
 main(SNum, Bits, theRange) # This is the main function call to Run the whole program!

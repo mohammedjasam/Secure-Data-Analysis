@@ -3,6 +3,8 @@ This repo has the implementation of a research and the working examples of Garbl
 
 ## Final Project
 This contains the code for Fast Range Query Research Paper. Modularized code is available for each algorithm
+### Documentation
+Included in the Final Project Folder
 
 ### Requirements
 - OS: Windows 10

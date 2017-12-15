@@ -1,18 +1,21 @@
 # Secure Data Analysis
-This repo has the working examples of Garbled Circuit using GCParser. 
+This repo has the working examples of Garbled Circuit using GCParser.
 
-
-## Execution (Homework 1,2)
-Move into GCParser directory and then run the following command
-> python code.py
-
-## Manual execution 
-Move into GCParser directory and then run the following command
-#### To check the Circuit File : ./testfiles Circuit-name.cir
-#### To execute the above file : ./runtestgcparser Circuit-name.cir Server-Input.txt Client-Input.txt
-
-
-## Final Project
+# Final Project
 This contains the code for Fast Range Query Research Paper. Modularized code is available for each algorithm
-#### To execute
-> python run.py
+
+## Requirements
+- OS: Windows 10
+- Python 3.6
+- Git for windows
+
+## Dependencies
+- binarytree
+> To install it, execute the following command "pip install binarytree"
+
+## Execution
+ - git clone https://github.com/mohammedjasam/Secure-Data-Analysis
+ - cd Secure-Data-Analysis
+ - Create a data.txt and query.txt (Examples Shown Below) and place them in TreeGeneration folder
+ - From the Final Project Folder where the run.py is present execute the following command
+ > python run.py

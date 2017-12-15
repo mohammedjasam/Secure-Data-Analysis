@@ -14,10 +14,11 @@ This contains the code for Fast Range Query Research Paper. Modularized code is 
 > To install it, execute the following command "pip install binarytree"
 
 ### Execution
+ - Open cmd and type the following
  - git clone https://github.com/mohammedjasam/Secure-Data-Analysis
  - cd Secure-Data-Analysis
- - Create a data.txt and query.txt (Instructions are below) and place them in TreeGeneration folder
- - From the Final Project Folder where the run.py is present, execute the following command
+ - Create a data.txt and query.txt (Instructions are below) and place them in "Secure-Data-Analysis/Final Project/TreeGeneration" folder
+ - From the "Final Project" Folder where the run.py is present, execute the following command
  > python run.py
 
 ### Instructions for data.txt and query.txt
